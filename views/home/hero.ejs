@@ -1,62 +1,86 @@
 <section class="campusnear-hero">
 
-    <!-- Dark overlay -->
     <div class="hero-overlay"></div>
 
-    <div class=" container hero-content">
+    <div class="container hero-content">
 
-        <!-- Hero Text -->
+        <!-- =========================
+             HERO TEXT
+        ========================== -->
+
         <div class="hero-text">
 
             <h1>
-                Find your perfect stay
+                Everything You Need,
                 <br>
-                near your campus
+                Near Your Campus
             </h1>
 
             <p>
-                PGs, hostels, cafes & essential places —
+                PGs, Messes, Cafes & essential places —
                 all in one place.
             </p>
 
         </div>
 
 
-        <!-- Search Box -->
+        <!-- =========================
+             SEARCH BOX
+        ========================== -->
+
         <form
             action="/pgs"
             method="GET"
             class="hero-search"
+            id="collegeSearchForm"
         >
 
-            <!-- Location -->
+            <!-- =========================
+                 COLLEGE SEARCH
+            ========================== -->
+
             <div class="search-field location-field">
 
                 <i class="fa-solid fa-location-dot"></i>
 
                 <div class="search-field-content">
 
-                    <label for="location">
-                        Location
+                    <label for="collegeSearch">
+                        College
                     </label>
 
                     <input
                         type="text"
-                        id="location"
-                        name="location"
-                        placeholder="Search by location..."
+                        id="collegeSearch"
+                        name="college"
+                        placeholder="Search your college..."
+                        autocomplete="off"
+                        required
                     >
+
+                    <!-- Suggestions -->
+
+                    <div
+                        id="collegeSuggestions"
+                        class="college-suggestions"
+                    ></div>
 
                 </div>
 
             </div>
 
 
-            <!-- Divider -->
+            <!-- =========================
+                 DIVIDER
+            ========================== -->
+
             <div class="search-divider"></div>
 
 
-            <!-- Category -->
+            <!-- =========================
+                 CATEGORY
+            ========================== -->
+
             <div class="search-field">
 
                 <i class="fa-solid fa-building"></i>
@@ -71,11 +95,23 @@
                         id="category"
                         name="category"
                     >
-                        <option value="">Any place</option>
-                        <option value="pg">PG</option>
-                        <option value="hostel">Hostel</option>
-                        <option value="cafe">Cafe</option>
-                        <option value="laundry">Laundry</option>
+
+                        <option value="pg" selected>
+                            PG
+                        </option>
+
+                        <option value="cafe">
+                            Cafe
+                        </option>
+
+                        <option value="mess">
+                            Mess
+                        </option>
+
+                        <option value="laundry">
+                            Laundry
+                        </option>
+
                     </select>
 
                 </div>
@@ -83,67 +119,57 @@
             </div>
 
 
-            <!-- Divider -->
+            <!-- =========================
+                 DIVIDER
+            ========================== -->
+
             <div class="search-divider"></div>
 
 
-            <!-- Guests -->
-            <div class="search-field">
+            <!-- =========================
+                 SEARCH BUTTON
+            ========================== -->
 
-                <i class="fa-solid fa-user"></i>
-
-                <div class="search-field-content">
-
-                    <label for="guests">
-                        Guests
-                    </label>
-
-                    <select
-                        id="guests"
-                        name="guests"
-                    >
-                        <option value="1">1 Guest</option>
-                        <option value="2">2 Guests</option>
-                        <option value="3">3 Guests</option>
-                        <option value="4">4+ Guests</option>
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            <!-- Search Button -->
             <button
                 type="submit"
                 class="hero-search-btn"
             >
+
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <span>Search</span>
+
+                <span>
+                    Search
+                </span>
+
             </button>
 
         </form>
 
 
-        <!-- Quick Search -->
+        <!-- =========================
+             QUICK SEARCH
+        ========================== -->
+
         <div class="hero-quick-search">
 
-            <span>Popular:</span>
+            <span>
+                Popular:
+            </span>
 
-            <a href="/pgs?location=AKGEC">
+            <a href="/pgs?college=AKGEC">
                 AKGEC
             </a>
 
-            <a href="/pgs?location=Govindpuram">
-                Govindpuram
+            <a href="/pgs?college=Galgotias University">
+                Galgotias University
             </a>
 
-            <a href="/pgs?location=Raj Nagar">
-                Raj Nagar
+            <a href="/pgs?college=ABES">
+                ABES
             </a>
 
-            <a href="/pgs?location=Crossings Republik">
-                Crossings Republik
+            <a href="/pgs?college=Jaypee Institute of Information Technology">
+                Jaypee Institute of Information Technology
             </a>
 
         </div>
@@ -151,3 +177,216 @@
     </div>
 
 </section>
+
+
+<!-- =========================================================
+     COLLEGE AUTOCOMPLETE
+========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const collegeInput =
+        document.getElementById("collegeSearch");
+
+    const suggestionsBox =
+        document.getElementById("collegeSuggestions");
+
+    const searchForm =
+        document.getElementById("collegeSearchForm");
+
+
+    if (!collegeInput || !suggestionsBox) {
+        return;
+    }
+
+
+    let colleges = [];
+
+
+    // =====================================================
+    // GET COLLEGES FROM SERVER
+    // =====================================================
+
+    fetch("/colleges/search")
+        .then(response => response.json())
+        .then(data => {
+
+            colleges = data;
+
+        })
+        .catch(error => {
+
+            console.error(
+                "College search error:",
+                error
+            );
+
+        });
+
+
+    // =====================================================
+    // INPUT EVENT
+    // =====================================================
+
+    collegeInput.addEventListener("input", function () {
+
+        const searchValue =
+            collegeInput.value
+                .trim()
+                .toLowerCase();
+
+
+        suggestionsBox.innerHTML = "";
+
+
+        if (!searchValue) {
+
+            suggestionsBox.style.display = "none";
+
+            return;
+
+        }
+
+
+        const filteredColleges =
+            colleges.filter(college => {
+
+                const name =
+                    college.name
+                        .toLowerCase();
+
+                const shortName =
+                    college.shortName
+                        ? college.shortName.toLowerCase()
+                        : "";
+
+                return (
+                    name.includes(searchValue) ||
+                    shortName.includes(searchValue)
+                );
+
+            }).slice(0, 8);
+
+
+        if (filteredColleges.length === 0) {
+
+            suggestionsBox.style.display = "none";
+
+            return;
+
+        }
+
+
+        // =================================================
+        // CREATE SUGGESTIONS
+        // =================================================
+
+        filteredColleges.forEach(college => {
+
+            const suggestion =
+                document.createElement("div");
+
+            suggestion.classList.add(
+                "college-suggestion-item"
+            );
+
+
+            suggestion.innerHTML = `
+
+                <i class="fa-solid fa-building-columns"></i>
+
+                <div>
+
+                    <strong>
+                        ${college.name}
+                    </strong>
+
+                    ${
+                        college.shortName
+                        ? `<small>${college.shortName}</small>`
+                        : ""
+                    }
+
+                    <span>
+                        ${college.city}, ${college.state}
+                    </span>
+
+                </div>
+
+            `;
+
+
+            suggestion.addEventListener(
+                "click",
+                function () {
+
+                    collegeInput.value =
+                        college.name;
+
+                    suggestionsBox.innerHTML = "";
+
+                    suggestionsBox.style.display =
+                        "none";
+
+                }
+            );
+
+
+            suggestionsBox.appendChild(
+                suggestion
+            );
+
+        });
+
+
+        suggestionsBox.style.display = "block";
+
+    });
+
+
+    // =====================================================
+    // CLICK OUTSIDE
+    // =====================================================
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                !collegeInput.contains(event.target) &&
+                !suggestionsBox.contains(event.target)
+            ) {
+
+                suggestionsBox.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    // =====================================================
+    // FORM VALIDATION
+    // =====================================================
+
+    searchForm.addEventListener(
+        "submit",
+        function (event) {
+
+            if (!collegeInput.value.trim()) {
+
+                event.preventDefault();
+
+                collegeInput.focus();
+
+            }
+
+        }
+    );
+
+});
+
+</script>
