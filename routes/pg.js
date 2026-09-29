@@ -7,7 +7,8 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const {
     isLoggedIn,
     isOwner,
-    validateListing
+    validateListing,
+    validateReview
 } = require("../middleware.js");
 
 const Pg = require("../models/pg.js");
@@ -85,6 +86,5 @@ router.get(
     isOwner(Pg, "/pgs"),
     wrapAsync(pgController.renderEditForm)
 );
-
 
 module.exports = router;

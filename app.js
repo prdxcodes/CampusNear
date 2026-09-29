@@ -108,6 +108,9 @@ app.use("/laundries", laundryRouter);
 // Review
 
 app.use("/pgs/:id/reviews", reviewRouter);
+app.use("/cafes/:id/reviews", reviewRouter);
+app.use("/messes/:id/reviews", reviewRouter);
+app.use("/laundries/:id/reviews", reviewRouter);
 
 // SignUp
 

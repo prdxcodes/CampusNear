@@ -99,32 +99,46 @@
 
 
                     <!-- LOCATION -->
-
                     <div class="mb-3">
-                        <label for="location" class="form-label">Location</label>
 
-                        <input type="text" id="location" name="location" class="form-control"
+                        <label for="location" class="form-label">
+                            Location
+                        </label>
+
+                        <input type="text" id="location" name="cafe[location]" class="form-control"
                             placeholder="Search your location..." autocomplete="off" required>
 
                         <!-- Suggestions -->
-                        <div id="locationSuggestions" class="location-suggestions"></div>
+                        <div id="locationSuggestions" class="location-suggestions">
+                        </div>
+
                     </div>
 
+
+                    <!-- SEARCH LOCATION -->
                     <div class="mb-3">
+
                         <button type="button" id="searchLocationBtn" class="btn btn-primary">
                             Search Location
                         </button>
+
                     </div>
 
-                    <div id="map"></div>
 
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
+                    <!-- MAP -->
+                    <div id="map" style="height:400px; width:100%; border-radius:12px;"></div>
+
+
+                    <!-- COORDINATES -->
+                    <input type="hidden" name="cafe[latitude]" id="latitude">
+
+                    <input type="hidden" name="cafe[longitude]" id="longitude">
+
 
                     <p id="coordinatesText" class="text-muted mt-2">
                         Select your exact location on the map.
                     </p>
-
+                    
                     <!-- CONTACT -->
 
                     <div class="form-group">

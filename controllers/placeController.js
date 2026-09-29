@@ -1,5 +1,6 @@
 const axios = require("axios");
 const College = require("../models/college.js");
+const Review = require("../models/review.js");
 
 // ======================================================
 // COMMON PLACE CONTROLLER FACTORY
@@ -42,6 +43,7 @@ const createPlaceController = (
 
         },
 
+
         // ==================================================
         // CREATE PLACE FORM
         // ==================================================
@@ -50,13 +52,8 @@ const createPlaceController = (
 
             try {
 
-                const College =
-                    require("../models/college.js");
-
-                const colleges =
-                    await College.find({})
-                        .sort({ name: 1 });
-
+                const colleges = await College.find({})
+                    .sort({ name: 1 });
 
                 res.render(
                     `${viewsPath}/new.ejs`,
@@ -74,6 +71,7 @@ const createPlaceController = (
 
         },
 
+
         // ==================================================
         // CREATE PLACE
         // ==================================================
@@ -81,14 +79,6 @@ const createPlaceController = (
         createPlace: async (req, res, next) => {
 
             try {
-
-                // ------------------------------------------
-                // GET CATEGORY-SPECIFIC FORM DATA
-                // ------------------------------------------
-                // PG  -> req.body.pg
-                // Cafe -> req.body.cafe
-                // Mess -> req.body.mess
-                // Laundry -> req.body.laundry
 
                 const ModelData =
                     req.body[category.toLowerCase()];
@@ -108,17 +98,17 @@ const createPlaceController = (
                 }
 
 
-                // ------------------------------------------
-                // CREATE NEW PLACE
-                // ------------------------------------------
+                // =========================
+                // CREATE MODEL
+                // =========================
 
                 const place =
                     new Model(ModelData);
 
 
-                // ------------------------------------------
+                // =========================
                 // OWNER
-                // ------------------------------------------
+                // =========================
 
                 if (req.user) {
 
@@ -128,9 +118,9 @@ const createPlaceController = (
                 }
 
 
-                // ------------------------------------------
+                // =========================
                 // IMAGE
-                // ------------------------------------------
+                // =========================
 
                 if (req.file) {
 
@@ -145,9 +135,9 @@ const createPlaceController = (
                 }
 
 
-                // ------------------------------------------
-                // EXACT MAP LOCATION
-                // ------------------------------------------
+                // =========================
+                // LOCATION
+                // =========================
 
                 const latitude =
                     parseFloat(
@@ -159,10 +149,6 @@ const createPlaceController = (
                         ModelData.longitude
                     );
 
-
-                // ------------------------------------------
-                // SAVE EXACT COORDINATES
-                // ------------------------------------------
 
                 if (
                     !isNaN(latitude) &&
@@ -180,16 +166,11 @@ const createPlaceController = (
 
                     };
 
-                }
+                } else {
 
-
-                // ------------------------------------------
-                // FALLBACK GEOCODING
-                // ------------------------------------------
-                // If user didn't select a location
-                // from the map, geocode the text location.
-
-                else {
+                    // =========================
+                    // FALLBACK GEOCODING
+                    // =========================
 
                     try {
 
@@ -213,14 +194,9 @@ const createPlaceController = (
                                             "CampusNear/1.0"
 
                                     }
-
                                 }
                             );
 
-
-                        // ----------------------------------
-                        // CHECK GEOCODING RESULT
-                        // ----------------------------------
 
                         if (
                             geoResponse.data &&
@@ -229,7 +205,6 @@ const createPlaceController = (
 
                             const result =
                                 geoResponse.data[0];
-
 
                             place.geocoding = {
 
@@ -253,26 +228,32 @@ const createPlaceController = (
 
                     } catch (geoError) {
 
-                        console.log(
-                            "Geocoding failed:",
-                            geoError.message
-                        );
+                        // Geocoding failure should not crash
+                        // the application.
 
                     }
 
                 }
 
 
-                // ------------------------------------------
+                // =========================
+                // REMOVE TEMPORARY FIELDS
+                // =========================
+
+                delete ModelData.latitude;
+                delete ModelData.longitude;
+
+
+                // =========================
                 // SAVE TO DATABASE
-                // ------------------------------------------
+                // =========================
 
                 await place.save();
 
 
-                // ------------------------------------------
-                // SUCCESS MESSAGE
-                // ------------------------------------------
+                // =========================
+                // SUCCESS
+                // =========================
 
                 req.flash(
                     "success",
@@ -280,11 +261,11 @@ const createPlaceController = (
                 );
 
 
-                // ------------------------------------------
-                // REDIRECT TO SHOW PAGE
-                // ------------------------------------------
+                // =========================
+                // REDIRECT
+                // =========================
 
-                res.redirect(
+                return res.redirect(
                     `${redirectPath}/${place._id}`
                 );
 
@@ -373,10 +354,6 @@ const createPlaceController = (
 
                 const { id } =
                     req.params;
-
-
-                const College =
-                    require("../models/college.js");
 
 
                 // ------------------------------------------
@@ -485,7 +462,7 @@ const createPlaceController = (
                 // ------------------------------------------
 
                 const placeData =
-                    req.body.place;
+                    req.body[category.toLowerCase()];
 
 
                 // ------------------------------------------
@@ -526,7 +503,6 @@ const createPlaceController = (
                 // ------------------------------------------
 
                 delete placeData.latitude;
-
                 delete placeData.longitude;
 
 
@@ -553,11 +529,8 @@ const createPlaceController = (
                         type: "Point",
 
                         coordinates: [
-
                             longitude,
-
                             latitude
-
                         ]
 
                     };
@@ -705,6 +678,54 @@ const createPlaceController = (
 
             }
 
+        },
+
+        // ==================================================
+        // CREATE REVIEW
+        // ==================================================
+
+        createReview: async (req, res, next) => {
+
+            try {
+
+                const { id } = req.params;
+
+                const place = await Model.findById(id);
+
+                if (!place) {
+                    req.flash(
+                        "error",
+                        `${category} does not exist!`
+                    );
+
+                    return res.redirect(redirectPath);
+                }
+
+                const review = new Review(req.body.review);
+
+                // Logged-in user ko author banao
+                review.author = req.user._id;
+
+                // Review ko place ke reviews array mein add karo
+                place.reviews.push(review);
+
+                await review.save();
+                await place.save();
+
+                req.flash(
+                    "success",
+                    "Review added successfully!"
+                );
+
+                return res.redirect(
+                    `${redirectPath}/${id}`
+                );
+
+            } catch (err) {
+
+                next(err);
+
+            }
         }
 
     };
