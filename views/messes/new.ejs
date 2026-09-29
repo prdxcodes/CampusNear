@@ -35,6 +35,10 @@
                         <input type="text" id="title" name="mess[title]" class="form-control"
                             placeholder="e.g. Sharma Mess" required>
 
+                        <div class="invalid-feedback">
+                            Please enter the mess name.
+                        </div>
+
                     </div>
 
 
@@ -48,6 +52,10 @@
 
                         <textarea id="description" name="mess[description]" class="form-control"
                             placeholder="Describe your mess and food quality..." required></textarea>
+
+                        <div class="invalid-feedback">
+                            Please enter a description.
+                        </div>
 
                     </div>
 
@@ -95,26 +103,43 @@
 
 
                     <!-- LOCATION -->
-                    <div class="mb-3">
-                        <label for="location" class="form-label">Location</label>
 
-                        <input type="text" id="location" name="location" class="form-control"
+                    <div class="mb-3">
+
+                        <label for="location" class="form-label">
+                            Location
+                        </label>
+
+                        <input type="text" id="location" name="mess[location]" class="form-control"
                             placeholder="Search your location..." autocomplete="off" required>
 
-                        <!-- Suggestions -->
                         <div id="locationSuggestions" class="location-suggestions"></div>
+
                     </div>
 
+
+                    <!-- SEARCH LOCATION -->
+
                     <div class="mb-3">
+
                         <button type="button" id="searchLocationBtn" class="btn btn-primary">
                             Search Location
                         </button>
+
                     </div>
 
-                    <div id="map"></div>
 
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
+                    <!-- MAP -->
+
+                    <div id="map" style="height:400px; width:100%; border-radius:12px;"></div>
+
+
+                    <!-- COORDINATES -->
+
+                    <input type="hidden" name="mess[latitude]" id="latitude">
+
+                    <input type="hidden" name="mess[longitude]" id="longitude">
+
 
                     <p id="coordinatesText" class="text-muted mt-2">
                         Select your exact location on the map.
@@ -167,7 +192,7 @@
 
 
                     <!-- MEALS -->
-
+                     
                     <div class="form-group">
 
                         <label>
@@ -177,17 +202,17 @@
                         <div class="checkbox-group">
 
                             <label class="checkbox-option">
-                                <input type="checkbox" name="mess[meals]" value="Breakfast">
+                                <input type="checkbox" name="mess[meals][]" value="Breakfast">
                                 Breakfast
                             </label>
 
                             <label class="checkbox-option">
-                                <input type="checkbox" name="mess[meals]" value="Lunch">
+                                <input type="checkbox" name="mess[meals][]" value="Lunch">
                                 Lunch
                             </label>
 
                             <label class="checkbox-option">
-                                <input type="checkbox" name="mess[meals]" value="Dinner">
+                                <input type="checkbox" name="mess[meals][]" value="Dinner">
                                 Dinner
                             </label>
 
@@ -195,8 +220,7 @@
 
                     </div>
 
-
-                    <!-- OPENING -->
+                    <!-- OPENING TIME -->
 
                     <div class="form-group">
 
@@ -209,7 +233,7 @@
                     </div>
 
 
-                    <!-- CLOSING -->
+                    <!-- CLOSING TIME -->
 
                     <div class="form-group">
 
@@ -239,10 +263,13 @@
                             <% colleges.forEach(college=> { %>
 
                                 <option value="<%= college._id %>">
+
                                     <%= college.name %>
+
                                         <% if (college.shortName) { %>
                                             (<%= college.shortName %>)
                                                 <% } %>
+
                                 </option>
 
                                 <% }) %>
@@ -251,6 +278,8 @@
 
                     </div>
 
+
+                    <!-- SUBMIT -->
 
                     <button type="submit" class="service-submit-btn">
                         Add Mess
@@ -263,5 +292,6 @@
         </div>
 
     </div>
+
 
     <script src="/js/script.js"></script>

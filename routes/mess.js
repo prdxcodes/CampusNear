@@ -9,6 +9,8 @@ const {
     validateListing
 } = require("../middleware.js");
 
+const { messSchema } = require("../schema.js");
+
 const Mess = require("../models/mess.js");
 const messController = require("../controllers/messController.js");
 
@@ -18,68 +20,87 @@ const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
 
-// =========================
+// =====================================================
 // INDEX + CREATE
-// =========================
+// =====================================================
 
 router
     .route("/")
+
     .get(
         wrapAsync(messController.index)
     )
+
     .post(
         isLoggedIn,
-        upload.single("place[image][url]"),
-        validateListing,
+
+        // Must exactly match the input name
+        upload.single("mess[image][url]"),
+
+        validateListing(messSchema),
+
         wrapAsync(messController.createPlace)
     );
 
 
-// =========================
-// NEW
-// =========================
+// =====================================================
+// NEW MESS FORM
+// =====================================================
 
 router.get(
     "/new",
     isLoggedIn,
-    messController.renderNewForm
+    wrapAsync(messController.renderNewForm)
 );
 
 
-// =========================
+// =====================================================
 // SHOW + UPDATE + DELETE
-// =========================
+// =====================================================
 
 router
     .route("/:id")
 
+    // SHOW
     .get(
         wrapAsync(messController.showPlace)
     )
 
+    // UPDATE
     .put(
         isLoggedIn,
+
         isOwner(Mess, "/messes"),
-        upload.single("place[image][url]"),
-        validateListing,
+
+        // Must match edit form too
+        upload.single("mess[image][url]"),
+
+        validateListing(messSchema),
+
         wrapAsync(messController.updatePlace)
     )
 
+    // DELETE
     .delete(
         isLoggedIn,
+
         isOwner(Mess, "/messes"),
+
         wrapAsync(messController.deletePlace)
     );
 
 
-// =========================
+// =====================================================
 // EDIT
-// =========================
+// =====================================================
 
 router.get(
     "/:id/edit",
+
     isLoggedIn,
+
     isOwner(Mess, "/messes"),
+
     wrapAsync(messController.renderEditForm)
 );
 

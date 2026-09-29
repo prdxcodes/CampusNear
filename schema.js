@@ -135,11 +135,9 @@ module.exports.messSchema = Joi.object({
 
     mess: Joi.object({
 
-        title: Joi.string()
-            .required(),
+        title: Joi.string().required(),
 
-        description: Joi.string()
-            .required(),
+        description: Joi.string().required(),
 
         image: Joi.object({
             filename: Joi.string().allow("", null),
@@ -150,21 +148,30 @@ module.exports.messSchema = Joi.object({
             .required()
             .min(0),
 
-        location: Joi.string()
+        country: Joi.string()
             .required(),
 
-        country: Joi.string()
+        location: Joi.string()
             .required(),
 
         ownerContact: Joi.string()
             .required(),
 
         mealType: Joi.string()
+            .valid("Veg", "Non-Veg", "Both")
             .required(),
 
-        meals: Joi.string()
+        meals: Joi.array()
+            .items(
+                Joi.string().valid(
+                    "Breakfast",
+                    "Lunch",
+                    "Dinner"
+                )
+            )
+            .min(1)
             .required(),
-
+            
         openingTime: Joi.string()
             .required(),
 
@@ -174,7 +181,6 @@ module.exports.messSchema = Joi.object({
         college: Joi.string()
             .required(),
 
-        // Map coordinates
         latitude: Joi.number()
             .min(-90)
             .max(90)
@@ -188,7 +194,6 @@ module.exports.messSchema = Joi.object({
     }).required()
 
 });
-
 
 // =====================================================
 // LAUNDRY SCHEMA
