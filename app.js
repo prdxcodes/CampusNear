@@ -17,6 +17,7 @@ const messRouter = require("./routes/mess.js");
 const laundryRouter = require("./routes/laundry.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const aboutRouter = require("./routes/about");
 
 const session = require("express-session");
 const flash = require("connect-flash");
@@ -115,6 +116,10 @@ app.use("/laundries/:id/reviews", reviewRouter);
 // SignUp
 
 app.use("/", userRouter);
+
+// About
+
+app.use("/about", aboutRouter);
 
 // Error Handeling
 
