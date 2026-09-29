@@ -1,0 +1,183 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="row">
+        <div class="col col-8 offset-2">
+
+            <br>
+
+            <h3>Edit Your PG</h3>
+
+            <br>
+
+            <form method="post" action="/pgs/<%= pg._id %>?_method=put" novalidate class="needs-validation"
+                enctype="multipart/form-data">
+
+                <!-- Title -->
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+
+                    <input name="pg[title]" value="<%= pg.title %>" type="text" class="form-control" required>
+
+                    <div class="invalid-feedback">
+                        Please enter title.
+                    </div>
+                </div>
+
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+
+                    <textarea name="pg[description]" class="form-control" required><%= pg.description %></textarea>
+
+                    <div class="invalid-feedback">
+                        Please enter description.
+                    </div>
+                </div>
+
+
+                <!-- Existing Image -->
+                <div class="mb-3">
+                    <label class="form-label">Existing Image</label>
+
+                    <br>
+
+                    <img src="<%= originalImageUrl %>" class="img-fluid rounded" style="max-width: 250px;">
+                </div>
+
+
+                <!-- New Image -->
+                <div class="mb-3">
+                    <label class="form-label">
+                        Upload New Image
+                    </label>
+
+                    <input name="pg[image][url]" type="file" class="form-control">
+                </div>
+
+
+                <!-- Price + Country -->
+                <div class="row">
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Price</label>
+
+                        <input name="pg[price]" value="<%= pg.price %>" type="number" class="form-control" required>
+                    </div>
+
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Country</label>
+
+                        <input name="pg[country]" value="<%= pg.country %>" type="text" class="form-control" required>
+                    </div>
+
+                </div>
+
+
+                <!-- Location -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Location
+                    </label>
+
+                    <input id="location" name="pg[location]" value="<%= pg.location || '' %>" type="text"
+                        class="form-control" placeholder="Search your location..." autocomplete="off" required>
+
+                    <!-- Suggestions -->
+                    <div id="locationSuggestions" class="location-suggestions">
+                    </div>
+
+                </div>
+
+
+                <!-- Search Location Button -->
+                <div class="mb-3">
+
+                    <button type="button" id="searchLocationBtn" class="btn btn-primary">
+                        Search Location
+                    </button>
+
+                </div>
+
+
+                <!-- Map -->
+                <div id="map">
+                    data-coordinates="<%= JSON.stringify(pg.geocoding?.coordinates || []) %>">
+                </div>
+
+
+                <!-- Coordinates -->
+                <input type="hidden" name="pg[geocoding][coordinates][1]" id="latitude"
+                    value="<%= pg.geocoding?.coordinates?.[1] || '' %>">
+
+                <input type="hidden" name="pg[geocoding][coordinates][0]" id="longitude"
+                    value="<%= pg.geocoding?.coordinates?.[0] || '' %>">
+
+                <input type="hidden" name="pg[geocoding][type]" value="Point">
+
+                <p id="coordinatesText" class="text-muted mt-2">
+
+                    <% if ( pg.geocoding && pg.geocoding.coordinates && pg.geocoding.coordinates.length===2 ) { %>
+
+                        Current coordinates:
+                        <%= pg.geocoding.coordinates[1].toFixed(6) %>,
+                            <%= pg.geocoding.coordinates[0].toFixed(6) %>
+
+                                <% } else { %>
+
+                                    Select your exact location on the map.
+
+                                    <% } %>
+
+                </p>
+
+
+                <br>
+
+                <button class="btn btn-dark edit-btn">
+                    Update PG
+                </button>
+
+                <br><br>
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+
+        .location-suggestions {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            position: relative;
+            z-index: 9999;
+        }
+
+
+        .suggestion-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+
+        .suggestion-item:hover {
+            background: #f5f5f5;
+        }
+    </style>

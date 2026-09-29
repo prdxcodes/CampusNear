@@ -1,0 +1,224 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="service-form-page">
+
+        <div class="service-form-container">
+
+            <div class="service-form-card">
+
+                <div class="service-form-header">
+
+                    <span class="service-form-badge">
+                        CAFE
+                    </span>
+
+                    <h2>List Your Cafe</h2>
+
+                    <p>
+                        Help students discover your cafe near their college.
+                    </p>
+
+                </div>
+
+
+                <form method="POST" action="/cafes" novalidate class="needs-validation service-form"
+                    enctype="multipart/form-data">
+
+                    <!-- TITLE -->
+
+                    <div class="form-group">
+
+                        <label for="title">
+                            Cafe Name
+                        </label>
+
+                        <input type="text" id="title" name="cafe[title]" class="form-control"
+                            placeholder="e.g. Campus Cafe" required>
+
+                        <div class="invalid-feedback">
+                            Please enter the cafe name.
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea id="description" name="cafe[description]" class="form-control"
+                            placeholder="Describe your cafe, ambience, facilities, etc." required></textarea>
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="form-group">
+
+                        <label for="image">
+                            Cafe Image
+                        </label>
+
+                        <input type="file" id="image" name="cafe[image][url]" class="form-control" accept="image/*"
+                            required>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="form-group">
+
+                        <label for="price">
+                            Average Price Per Person (₹)
+                        </label>
+
+                        <input type="number" id="price" name="cafe[price]" class="form-control" placeholder="e.g. 250"
+                            min="0" required>
+
+                    </div>
+
+
+                    <!-- COUNTRY -->
+
+                    <div class="form-group">
+
+                        <label for="country">
+                            Country
+                        </label>
+
+                        <input type="text" id="country" name="cafe[country]" class="form-control" value="India"
+                            required>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+
+                        <input type="text" id="location" name="location" class="form-control"
+                            placeholder="Search your location..." autocomplete="off" required>
+
+                        <!-- Suggestions -->
+                        <div id="locationSuggestions" class="location-suggestions"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="button" id="searchLocationBtn" class="btn btn-primary">
+                            Search Location
+                        </button>
+                    </div>
+
+                    <div id="map"></div>
+
+                    <input type="hidden" name="latitude" id="latitude">
+                    <input type="hidden" name="longitude" id="longitude">
+
+                    <p id="coordinatesText" class="text-muted mt-2">
+                        Select your exact location on the map.
+                    </p>
+
+                    <!-- CONTACT -->
+
+                    <div class="form-group">
+
+                        <label for="ownerContact">
+                            Owner Contact Number
+                        </label>
+
+                        <input type="tel" id="ownerContact" name="cafe[ownerContact]" class="form-control"
+                            placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required>
+
+                    </div>
+
+
+                    <!-- CUISINE -->
+
+                    <div class="form-group">
+
+                        <label for="cuisine">
+                            Cuisine
+                        </label>
+
+                        <input type="text" id="cuisine" name="cafe[cuisine]" class="form-control"
+                            placeholder="e.g. Indian, Chinese, Fast Food" required>
+
+                    </div>
+
+
+                    <!-- OPENING TIME -->
+
+                    <div class="form-group">
+
+                        <label for="openingTime">
+                            Opening Time
+                        </label>
+
+                        <input type="time" id="openingTime" name="cafe[openingTime]" class="form-control" required>
+
+                    </div>
+
+
+                    <!-- CLOSING TIME -->
+
+                    <div class="form-group">
+
+                        <label for="closingTime">
+                            Closing Time
+                        </label>
+
+                        <input type="time" id="closingTime" name="cafe[closingTime]" class="form-control" required>
+
+                    </div>
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="form-group">
+
+                        <label for="college">
+                            Nearby College
+                        </label>
+
+                        <select id="college" name="cafe[college]" class="form-select" required>
+
+                            <option value="" selected disabled>
+                                Select College
+                            </option>
+
+                            <% colleges.forEach(college=> { %>
+
+                                <option value="<%= college._id %>">
+                                    <%= college.name %>
+                                        <% if (college.shortName) { %>
+                                            (<%= college.shortName %>)
+                                                <% } %>
+                                </option>
+
+                                <% }) %>
+
+                        </select>
+
+                    </div>
+
+
+                    <button type="submit" class="service-submit-btn">
+                        Add Cafe
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/js/script.js"></script>

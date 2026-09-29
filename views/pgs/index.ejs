@@ -1,0 +1,201 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="listing-page">
+
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
+
+    <div class="listing-header">
+
+        <div>
+
+            <p class="section-label">
+                STUDENT ACCOMMODATION
+            </p>
+
+            <h1>
+                PGs Near Your Campus
+            </h1>
+
+            <p class="listing-subtitle">
+                Find comfortable and affordable PGs near your college.
+            </p>
+
+        </div>
+
+        <div class="listing-count">
+            <%= allPlaces.length %> PGs
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         LISTINGS
+    ========================== -->
+
+    <div class="row">
+
+        <% if (!allPlaces || allPlaces.length === 0) { %>
+
+            <!-- EMPTY STATE -->
+
+            <div class="col-12">
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <h3>
+                        No PGs available
+                    </h3>
+
+                    <p>
+                        Be the first one to list a PG near your campus.
+                    </p>
+
+                    <a
+                        href="/pgs/new"
+                        class="btn btn-dark"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        Add PG
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        <% } else { %>
+
+
+            <!-- =========================
+                 PG CARDS
+            ========================== -->
+
+            <% allPlaces.forEach(pg => { %>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <a
+                        href="/pgs/<%= pg._id %>"
+                        class="text-decoration-none"
+                    >
+
+                        <div class="listing-card">
+
+
+                            <!-- IMAGE -->
+
+                            <div class="listing-image-wrapper">
+
+                                <% if (pg.image && pg.image.url) { %>
+
+                                    <img
+                                        src="<%= pg.image.url %>"
+                                        alt="<%= pg.title %>"
+                                        class="listing-image"
+                                    >
+
+                                <% } else { %>
+
+                                    <div class="no-image">
+
+                                        <i class="fa-solid fa-house"></i>
+
+                                    </div>
+
+                                <% } %>
+
+                            </div>
+
+
+                            <!-- CARD BODY -->
+
+                            <div class="listing-card-body">
+
+
+                                <!-- CATEGORY -->
+
+                                <div class="listing-category">
+                                    PG
+                                </div>
+
+
+                                <!-- TITLE -->
+
+                                <h3>
+                                    <%= pg.title %>
+                                </h3>
+
+
+                                <!-- LOCATION -->
+
+                                <% if (pg.location) { %>
+
+                                    <p class="listing-location">
+
+                                        <i class="fa-solid fa-location-dot"></i>
+
+                                        <%= pg.location %>
+
+                                    </p>
+
+                                <% } %>
+
+
+                                <!-- DESCRIPTION -->
+
+                                <% if (pg.description) { %>
+
+                                    <p class="listing-description">
+
+                                        <%= pg.description.length > 100
+                                            ? pg.description.substring(0, 100) + "..."
+                                            : pg.description
+                                        %>
+
+                                    </p>
+
+                                <% } %>
+
+
+                                <!-- PRICE -->
+
+                                <div class="listing-bottom">
+
+                                    <strong>
+                                        ₹<%= pg.price || "N/A" %>
+
+                                        <% if (pg.price) { %>
+                                            <small>/ month</small>
+                                        <% } %>
+
+                                    </strong>
+
+
+                                    <span class="feature-badge">
+                                        View PG
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            <% }) %>
+
+
+        <% } %>
+
+    </div>
+
+</div>

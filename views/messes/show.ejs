@@ -1,0 +1,549 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="property-page">
+
+        <section class="property-hero">
+
+            <div class="property-image-container">
+
+                <img src="<%= place.image.url %>" class="property-main-image" alt="<%= place.title %>">
+
+                <div class="image-overlay"></div>
+
+                <div class="property-badge">
+                    <i class="fa-solid fa-star"></i>
+                    Recommended
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="property-header">
+
+            <div class="property-header-content">
+
+                <div class="property-main-info">
+
+                    <div class="property-location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <%= place.location %>, <%= place.country %>
+                    </div>
+
+                    <h1>
+                        <%= place.title %>
+                    </h1>
+
+                    <div class="property-meta">
+
+                        <span>
+                            <i class="fa-solid fa-star"></i>
+                            4.8
+                        </span>
+
+                        <span>•</span>
+
+                        <span>
+                            <%= place.reviews.length %> reviews
+                        </span>
+
+                        <span>•</span>
+
+                        <span>
+                            Student friendly
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="property-price-box">
+
+                    <span class="price-label">
+                        Starting from
+                    </span>
+
+                    <div class="property-price">
+
+                        ₹<%= place.price.toLocaleString("en-IN") %>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="property-content">
+
+            <div class="property-left">
+
+
+                <!-- OWNER -->
+
+                <div class="owner-card">
+
+                    <div class="owner-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="owner-label">
+                            Property listed by
+                        </span>
+
+                        <strong>
+                            <%= place.owner ? place.owner.username : "Unknown" %>
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="property-section">
+
+                    <div class="section-title">
+
+                        <i class="fa-solid fa-utensils"></i>
+
+                        <h2>
+                            About this mess
+                        </h2>
+
+                    </div>
+
+                    <p class="property-description">
+                        <%= place.description %>
+                    </p>
+
+                </div>
+
+
+                <!-- MESS DETAILS -->
+
+                <div class="property-section">
+
+                    <div class="section-title">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <h2>
+                            Mess details
+                        </h2>
+
+                    </div>
+
+
+                    <div class="details-grid">
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+                                <i class="fa-solid fa-bowl-food"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Meal Type
+                                </span>
+
+                                <strong>
+                                    <%= place.mealType %>
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Opening Time
+                                </span>
+
+                                <strong>
+                                    <%= place.openingTime %>
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Closing Time
+                                </span>
+
+                                <strong>
+                                    <%= place.closingTime %>
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Price
+                                </span>
+
+                                <strong>
+                                    ₹<%= place.price.toLocaleString("en-IN") %>
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <% if (place.meals && place.meals.length> 0) { %>
+
+                        <div class="property-description mt-4">
+
+                            <strong>
+                                Available Meals:
+                            </strong>
+
+                            <%= place.meals.join(", ") %>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class=" property-section">
+
+                                <div class="section-title">
+
+                                    <i class="fa-solid fa-phone"></i>
+
+                                    <h2>
+                                        Contact Owner
+                                    </h2>
+
+                                </div>
+
+                                <p class="property-description">
+                                    <%= place.ownerContact %>
+                                </p>
+
+                        </div>
+
+
+                        <!-- COLLEGE -->
+
+                        <% if (place.college) { %>
+
+                            <div class="property-section">
+
+                                <div class="section-title">
+
+                                    <i class="fa-solid fa-building-columns"></i>
+
+                                    <h2>
+                                        Nearby College
+                                    </h2>
+
+                                </div>
+
+                                <p class="property-description">
+
+                                    <%= place.college.name %>
+
+                                        <% if (place.college.shortName) { %>
+                                            (<%= place.college.shortName %>)
+                                                <% } %>
+
+                                </p>
+
+                            </div>
+
+                            <% } %>
+
+
+                                <!-- OWNER ACTIONS -->
+
+                                <% if(currUser && place.owner._id.equals(currUser._id)) { %>
+
+                                    <div class="owner-actions">
+
+                                        <a href="/messes/<%= place._id %>/edit" class="edit-property-btn">
+                                            <i class="fa-solid fa-pen"></i>
+                                            Edit Property
+                                        </a>
+
+                                        <form method="post" action="/messes/<%= place._id %>?_method=delete">
+
+                                            <button type="submit" class="delete-property-btn">
+                                                <i class="fa-solid fa-trash"></i>
+                                                Delete Property
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                    <% } %>
+
+
+                                        <!-- REVIEWS -->
+
+                                        <div class="reviews-section">
+
+                                            <div class="section-title">
+
+                                                <i class="fa-solid fa-star"></i>
+
+                                                <h2>
+                                                    Reviews
+                                                </h2>
+
+                                                <span>
+                                                    (<%= place.reviews.length %>)
+                                                </span>
+
+                                            </div>
+
+
+                                            <% if(currUser) { %>
+
+                                                <div class="review-form-card">
+
+                                                    <h3>
+                                                        Share your experience
+                                                    </h3>
+
+                                                    <p>
+                                                        Help other students make a better decision.
+                                                    </p>
+
+                                                    <form method="post" action="/messes/<%= place._id %>/reviews"
+                                                        novalidate class="needs-validation">
+
+                                                        <label>
+                                                            Rating
+                                                        </label>
+
+                                                        <fieldset class="starability-slot">
+
+                                                            <input type="radio" id="no-rate" class="input-no-rate"
+                                                                name="review[rating]" value="1" checked />
+
+                                                            <input type="radio" id="first-rate1" name="review[rating]"
+                                                                value="1">
+                                                            <label for="first-rate1">1 star</label>
+
+                                                            <input type="radio" id="first-rate2" name="review[rating]"
+                                                                value="2">
+                                                            <label for="first-rate2">2 stars</label>
+
+                                                            <input type="radio" id="first-rate3" name="review[rating]"
+                                                                value="3">
+                                                            <label for="first-rate3">3 stars</label>
+
+                                                            <input type="radio" id="first-rate4" name="review[rating]"
+                                                                value="4">
+                                                            <label for="first-rate4">4 stars</label>
+
+                                                            <input type="radio" id="first-rate5" name="review[rating]"
+                                                                value="5">
+                                                            <label for="first-rate5">5 stars</label>
+
+                                                        </fieldset>
+
+
+                                                        <label for="review">
+                                                            Your review
+                                                        </label>
+
+                                                        <textarea id="review" name="review[review]" rows="4" required
+                                                            placeholder="What did you like about this mess?"></textarea>
+
+                                                        <button type="submit" class="submit-review-btn">
+                                                            Submit Review
+                                                            <i class="fa-solid fa-arrow-right"></i>
+                                                        </button>
+
+                                                    </form>
+
+                                                </div>
+
+                                                <% } %>
+
+
+                                                    <% if(place.reviews.length> 0) { %>
+
+                                                        <div class="reviews-list">
+
+                                                            <% for(review of place.reviews) { %>
+
+                                                                <div class="review-card">
+
+                                                                    <div class="review-header">
+
+                                                                        <div class="review-user">
+
+                                                                            <div class="review-avatar">
+                                                                                <i class="fa-solid fa-user"></i>
+                                                                            </div>
+
+                                                                            <div>
+
+                                                                                <strong>
+                                                                                    <%= review.author.username %>
+                                                                                </strong>
+
+                                                                                <span>
+                                                                                    Student review
+                                                                                </span>
+
+                                                                            </div>
+
+                                                                        </div>
+
+
+                                                                        <div class="review-rating">
+
+                                                                            <i class="fa-solid fa-star"></i>
+
+                                                                            <%= review.rating %>.0
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                    <p>
+                                                                        <%= review.review %>
+                                                                    </p>
+
+
+                                                                    <% if(currUser &&
+                                                                        review.author._id.equals(currUser._id)) { %>
+
+                                                                        <form method="post"
+                                                                            action="/messes/<%= place._id %>/reviews/<%= review._id %>?_method=delete">
+
+                                                                            <button class="delete-review-btn"
+                                                                                type="submit">
+                                                                                Delete review
+                                                                            </button>
+
+                                                                        </form>
+
+                                                                        <% } %>
+
+                                                                </div>
+
+                                                                <% } %>
+
+                                                        </div>
+
+                                                        <% } else { %>
+
+                                                            <div class="no-reviews">
+
+                                                                <i class="fa-regular fa-comment-dots"></i>
+
+                                                                <h3>
+                                                                    No reviews yet
+                                                                </h3>
+
+                                                                <p>
+                                                                    Be the first student to review this mess.
+                                                                </p>
+
+                                                            </div>
+
+                                                            <% } %>
+
+                                        </div>
+
+                </div>
+
+
+                <!-- MAP -->
+
+                <aside class="property-right">
+
+                    <div class="map-card">
+
+                        <div class="map-header">
+
+                            <div>
+
+                                <span>
+                                    LOCATION
+                                </span>
+
+                                <h2>
+                                    Where you'll be
+                                </h2>
+
+                            </div>
+
+                            <i class="fa-solid fa-map-location-dot"></i>
+
+                        </div>
+
+
+                        <div id="map" data-coordinates='<%= JSON.stringify(place.geocoding.coordinates) %>'
+                            data-title="<%= place.title %>">
+                        </div>
+
+
+                        <div class="map-location">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <span>
+                                <%= place.location %>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+        </section>
+
+    </div>

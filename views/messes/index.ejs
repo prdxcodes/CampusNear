@@ -1,0 +1,180 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="listing-page">
+
+    <div class="listing-header">
+
+        <div>
+
+            <p class="section-label">
+                FOOD SERVICES
+            </p>
+
+            <h1>Mess Near Your Campus</h1>
+
+            <p class="listing-subtitle">
+                Find affordable daily meals and monthly mess plans near your college.
+            </p>
+
+        </div>
+
+        <div class="listing-count">
+            <%= allPlaces.length %> Messes
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <% if (allPlaces.length === 0) { %>
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-bowl-food"></i>
+
+                <h3>No messes available</h3>
+
+                <p>
+                    Be the first one to list a mess near your campus.
+                </p>
+
+                <a href="/messes/new" class="btn btn-dark">
+                    Add Mess
+                </a>
+
+            </div>
+
+        <% } else { %>
+
+
+            <% allPlaces.forEach(mess => { %>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <a
+                        href="/messes/<%= mess._id %>"
+                        class="text-decoration-none"
+                    >
+
+                        <div class="listing-card">
+
+                            <div class="listing-image-wrapper">
+
+                                <% if (mess.image && mess.image.url) { %>
+
+                                    <img
+                                        src="<%= mess.image.url %>"
+                                        alt="<%= mess.title %>"
+                                        class="listing-image"
+                                    >
+
+                                <% } else { %>
+
+                                    <div class="no-image">
+                                        <i class="fa-solid fa-bowl-food"></i>
+                                    </div>
+
+                                <% } %>
+
+                            </div>
+
+
+                            <div class="listing-card-body">
+
+                                <div class="listing-category">
+                                    MESS
+                                </div>
+
+
+                                <h3>
+                                    <%= mess.title %>
+                                </h3>
+
+
+                                <p class="listing-location">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <%= mess.location %>
+
+                                </p>
+
+
+                                <div class="listing-info">
+
+                                    <span>
+                                        <i class="fa-solid fa-utensils"></i>
+                                        <%= mess.mealType %>
+                                    </span>
+
+                                    <span>
+                                        <i class="fa-regular fa-clock"></i>
+                                        <%= mess.openingTime %>
+                                        -
+                                        <%= mess.closingTime %>
+                                    </span>
+
+                                </div>
+
+
+                                <div class="meal-features">
+
+                                    <% if (mess.meals && mess.meals.breakfast) { %>
+
+                                        <span>
+                                            Breakfast
+                                        </span>
+
+                                    <% } %>
+
+
+                                    <% if (mess.meals && mess.meals.lunch) { %>
+
+                                        <span>
+                                            Lunch
+                                        </span>
+
+                                    <% } %>
+
+
+                                    <% if (mess.meals && mess.meals.dinner) { %>
+
+                                        <span>
+                                            Dinner
+                                        </span>
+
+                                    <% } %>
+
+                                </div>
+
+
+                                <div class="listing-bottom">
+
+                                    <strong>
+                                        ₹<%= mess.price %>
+                                        <small>/ month</small>
+                                    </strong>
+
+                                    <span class="feature-badge">
+                                        View Mess
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            <% }) %>
+
+
+        <% } %>
+
+    </div>
+
+</div>

@@ -1,0 +1,383 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row">
+    <div class="col col-8 offset-2">
+
+        <br>
+        <h3>Edit Your Mess</h3>
+        <br>
+
+        <form
+            method="post"
+            action="/messes/<%= mess._id %>?_method=put"
+            novalidate
+            class="needs-validation"
+            enctype="multipart/form-data"
+        >
+
+            <!-- TITLE -->
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+
+                <input
+                    name="mess[title]"
+                    value="<%= mess.title || '' %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+            </div>
+
+
+            <!-- DESCRIPTION -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+
+                <textarea
+                    name="mess[description]"
+                    class="form-control"
+                    required
+                ><%= mess.description || '' %></textarea>
+            </div>
+
+
+            <!-- EXISTING IMAGE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Existing Image
+                </label>
+
+                <br>
+
+                <% if (originalImageUrl) { %>
+
+                    <img
+                        src="<%= originalImageUrl %>"
+                        class="img-fluid rounded"
+                        style="max-width:250px;"
+                    >
+
+                <% } %>
+
+            </div>
+
+
+            <!-- NEW IMAGE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Upload New Image
+                </label>
+
+                <input
+                    name="mess[image][url]"
+                    type="file"
+                    class="form-control"
+                >
+
+            </div>
+
+
+            <!-- PRICE + COUNTRY -->
+            <div class="row">
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Price
+                    </label>
+
+                    <input
+                        name="mess[price]"
+                        value="<%= mess.price || '' %>"
+                        type="number"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Country
+                    </label>
+
+                    <input
+                        name="mess[country]"
+                        value="<%= mess.country || '' %>"
+                        type="text"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- OWNER CONTACT -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Owner Contact
+                </label>
+
+                <input
+                    name="mess[ownerContact]"
+                    value="<%= mess.ownerContact || '' %>"
+                    type="tel"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+
+            <!-- MEAL TYPE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Meal Type
+                </label>
+
+                <input
+                    name="mess[mealType]"
+                    value="<%= mess.mealType || '' %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+
+            <!-- MEALS -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Meals
+                </label>
+
+                <textarea
+                    name="mess[meals]"
+                    class="form-control"
+                    required
+                ><%= mess.meals || '' %></textarea>
+
+            </div>
+
+
+            <!-- OPENING + CLOSING -->
+            <div class="row">
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Opening Time
+                    </label>
+
+                    <input
+                        name="mess[openingTime]"
+                        value="<%= mess.openingTime || '' %>"
+                        type="time"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Closing Time
+                    </label>
+
+                    <input
+                        name="mess[closingTime]"
+                        value="<%= mess.closingTime || '' %>"
+                        type="time"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- COLLEGE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    College
+                </label>
+
+                <select
+                    name="mess[college]"
+                    class="form-select"
+                    required
+                >
+
+                    <option value="">
+                        Select College
+                    </option>
+
+                    <% colleges.forEach(college => { %>
+
+                        <option
+                            value="<%= college._id %>"
+                            <%= mess.college &&
+                                mess.college._id.toString() === college._id.toString()
+                                ? "selected"
+                                : "" %>
+                        >
+                            <%= college.name %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- LOCATION - SAME AS PG -->
+            <!-- ========================= -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Location
+                </label>
+
+                <input
+                    id="location"
+                    name="mess[location]"
+                    value="<%= mess.location || '' %>"
+                    type="text"
+                    class="form-control"
+                    placeholder="Search your location..."
+                    autocomplete="off"
+                    required
+                >
+
+                <!-- Suggestions -->
+                <div
+                    id="locationSuggestions"
+                    class="location-suggestions">
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH LOCATION -->
+            <div class="mb-3">
+
+                <button
+                    type="button"
+                    id="searchLocationBtn"
+                    class="btn btn-primary"
+                >
+                    Search Location
+                </button>
+
+            </div>
+
+
+            <!-- MAP -->
+            <div id="map"></div>
+
+
+            <!-- COORDINATES -->
+            <input
+                type="hidden"
+                name="mess[latitude]"
+                id="latitude"
+                value="<%= mess.geocoding?.coordinates?.[1] || '' %>"
+            >
+
+            <input
+                type="hidden"
+                name="mess[longitude]"
+                id="longitude"
+                value="<%= mess.geocoding?.coordinates?.[0] || '' %>"
+            >
+
+
+            <p
+                id="coordinatesText"
+                class="text-muted mt-2"
+            >
+
+                <% if (
+                    mess.geocoding &&
+                    mess.geocoding.coordinates &&
+                    mess.geocoding.coordinates.length === 2
+                ) { %>
+
+                    Current coordinates:
+                    <%= mess.geocoding.coordinates[1].toFixed(6) %>,
+                    <%= mess.geocoding.coordinates[0].toFixed(6) %>
+
+                <% } else { %>
+
+                    Select your exact location on the map.
+
+                <% } %>
+
+            </p>
+
+
+            <br>
+
+            <button class="btn btn-dark edit-btn">
+                Update Mess
+            </button>
+
+            <br><br>
+
+        </form>
+
+    </div>
+</div>
+
+
+<style>
+
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+
+.location-suggestions {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 9999;
+}
+
+
+.suggestion-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+
+.suggestion-item:hover {
+    background: #f5f5f5;
+}
+
+</style>

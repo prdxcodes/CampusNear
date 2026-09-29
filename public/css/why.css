@@ -1,0 +1,222 @@
+/* =========================
+   WHY CAMPUSNEAR
+========================= */
+
+.why-campusnear {
+    width: 100%;
+
+    padding: 80px 5%;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.why-header {
+    width: 100%;
+
+    max-width: 750px;
+
+    margin: 0 auto 45px;
+
+    text-align: center;
+}
+
+.why-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #d94b3d;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.6px;
+}
+
+.why-header h2 {
+    margin: 0;
+
+    color: #18202c;
+
+    font-size: 32px;
+    line-height: 1.2;
+
+    font-weight: 700;
+}
+
+.why-header h2 span {
+    color: #d94b3d;
+}
+
+.why-header p {
+    margin: 13px auto 0;
+
+    max-width: 560px;
+
+    color: #747b85;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.why-features {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 24px;
+}
+
+
+/* =========================
+   FEATURE CARD
+========================= */
+
+.why-card {
+    min-height: 230px;
+
+    padding: 30px 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.why-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #f0d1cd;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.why-icon {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #fff1ef;
+
+    color: #d94b3d;
+
+    font-size: 22px;
+
+    transition: 0.25s ease;
+}
+
+.why-card:hover .why-icon {
+    background: #d94b3d;
+
+    color: #ffffff;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.why-card h3 {
+    margin: 0 0 10px;
+
+    color: #18202c;
+
+    font-size: 17px;
+
+    font-weight: 650;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.why-card p {
+    margin: 0;
+
+    color: #7b828b;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .why-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .why-campusnear {
+        padding: 55px 20px;
+    }
+
+    .why-header {
+        margin-bottom: 30px;
+    }
+
+    .why-header h2 {
+        font-size: 27px;
+    }
+
+    .why-features {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .why-card {
+        min-height: auto;
+
+        padding: 25px 20px;
+    }
+}

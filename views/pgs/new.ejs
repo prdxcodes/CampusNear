@@ -1,0 +1,321 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="service-form-page">
+
+        <div class="service-form-container">
+
+            <div class="service-form-card">
+
+                <div class="service-form-header">
+
+                    <span class="service-form-badge">
+                        PG
+                    </span>
+
+                    <h2>List Your PG</h2>
+
+                    <p>
+                        Add your PG details to help students find the right place near their college.
+                    </p>
+
+                </div>
+
+
+                <form method="POST" action="/pgs" novalidate class="needs-validation service-form"
+                    enctype="multipart/form-data">
+
+                    <!-- TITLE -->
+
+                    <div class="form-group">
+
+                        <label for="title">
+                            PG Name
+                        </label>
+
+                        <input type="text" id="title" name="pg[title]" class="form-control"
+                            placeholder="e.g. Sunrise Boys PG" required>
+
+                        <div class="invalid-feedback">
+                            Please enter the PG name.
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea id="description" name="pg[description]" class="form-control"
+                            placeholder="Describe the PG, facilities, rules, etc." required></textarea>
+
+                        <div class="invalid-feedback">
+                            Please enter a description.
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="form-group">
+
+                        <label for="image">
+                            PG Image
+                        </label>
+
+                        <input type="file" id="image" name="pg[image][url]" class="form-control" accept="image/*"
+                            required>
+
+                        <small>
+                            Upload a clear image of the PG.
+                        </small>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="form-group">
+
+                        <label for="price">
+                            Monthly Rent (₹)
+                        </label>
+
+                        <input type="number" id="price" name="pg[price]" class="form-control" placeholder="e.g. 8000"
+                            min="0" required>
+
+                        <div class="invalid-feedback">
+                            Please enter the monthly rent.
+                        </div>
+
+                    </div>
+
+
+                    <!-- COUNTRY -->
+
+                    <div class="form-group">
+
+                        <label for="country">
+                            Country
+                        </label>
+
+                        <input type="text" id="country" name="pg[country]" class="form-control" value="India" required>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+                    <div class="form-group">
+
+                        <label for="location">
+                            Location
+                        </label>
+
+                        <input type="text" id="location" name="pg[location]" class="form-control"
+                            placeholder="Search your location..." autocomplete="off" required>
+
+                        <div id="locationSuggestions" class="location-suggestions">
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <button type="button" id="searchLocationBtn" class="btn btn-primary">
+                            Search Location
+                        </button>
+
+                    </div>
+
+
+                    <!-- MAP -->
+                    <div id="map" style="height: 400px; width: 100%; border-radius: 12px;">
+                    </div>
+
+
+                    <!-- EXACT COORDINATES -->
+
+                    <input type="hidden" name="pg[latitude]" id="latitude">
+
+                    <input type="hidden" name="pg[longitude]" id="longitude">
+
+                    <p id="coordinatesText" class="text-muted mt-2">
+                        Search a location and drag the marker to the exact property location.
+                    </p>
+                    
+                    <!-- OWNER CONTACT -->
+
+                    <div class="form-group">
+
+                        <label for="ownerContact">
+                            Owner Contact Number
+                        </label>
+
+                        <input type="tel" id="ownerContact" name="pg[ownerContact]" class="form-control"
+                            placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required>
+
+                        <div class="invalid-feedback">
+                            Please enter a valid 10-digit mobile number.
+                        </div>
+
+                    </div>
+
+
+                    <!-- GENDER -->
+
+                    <div class="form-group">
+
+                        <label for="gender">
+                            PG For
+                        </label>
+
+                        <select id="gender" name="pg[gender]" class="form-select" required>
+
+                            <option value="" selected disabled>
+                                Select
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Unisex">
+                                Unisex
+                            </option>
+
+                        </select>
+
+                        <div class="invalid-feedback">
+                            Please select who the PG is for.
+                        </div>
+
+                    </div>
+
+
+                    <!-- SHARING -->
+
+                    <div class="form-group">
+
+                        <label for="sharingType">
+                            Sharing Type
+                        </label>
+
+                        <select id="sharingType" name="pg[sharingType]" class="form-select" required>
+
+                            <option value="" selected disabled>
+                                Select sharing type
+                            </option>
+
+                            <option value="Single">
+                                Single
+                            </option>
+
+                            <option value="Double">
+                                Double
+                            </option>
+
+                            <option value="Triple">
+                                Triple
+                            </option>
+
+                            <option value="4 Sharing">
+                                4 Sharing
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                        <div class="invalid-feedback">
+                            Please select a sharing type.
+                        </div>
+
+                    </div>
+
+
+                    <!-- FOOD -->
+
+                    <div class="form-group">
+
+                        <label for="foodIncluded">
+                            Food Included
+                        </label>
+
+                        <select id="foodIncluded" name="pg[foodIncluded]" class="form-select" required>
+
+                            <option value="" selected disabled>
+                                Select
+                            </option>
+
+                            <option value="true">
+                                Yes
+                            </option>
+
+                            <option value="false">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="form-group">
+
+                        <label for="college">
+                            Nearby College
+                        </label>
+
+                        <select id="college" name="pg[college]" class="form-select" required>
+
+                            <option value="" selected disabled>
+                                Select College
+                            </option>
+
+                            <% colleges.forEach(college=> { %>
+
+                                <option value="<%= college._id %>">
+                                    <%= college.name %>
+                                        <% if (college.shortName) { %>
+                                            (<%= college.shortName %>)
+                                                <% } %>
+                                </option>
+
+                                <% }) %>
+
+                        </select>
+
+                        <div class="invalid-feedback">
+                            Please select a nearby college.
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit" class="service-submit-btn">
+                        Add PG
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/js/script.js"></script>

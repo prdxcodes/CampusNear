@@ -1,0 +1,338 @@
+/* =========================
+   CAMPUSNEAR HERO
+========================= */
+
+.campusnear-hero {
+    position: relative;
+
+    min-height: 430px;
+
+    background-image: url("/images/hero-campus.jpg");
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+
+    color: white;
+}
+
+
+/* Dark overlay */
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.72),
+            rgba(0, 0, 0, 0.40),
+            rgba(0, 0, 0, 0.25)
+        );
+}
+
+
+/* Main content */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+
+
+/* =========================
+   HERO TEXT
+========================= */
+
+.hero-text {
+    max-width: 720px;
+}
+
+.hero-text h1 {
+    margin: 0;
+
+    font-size: 52px;
+    line-height: 1.08;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+.hero-text p {
+    margin-top: 18px;
+    margin-bottom: 28px;
+
+    font-size: 18px;
+
+    color: rgba(255, 255, 255, 0.92);
+}
+
+
+/* =========================
+   SEARCH BOX
+========================= */
+
+.hero-search {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    min-height: 72px;
+
+    background: white;
+    border-radius: 16px;
+    padding: 8px;
+
+    display: flex;
+    align-items: center;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Search field */
+
+.search-field {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 8px 18px;
+}
+
+.search-field > i {
+    color: #d94b3d;
+
+    font-size: 18px;
+}
+
+
+/* Field content */
+
+.search-field-content {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.search-field-content label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #202833;
+
+    margin-bottom: 3px;
+}
+
+.search-field-content input,
+.search-field-content select {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #59616c;
+
+    font-size: 13px;
+
+    padding: 0;
+}
+
+.search-field-content input::placeholder {
+    color: #8d949c;
+}
+
+.search-field-content select {
+    cursor: pointer;
+}
+
+
+/* Divider */
+
+.search-divider {
+    width: 1px;
+    height: 38px;
+
+    background: #e5e7eb;
+}
+
+
+/* Search button */
+
+.hero-search-btn {
+    height: 56px;
+
+    padding: 0 25px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #d94b3d;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.hero-search-btn:hover {
+    background: #c63e34;
+
+    transform: translateY(-1px);
+}
+
+.hero-search-btn i {
+    font-size: 14px;
+}
+
+
+/* =========================
+   QUICK SEARCH
+========================= */
+
+.hero-quick-search {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 17px auto 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    flex-wrap: wrap;
+    gap: 10px;
+
+    font-size: 13px;
+}
+
+.hero-quick-search > span {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.hero-quick-search a {
+    color: white;
+
+    text-decoration: none;
+
+    padding: 6px 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(4px);
+
+    transition: all 0.2s ease;
+}
+
+.hero-quick-search a:hover {
+    background: white;
+
+    color: #d94b3d;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .staynear-hero {
+        min-height: 500px;
+    }
+
+    .hero-text h1 {
+        font-size: 42px;
+    }
+
+    .hero-search {
+        max-width: 100%;
+
+        flex-wrap: wrap;
+
+        padding: 12px;
+    }
+
+    .search-field {
+        flex: 1 1 45%;
+    }
+
+    .search-divider {
+        display: none;
+    }
+
+    .hero-search-btn {
+        width: 100%;
+        margin-top: 8px;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .staynear-hero {
+        min-height: 620px;
+    }
+
+    .hero-content {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .hero-text h1 {
+        font-size: 34px;
+    }
+
+    .hero-text p {
+        font-size: 15px;
+    }
+
+    .hero-search {
+        display: block;
+
+        padding: 12px;
+    }
+
+    .search-field {
+        padding: 12px 8px;
+    }
+
+    .hero-search-btn {
+        height: 50px;
+    }
+
+    .hero-quick-search {
+        margin-top: 15px;
+    }
+}

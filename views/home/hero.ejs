@@ -1,0 +1,153 @@
+<section class="campusnear-hero">
+
+    <!-- Dark overlay -->
+    <div class="hero-overlay"></div>
+
+    <div class=" container hero-content">
+
+        <!-- Hero Text -->
+        <div class="hero-text">
+
+            <h1>
+                Find your perfect stay
+                <br>
+                near your campus
+            </h1>
+
+            <p>
+                PGs, hostels, cafes & essential places —
+                all in one place.
+            </p>
+
+        </div>
+
+
+        <!-- Search Box -->
+        <form
+            action="/pgs"
+            method="GET"
+            class="hero-search"
+        >
+
+            <!-- Location -->
+            <div class="search-field location-field">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <div class="search-field-content">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        placeholder="Search by location..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Divider -->
+            <div class="search-divider"></div>
+
+
+            <!-- Category -->
+            <div class="search-field">
+
+                <i class="fa-solid fa-building"></i>
+
+                <div class="search-field-content">
+
+                    <label for="category">
+                        Looking for
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                    >
+                        <option value="">Any place</option>
+                        <option value="pg">PG</option>
+                        <option value="hostel">Hostel</option>
+                        <option value="cafe">Cafe</option>
+                        <option value="laundry">Laundry</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Divider -->
+            <div class="search-divider"></div>
+
+
+            <!-- Guests -->
+            <div class="search-field">
+
+                <i class="fa-solid fa-user"></i>
+
+                <div class="search-field-content">
+
+                    <label for="guests">
+                        Guests
+                    </label>
+
+                    <select
+                        id="guests"
+                        name="guests"
+                    >
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4+ Guests</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Search Button -->
+            <button
+                type="submit"
+                class="hero-search-btn"
+            >
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Search</span>
+            </button>
+
+        </form>
+
+
+        <!-- Quick Search -->
+        <div class="hero-quick-search">
+
+            <span>Popular:</span>
+
+            <a href="/pgs?location=AKGEC">
+                AKGEC
+            </a>
+
+            <a href="/pgs?location=Govindpuram">
+                Govindpuram
+            </a>
+
+            <a href="/pgs?location=Raj Nagar">
+                Raj Nagar
+            </a>
+
+            <a href="/pgs?location=Crossings Republik">
+                Crossings Republik
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

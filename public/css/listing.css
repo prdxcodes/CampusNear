@@ -1,0 +1,561 @@
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LISTING PAGE
+========================================================= */
+
+.listing-page {
+    width: 100%;
+
+    /*
+        5% left + right spacing
+        keeps content away from screen edges
+    */
+    padding: 50px 5% 80px;
+
+    box-sizing: border-box;
+}
+
+
+/*
+    Bootstrap .row normally uses negative margins.
+    Remove them here so the row doesn't extend
+    outside the listing section.
+*/
+
+.listing-page > .row {
+    width: 100%;
+
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.listing-header {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 40px;
+
+    gap: 30px;
+}
+
+.section-label {
+    margin-bottom: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    color: #d94b3d;
+}
+
+.listing-header h1 {
+    margin: 0;
+
+    font-size: 38px;
+    font-weight: 700;
+
+    color: #222;
+
+    line-height: 1.2;
+}
+
+.listing-subtitle {
+    margin-top: 10px;
+    margin-bottom: 0;
+
+    font-size: 15px;
+
+    color: #777;
+
+    max-width: 650px;
+
+    line-height: 1.6;
+}
+
+.listing-count {
+    white-space: nowrap;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #555;
+
+    padding: 10px 16px;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 30px;
+
+    background: #fff;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LISTING CARD
+========================================================= */
+
+.listing-card {
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 18px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #ddd;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.listing-image-wrapper {
+    width: 100%;
+    height: 230px;
+
+    overflow: hidden;
+
+    background: #f2f2f2;
+}
+
+.listing-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.4s ease;
+}
+
+.listing-card:hover .listing-image {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   NO IMAGE
+========================================================= */
+
+.no-image {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #f4f4f4;
+
+    color: #aaa;
+
+    font-size: 45px;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.listing-card-body {
+    padding: 22px;
+}
+
+.listing-category {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    color: #d94b3d;
+
+    text-transform: uppercase;
+}
+
+.listing-card-body h3 {
+    margin: 0 0 10px;
+
+    font-size: 21px;
+    font-weight: 650;
+
+    line-height: 1.3;
+
+    color: #222;
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.listing-location {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 16px;
+
+    font-size: 13px;
+
+    color: #777;
+
+    min-width: 0;
+}
+
+.listing-location i {
+    color: #d94b3d;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   INFORMATION ROW
+========================================================= */
+
+.listing-info {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+
+    max-width: 100%;
+}
+
+.listing-info span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 10px;
+
+    border-radius: 8px;
+
+    background: #f6f6f6;
+
+    color: #555;
+
+    font-size: 12px;
+
+    max-width: 100%;
+}
+
+.listing-info i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   FEATURE TAGS
+========================================================= */
+
+.meal-features,
+.service-features {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+
+    max-width: 100%;
+}
+
+.meal-features span,
+.service-features span {
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #f7f1ef;
+
+    color: #555;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   BOTTOM SECTION
+========================================================= */
+
+.listing-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-top: 17px;
+
+    border-top: 1px solid #eee;
+
+    min-width: 0;
+}
+
+.listing-bottom strong {
+    font-size: 19px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.listing-bottom strong small {
+    font-size: 11px;
+
+    font-weight: 400;
+
+    color: #888;
+}
+
+
+/* =========================================================
+   FEATURE BADGE
+========================================================= */
+
+.feature-badge {
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background: #222;
+
+    color: #fff;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+    width: 100%;
+
+    padding: 80px 30px;
+
+    text-align: center;
+
+    border: 1px dashed #d8d8d8;
+
+    border-radius: 18px;
+
+    background: #fafafa;
+}
+
+.empty-state i {
+    margin-bottom: 20px;
+
+    font-size: 45px;
+
+    color: #bbb;
+}
+
+.empty-state h3 {
+    margin-bottom: 8px;
+
+    font-size: 22px;
+
+    color: #333;
+}
+
+.empty-state p {
+    margin-bottom: 22px;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+.empty-state .btn {
+    padding: 10px 20px;
+
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.listing-page a {
+    color: inherit;
+}
+
+.listing-page a:hover {
+    color: inherit;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .listing-page {
+        padding: 40px 4% 60px;
+    }
+
+    .listing-header h1 {
+        font-size: 32px;
+    }
+
+    .listing-image-wrapper {
+        height: 210px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .listing-page {
+        padding: 30px 20px 50px;
+    }
+
+    .listing-header {
+        display: block;
+
+        margin-bottom: 30px;
+    }
+
+    .listing-header h1 {
+        font-size: 28px;
+    }
+
+    .listing-subtitle {
+        font-size: 14px;
+    }
+
+    .listing-count {
+        display: inline-block;
+
+        margin-top: 18px;
+    }
+
+    .listing-image-wrapper {
+        height: 220px;
+    }
+
+    .listing-card-body {
+        padding: 18px;
+    }
+
+    .listing-card-body h3 {
+        font-size: 19px;
+    }
+
+    .listing-bottom {
+        gap: 10px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .listing-page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .listing-header h1 {
+        font-size: 25px;
+    }
+
+    .listing-image-wrapper {
+        height: 200px;
+    }
+
+    .listing-bottom {
+        align-items: flex-start;
+    }
+
+    .listing-bottom strong {
+        font-size: 17px;
+    }
+
+    .feature-badge {
+        font-size: 9px;
+
+        padding: 6px 9px;
+    }
+}

@@ -1,0 +1,91 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
+/* Cards */
+
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text p{
+    font-weight: 400 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+/* Card Effect */
+
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover{
+    background-color: white;
+    opacity: 0.2;
+}
+
+/* New Page */
+
+.add-btn{
+    background-color: #BC4A3C !important;
+    border: none !important;
+}
+
+/* Edit Page */
+
+.edit-btn{
+    background-color: #BC4A3C !important;
+    border: none !important;
+}
+
+/* Show Page */
+
+.show-img{
+    height: 30vh;
+}
+
+.btns{
+    display: flex;
+}
+
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#map {
+        height: 400px;
+        width: 100%;
+    }
+
+.btn-search {
+    background-color: #BC4A3C !important;
+    color: #ffff !important;
+}    
+
+/* Map */
+
+#map{
+    height: 400px !important;
+    width: 600px !important;
+}

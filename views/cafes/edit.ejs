@@ -1,0 +1,421 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row">
+    <div class="col col-8 offset-2">
+
+        <br>
+
+        <h3>Edit Your Cafe</h3>
+
+        <br>
+
+        <form
+            method="post"
+            action="/cafes/<%= cafe._id %>?_method=put"
+            novalidate
+            class="needs-validation"
+            enctype="multipart/form-data"
+        >
+
+            <!-- TITLE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Cafe Name
+                </label>
+
+                <input
+                    name="cafe[title]"
+                    value="<%= cafe.title || '' %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Please enter cafe name.
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Description
+                </label>
+
+                <textarea
+                    name="cafe[description]"
+                    class="form-control"
+                    required
+                ><%= cafe.description || '' %></textarea>
+
+                <div class="invalid-feedback">
+                    Please enter description.
+                </div>
+
+            </div>
+
+
+            <!-- EXISTING IMAGE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Existing Image
+                </label>
+
+                <br>
+
+                <% if (originalImageUrl) { %>
+
+                    <img
+                        src="<%= originalImageUrl %>"
+                        class="img-fluid rounded"
+                        style="max-width:250px;"
+                    >
+
+                <% } %>
+
+            </div>
+
+
+            <!-- NEW IMAGE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Upload New Image
+                </label>
+
+                <input
+                    name="cafe[image][url]"
+                    type="file"
+                    class="form-control"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+            <!-- PRICE + COUNTRY -->
+            <div class="row">
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Price
+                    </label>
+
+                    <input
+                        name="cafe[price]"
+                        value="<%= cafe.price || '' %>"
+                        type="number"
+                        class="form-control"
+                        min="0"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter price.
+                    </div>
+
+                </div>
+
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Country
+                    </label>
+
+                    <input
+                        name="cafe[country]"
+                        value="<%= cafe.country || 'India' %>"
+                        type="text"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- OWNER CONTACT -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Owner Contact
+                </label>
+
+                <input
+                    name="cafe[ownerContact]"
+                    value="<%= cafe.ownerContact || '' %>"
+                    type="tel"
+                    class="form-control"
+                    placeholder="10-digit mobile number"
+                    pattern="[6-9][0-9]{9}"
+                    maxlength="10"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Please enter a valid 10-digit mobile number.
+                </div>
+
+            </div>
+
+
+            <!-- CUISINE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Cuisine
+                </label>
+
+                <input
+                    name="cafe[cuisine]"
+                    value="<%= cafe.cuisine || '' %>"
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Indian, Chinese, Italian"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Please enter cuisine.
+                </div>
+
+            </div>
+
+
+            <!-- OPENING + CLOSING -->
+            <div class="row">
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Opening Time
+                    </label>
+
+                    <input
+                        name="cafe[openingTime]"
+                        value="<%= cafe.openingTime || '' %>"
+                        type="time"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Closing Time
+                    </label>
+
+                    <input
+                        name="cafe[closingTime]"
+                        value="<%= cafe.closingTime || '' %>"
+                        type="time"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- COLLEGE -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Nearby College
+                </label>
+
+                <select
+                    name="cafe[college]"
+                    class="form-select"
+                    required
+                >
+
+                    <option value="">
+                        Select College
+                    </option>
+
+                    <% colleges.forEach(college => { %>
+
+                        <option
+                            value="<%= college._id %>"
+                            <%= cafe.college &&
+                                cafe.college._id.toString() === college._id.toString()
+                                ? "selected"
+                                : "" %>
+                        >
+                            <%= college.name %>
+
+                            <% if (college.shortName) { %>
+                                (<%= college.shortName %>)
+                            <% } %>
+
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+                <div class="invalid-feedback">
+                    Please select a nearby college.
+                </div>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- LOCATION -->
+            <!-- ========================= -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Location
+                </label>
+
+                <input
+                    id="location"
+                    name="cafe[location]"
+                    value="<%= cafe.location || '' %>"
+                    type="text"
+                    class="form-control"
+                    placeholder="Search your location..."
+                    autocomplete="off"
+                    required
+                >
+
+                <!-- Suggestions -->
+                <div
+                    id="locationSuggestions"
+                    class="location-suggestions">
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH LOCATION -->
+            <div class="mb-3">
+
+                <button
+                    type="button"
+                    id="searchLocationBtn"
+                    class="btn btn-primary"
+                >
+                    Search Location
+                </button>
+
+            </div>
+
+
+            <!-- MAP -->
+            <div id="map"></div>
+
+
+            <!-- LATITUDE -->
+            <input
+                type="hidden"
+                name="cafe[latitude]"
+                id="latitude"
+                value="<%= cafe.geocoding?.coordinates?.[1] || '' %>"
+            >
+
+
+            <!-- LONGITUDE -->
+            <input
+                type="hidden"
+                name="cafe[longitude]"
+                id="longitude"
+                value="<%= cafe.geocoding?.coordinates?.[0] || '' %>"
+            >
+
+
+            <!-- COORDINATES INFO -->
+            <p
+                id="coordinatesText"
+                class="text-muted mt-2"
+            >
+
+                <% if (
+                    cafe.geocoding &&
+                    cafe.geocoding.coordinates &&
+                    cafe.geocoding.coordinates.length === 2
+                ) { %>
+
+                    Current coordinates:
+                    <%= cafe.geocoding.coordinates[1].toFixed(6) %>,
+                    <%= cafe.geocoding.coordinates[0].toFixed(6) %>
+
+                <% } else { %>
+
+                    Select your exact location on the map.
+
+                <% } %>
+
+            </p>
+
+
+            <br>
+
+
+            <!-- SUBMIT -->
+            <button
+                class="btn btn-dark edit-btn"
+                type="submit"
+            >
+                Update Cafe
+            </button>
+
+            <br><br>
+
+        </form>
+
+    </div>
+</div>
+
+
+<style>
+
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+
+.location-suggestions {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 9999;
+}
+
+
+.suggestion-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+
+.suggestion-item:hover {
+    background: #f5f5f5;
+}
+
+</style>

@@ -1,0 +1,156 @@
+<section class="recommended-section">
+
+    <!-- Section Header -->
+    <div class="section-header">
+
+        <div>
+            <span class="section-label">
+                STAYNEAR PICKS
+            </span>
+
+            <h2>
+                Recommended Properties
+            </h2>
+
+            <p>
+                Comfortable places selected for students near your campus.
+            </p>
+        </div>
+
+        <a href="/pgs" class="view-all-btn">
+            View all
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+
+    <!-- Property Cards -->
+    <div class="row g-4">
+
+        <% if (pgs && pgs.length > 0) { %>
+
+            <% pgs.slice(0, 6).forEach(pg => { %>
+
+                <div class="col-xl-4 col-lg-4 col-md-6">
+
+                    <div class="recommended-card">
+
+                        <div class="recommended-image-wrapper">
+
+                            <a href="/pgs/<%= pg._id %>">
+
+                                <img
+                                    src="<%= pg.image.url %>"
+                                    alt="<%= pg.title %>"
+                                    class="recommended-image"
+                                >
+
+                            </a>
+
+                            <button
+                                class="wishlist-btn"
+                                type="button"
+                            >
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+
+                            <span class="featured-badge">
+                                <i class="fa-solid fa-star"></i>
+                                Recommended
+                            </span>
+
+                        </div>
+
+
+                        <div class="recommended-card-body">
+
+                            <div class="property-location">
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <span>
+                                    <%= pg.location %>
+                                </span>
+                            </div>
+
+
+                            <h3 class="property-title">
+
+                                <a href="/pgs/<%= pg._id %>">
+                                    <%= pg.title %>
+                                </a>
+
+                            </h3>
+
+
+                            <div class="property-rating">
+
+                                <span class="rating-star">
+                                    <i class="fa-solid fa-star"></i>
+                                    4.8
+                                </span>
+
+                                <span class="review-count">
+                                    · Highly rated
+                                </span>
+
+                            </div>
+
+
+                            <div class="property-footer">
+
+                                <div class="property-price">
+
+                                    <strong>
+                                        ₹<%= pg.price.toLocaleString("en-IN") %>
+                                    </strong>
+
+                                    <span>
+                                        / month
+                                    </span>
+
+                                </div>
+
+                                <a
+                                    href="/pgs/<%= pg._id %>"
+                                    class="view-property"
+                                >
+                                    View
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        <% } else { %>
+
+            <div class="col-12">
+
+                <div class="empty-properties">
+
+                    <i class="fa-regular fa-building"></i>
+
+                    <h4>
+                        No properties available yet
+                    </h4>
+
+                    <p>
+                        New properties will appear here soon.
+                    </p>
+
+                </div>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</section>

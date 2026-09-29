@@ -1,0 +1,267 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="service-form-page">
+
+        <div class="service-form-container">
+
+            <div class="service-form-card">
+
+                <div class="service-form-header">
+
+                    <span class="service-form-badge">
+                        MESS
+                    </span>
+
+                    <h2>List Your Mess</h2>
+
+                    <p>
+                        Help students find affordable and reliable mess services.
+                    </p>
+
+                </div>
+
+
+                <form method="POST" action="/messes" novalidate class="needs-validation service-form"
+                    enctype="multipart/form-data">
+
+                    <!-- TITLE -->
+
+                    <div class="form-group">
+
+                        <label for="title">
+                            Mess Name
+                        </label>
+
+                        <input type="text" id="title" name="mess[title]" class="form-control"
+                            placeholder="e.g. Sharma Mess" required>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea id="description" name="mess[description]" class="form-control"
+                            placeholder="Describe your mess and food quality..." required></textarea>
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="form-group">
+
+                        <label for="image">
+                            Mess Image
+                        </label>
+
+                        <input type="file" id="image" name="mess[image][url]" class="form-control" accept="image/*"
+                            required>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="form-group">
+
+                        <label for="price">
+                            Monthly Price (₹)
+                        </label>
+
+                        <input type="number" id="price" name="mess[price]" class="form-control" placeholder="e.g. 3000"
+                            min="0" required>
+
+                    </div>
+
+
+                    <!-- COUNTRY -->
+
+                    <div class="form-group">
+
+                        <label for="country">
+                            Country
+                        </label>
+
+                        <input type="text" id="country" name="mess[country]" class="form-control" value="India"
+                            required>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+
+                        <input type="text" id="location" name="location" class="form-control"
+                            placeholder="Search your location..." autocomplete="off" required>
+
+                        <!-- Suggestions -->
+                        <div id="locationSuggestions" class="location-suggestions"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="button" id="searchLocationBtn" class="btn btn-primary">
+                            Search Location
+                        </button>
+                    </div>
+
+                    <div id="map"></div>
+
+                    <input type="hidden" name="latitude" id="latitude">
+                    <input type="hidden" name="longitude" id="longitude">
+
+                    <p id="coordinatesText" class="text-muted mt-2">
+                        Select your exact location on the map.
+                    </p>
+
+
+                    <!-- CONTACT -->
+
+                    <div class="form-group">
+
+                        <label for="ownerContact">
+                            Owner Contact Number
+                        </label>
+
+                        <input type="tel" id="ownerContact" name="mess[ownerContact]" class="form-control"
+                            placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required>
+
+                    </div>
+
+
+                    <!-- MEAL TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="mealType">
+                            Food Type
+                        </label>
+
+                        <select id="mealType" name="mess[mealType]" class="form-select" required>
+
+                            <option value="" selected disabled>
+                                Select food type
+                            </option>
+
+                            <option value="Veg">
+                                Veg
+                            </option>
+
+                            <option value="Non-Veg">
+                                Non-Veg
+                            </option>
+
+                            <option value="Both">
+                                Veg & Non-Veg
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- MEALS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Meals Available
+                        </label>
+
+                        <div class="checkbox-group">
+
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="mess[meals]" value="Breakfast">
+                                Breakfast
+                            </label>
+
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="mess[meals]" value="Lunch">
+                                Lunch
+                            </label>
+
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="mess[meals]" value="Dinner">
+                                Dinner
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPENING -->
+
+                    <div class="form-group">
+
+                        <label for="openingTime">
+                            Opening Time
+                        </label>
+
+                        <input type="time" id="openingTime" name="mess[openingTime]" class="form-control" required>
+
+                    </div>
+
+
+                    <!-- CLOSING -->
+
+                    <div class="form-group">
+
+                        <label for="closingTime">
+                            Closing Time
+                        </label>
+
+                        <input type="time" id="closingTime" name="mess[closingTime]" class="form-control" required>
+
+                    </div>
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="form-group">
+
+                        <label for="college">
+                            Nearby College
+                        </label>
+
+                        <select id="college" name="mess[college]" class="form-select" required>
+
+                            <option value="" selected disabled>
+                                Select College
+                            </option>
+
+                            <% colleges.forEach(college=> { %>
+
+                                <option value="<%= college._id %>">
+                                    <%= college.name %>
+                                        <% if (college.shortName) { %>
+                                            (<%= college.shortName %>)
+                                                <% } %>
+                                </option>
+
+                                <% }) %>
+
+                        </select>
+
+                    </div>
+
+
+                    <button type="submit" class="service-submit-btn">
+                        Add Mess
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/js/script.js"></script>

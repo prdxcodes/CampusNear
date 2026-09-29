@@ -1,0 +1,170 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="listing-page">
+
+    <div class="listing-header">
+
+        <div>
+
+            <p class="section-label">
+                STUDENT SERVICES
+            </p>
+
+            <h1>Laundry Near Your Campus</h1>
+
+            <p class="listing-subtitle">
+                Find reliable washing, ironing and dry-cleaning services near your college.
+            </p>
+
+        </div>
+
+        <div class="listing-count">
+            <%= allPlaces.length %> Laundries
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <% if (allPlaces.length === 0) { %>
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-shirt"></i>
+
+                <h3>No laundry services available</h3>
+
+                <p>
+                    Be the first one to list a laundry service near your campus.
+                </p>
+
+                <a href="/laundries/new" class="btn btn-dark">
+                    Add Laundry
+                </a>
+
+            </div>
+
+        <% } else { %>
+
+
+            <% allPlaces.forEach(laundry => { %>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <a
+                        href="/laundries/<%= laundry._id %>"
+                        class="text-decoration-none"
+                    >
+
+                        <div class="listing-card">
+
+                            <div class="listing-image-wrapper">
+
+                                <% if (laundry.image && laundry.image.url) { %>
+
+                                    <img
+                                        src="<%= laundry.image.url %>"
+                                        alt="<%= laundry.title %>"
+                                        class="listing-image"
+                                    >
+
+                                <% } else { %>
+
+                                    <div class="no-image">
+                                        <i class="fa-solid fa-shirt"></i>
+                                    </div>
+
+                                <% } %>
+
+                            </div>
+
+
+                            <div class="listing-card-body">
+
+                                <div class="listing-category">
+                                    LAUNDRY
+                                </div>
+
+
+                                <h3>
+                                    <%= laundry.title %>
+                                </h3>
+
+
+                                <p class="listing-location">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <%= laundry.location %>
+
+                                </p>
+
+
+                                <div class="listing-info">
+
+                                    <span>
+                                        <i class="fa-solid fa-soap"></i>
+                                        Laundry Service
+                                    </span>
+
+                                    <% if (laundry.pickupDelivery) { %>
+
+                                        <span>
+                                            <i class="fa-solid fa-truck"></i>
+                                            Pickup & Delivery
+                                        </span>
+
+                                    <% } %>
+
+                                </div>
+
+
+                                <% if (
+                                    laundry.serviceType &&
+                                    laundry.serviceType.length
+                                ) { %>
+
+                                    <div class="service-features">
+
+                                        <% laundry.serviceType.forEach(service => { %>
+
+                                            <span>
+                                                <%= service %>
+                                            </span>
+
+                                        <% }) %>
+
+                                    </div>
+
+                                <% } %>
+
+
+                                <div class="listing-bottom">
+
+                                    <strong>
+                                        ₹<%= laundry.price %>
+                                    </strong>
+
+                                    <span class="feature-badge">
+                                        View Laundry
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            <% }) %>
+
+
+        <% } %>
+
+    </div>
+
+</div>

@@ -1,0 +1,147 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="listing-page">
+
+    <div class="listing-header">
+
+        <div>
+
+            <p class="section-label">
+                FOOD & BEVERAGES
+            </p>
+
+            <h1>Cafes Near Your Campus</h1>
+
+            <p class="listing-subtitle">
+                Discover cafes, coffee shops and student-friendly places near your college.
+            </p>
+
+        </div>
+
+        <div class="listing-count">
+            <%= allPlaces.length %> Cafes
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <% if (allPlaces.length === 0) { %>
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-mug-hot"></i>
+
+                <h3>No cafes available</h3>
+
+                <p>
+                    Be the first one to list a cafe near your campus.
+                </p>
+
+                <a href="/cafes/new" class="btn btn-dark">
+                    Add Cafe
+                </a>
+
+            </div>
+
+        <% } else { %>
+
+
+            <% allPlaces.forEach(cafe => { %>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <a
+                        href="/cafes/<%= cafe._id %>"
+                        class="text-decoration-none"
+                    >
+
+                        <div class="listing-card">
+
+                            <div class="listing-image-wrapper">
+
+                                <% if (cafe.image && cafe.image.url) { %>
+
+                                    <img
+                                        src="<%= cafe.image.url %>"
+                                        alt="<%= cafe.title %>"
+                                        class="listing-image"
+                                    >
+
+                                <% } else { %>
+
+                                    <div class="no-image">
+                                        <i class="fa-solid fa-mug-hot"></i>
+                                    </div>
+
+                                <% } %>
+
+                            </div>
+
+
+                            <div class="listing-card-body">
+
+                                <div class="listing-category">
+                                    CAFE
+                                </div>
+
+                                <h3>
+                                    <%= cafe.title %>
+                                </h3>
+
+
+                                <p class="listing-location">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <%= cafe.location %>
+
+                                </p>
+
+
+                                <div class="listing-info">
+
+                                    <span>
+                                        <i class="fa-solid fa-utensils"></i>
+                                        <%= cafe.cuisine %>
+                                    </span>
+
+                                    <span>
+                                        <i class="fa-regular fa-clock"></i>
+                                        <%= cafe.openingTime %>
+                                        -
+                                        <%= cafe.closingTime %>
+                                    </span>
+
+                                </div>
+
+
+                                <div class="listing-bottom">
+
+                                    <strong>
+                                        ₹<%= cafe.price %>
+                                    </strong>
+
+                                    <span class="feature-badge">
+                                        View Cafe
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            <% }) %>
+
+
+        <% } %>
+
+    </div>
+
+</div>

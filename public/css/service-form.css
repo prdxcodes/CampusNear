@@ -1,0 +1,334 @@
+/* =========================================
+   SERVICE FORM PAGE
+========================================= */
+
+.service-form-page {
+    min-height: calc(100vh - 80px);
+    padding: 55px 20px 80px;
+    background: #f7f7f5;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.service-form-container {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.service-form-card {
+    background: #ffffff;
+    border: 1px solid #e7e7e7;
+    border-radius: 18px;
+    padding: 45px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.service-form-header {
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.service-form-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+
+    background: #f1f1f1;
+    color: #333;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.service-form-header h2 {
+    margin: 0 0 8px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #222;
+}
+
+.service-form-header p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.form-group {
+    margin-bottom: 23px;
+}
+
+
+/* =========================================
+   LABEL
+========================================= */
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #333;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.service-form .form-control,
+.service-form .form-select {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 11px 14px;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 9px;
+
+    background: #fff;
+
+    color: #222;
+
+    font-size: 14px;
+
+    box-shadow: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.service-form textarea.form-control {
+    min-height: 125px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.service-form .form-control:focus,
+.service-form .form-select:focus {
+    border-color: #222;
+
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================
+   FILE INPUT
+========================================= */
+
+.service-form input[type="file"] {
+    padding: 9px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   SMALL TEXT
+========================================= */
+
+.service-form small {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   CHECKBOXES
+========================================= */
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.checkbox-option {
+    display: flex !important;
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0 !important;
+
+    padding: 10px 14px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    background: #fafafa;
+
+    font-size: 13px !important;
+    font-weight: 500 !important;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.checkbox-option:hover {
+    border-color: #aaa;
+}
+
+.checkbox-option input {
+    width: 16px;
+    height: 16px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   VALIDATION
+========================================= */
+
+.service-form .invalid-feedback {
+    margin-top: 6px;
+
+    font-size: 12px;
+}
+
+.service-form .valid-feedback {
+    margin-top: 6px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.service-submit-btn {
+    width: 100%;
+
+    min-height: 50px;
+
+    margin-top: 10px;
+
+    padding: 12px 20px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #222;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.service-submit-btn:hover {
+    background: #000;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .service-form-page {
+        padding: 30px 15px 50px;
+    }
+
+    .service-form-card {
+        padding: 30px 25px;
+    }
+
+    .service-form-header h2 {
+        font-size: 25px;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .service-form-page {
+        padding: 20px 10px 40px;
+    }
+
+    .service-form-card {
+        padding: 25px 18px;
+
+        border-radius: 13px;
+    }
+
+    .service-form-header {
+        margin-bottom: 27px;
+    }
+
+    .service-form-header h2 {
+        font-size: 22px;
+    }
+
+    .checkbox-group {
+        flex-direction: column;
+    }
+
+    .checkbox-option {
+        width: 100%;
+    }
+
+}
