@@ -1,183 +1,474 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="row">
-        <div class="col col-8 offset-2">
+<div class="row">
+    <div class="col col-8 offset-2">
 
-            <br>
+        <br>
 
-            <h3>Edit Your PG</h3>
+        <h3>Edit Your PG</h3>
 
-            <br>
+        <br>
 
-            <form method="post" action="/pgs/<%= pg._id %>?_method=put" novalidate class="needs-validation"
-                enctype="multipart/form-data">
+        <form method="post"
+            action="/pgs/<%= pg._id %>?_method=put"
+            novalidate
+            class="needs-validation"
+            enctype="multipart/form-data">
 
-                <!-- Title -->
-                <div class="mb-3">
-                    <label class="form-label">Title</label>
+            <!-- TITLE -->
 
-                    <input name="pg[title]" value="<%= pg.title %>" type="text" class="form-control" required>
+            <div class="mb-3">
 
-                    <div class="invalid-feedback">
-                        Please enter title.
-                    </div>
+                <label class="form-label">
+                    PG Name
+                </label>
+
+                <input
+                    name="pg[title]"
+                    value="<%= pg.title %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Please enter PG name.
                 </div>
 
+            </div>
 
-                <!-- Description -->
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
 
-                    <textarea name="pg[description]" class="form-control" required><%= pg.description %></textarea>
+            <!-- DESCRIPTION -->
 
-                    <div class="invalid-feedback">
-                        Please enter description.
-                    </div>
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Description
+                </label>
+
+                <textarea
+                    name="pg[description]"
+                    class="form-control"
+                    required
+                ><%= pg.description %></textarea>
+
+                <div class="invalid-feedback">
+                    Please enter description.
                 </div>
 
-
-                <!-- Existing Image -->
-                <div class="mb-3">
-                    <label class="form-label">Existing Image</label>
-
-                    <br>
-
-                    <img src="<%= originalImageUrl %>" class="img-fluid rounded" style="max-width: 250px;">
-                </div>
+            </div>
 
 
-                <!-- New Image -->
-                <div class="mb-3">
-                    <label class="form-label">
-                        Upload New Image
-                    </label>
+            <!-- EXISTING IMAGE -->
 
-                    <input name="pg[image][url]" type="file" class="form-control">
-                </div>
+            <div class="mb-3">
 
-
-                <!-- Price + Country -->
-                <div class="row">
-
-                    <div class="mb-3 col-md-6">
-                        <label class="form-label">Price</label>
-
-                        <input name="pg[price]" value="<%= pg.price %>" type="number" class="form-control" required>
-                    </div>
-
-
-                    <div class="mb-3 col-md-6">
-                        <label class="form-label">Country</label>
-
-                        <input name="pg[country]" value="<%= pg.country %>" type="text" class="form-control" required>
-                    </div>
-
-                </div>
-
-
-                <!-- Location -->
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Location
-                    </label>
-
-                    <input id="location" name="pg[location]" value="<%= pg.location || '' %>" type="text"
-                        class="form-control" placeholder="Search your location..." autocomplete="off" required>
-
-                    <!-- Suggestions -->
-                    <div id="locationSuggestions" class="location-suggestions">
-                    </div>
-
-                </div>
-
-
-                <!-- Search Location Button -->
-                <div class="mb-3">
-
-                    <button type="button" id="searchLocationBtn" class="btn btn-primary">
-                        Search Location
-                    </button>
-
-                </div>
-
-
-                <!-- Map -->
-                <div id="map">
-                    data-coordinates="<%= JSON.stringify(pg.geocoding?.coordinates || []) %>">
-                </div>
-
-
-                <!-- Coordinates -->
-                <input type="hidden" name="pg[geocoding][coordinates][1]" id="latitude"
-                    value="<%= pg.geocoding?.coordinates?.[1] || '' %>">
-
-                <input type="hidden" name="pg[geocoding][coordinates][0]" id="longitude"
-                    value="<%= pg.geocoding?.coordinates?.[0] || '' %>">
-
-                <input type="hidden" name="pg[geocoding][type]" value="Point">
-
-                <p id="coordinatesText" class="text-muted mt-2">
-
-                    <% if ( pg.geocoding && pg.geocoding.coordinates && pg.geocoding.coordinates.length===2 ) { %>
-
-                        Current coordinates:
-                        <%= pg.geocoding.coordinates[1].toFixed(6) %>,
-                            <%= pg.geocoding.coordinates[0].toFixed(6) %>
-
-                                <% } else { %>
-
-                                    Select your exact location on the map.
-
-                                    <% } %>
-
-                </p>
-
+                <label class="form-label">
+                    Existing Image
+                </label>
 
                 <br>
 
-                <button class="btn btn-dark edit-btn">
-                    Update PG
+                <% if (originalImageUrl) { %>
+
+                    <img
+                        src="<%= originalImageUrl %>"
+                        class="img-fluid rounded"
+                        style="max-width: 250px;"
+                    >
+
+                <% } else { %>
+
+                    <p class="text-muted">
+                        No image available.
+                    </p>
+
+                <% } %>
+
+            </div>
+
+
+            <!-- NEW IMAGE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Upload New Image
+                </label>
+
+                <input
+                    name="pg[image][url]"
+                    type="file"
+                    class="form-control"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+            <!-- PRICE + COUNTRY -->
+
+            <div class="row">
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Monthly Rent (₹)
+                    </label>
+
+                    <input
+                        name="pg[price]"
+                        value="<%= pg.price %>"
+                        type="number"
+                        class="form-control"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="mb-3 col-md-6">
+
+                    <label class="form-label">
+                        Country
+                    </label>
+
+                    <input
+                        name="pg[country]"
+                        value="<%= pg.country %>"
+                        type="text"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Location
+                </label>
+
+                <input
+                    id="location"
+                    name="pg[location]"
+                    value="<%= pg.location || '' %>"
+                    type="text"
+                    class="form-control"
+                    placeholder="Search your location..."
+                    autocomplete="off"
+                    required
+                >
+
+                <div
+                    id="locationSuggestions"
+                    class="location-suggestions">
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH LOCATION -->
+
+            <div class="mb-3">
+
+                <button
+                    type="button"
+                    id="searchLocationBtn"
+                    class="btn btn-primary"
+                >
+                    Search Location
                 </button>
 
-                <br><br>
+            </div>
 
-            </form>
 
-        </div>
+            <!-- MAP -->
+
+            <div
+                id="map"
+                data-coordinates="<%= JSON.stringify(pg.geocoding?.coordinates || []) %>"
+                data-title="<%= pg.title %>"
+            >
+            </div>
+
+
+            <!-- COORDINATES -->
+
+            <input
+                type="hidden"
+                name="pg[latitude]"
+                id="latitude"
+                value="<%= pg.geocoding?.coordinates?.[1] || '' %>"
+            >
+
+            <input
+                type="hidden"
+                name="pg[longitude]"
+                id="longitude"
+                value="<%= pg.geocoding?.coordinates?.[0] || '' %>"
+            >
+
+            <p id="coordinatesText" class="text-muted mt-2">
+
+                <% if (
+                    pg.geocoding &&
+                    pg.geocoding.coordinates &&
+                    pg.geocoding.coordinates.length === 2
+                ) { %>
+
+                    Current coordinates:
+                    <%= pg.geocoding.coordinates[1].toFixed(6) %>,
+                    <%= pg.geocoding.coordinates[0].toFixed(6) %>
+
+                <% } else { %>
+
+                    Search a location and select the exact property location.
+
+                <% } %>
+
+            </p>
+
+
+            <!-- OWNER CONTACT -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Owner Contact Number
+                </label>
+
+                <input
+                    type="tel"
+                    name="pg[ownerContact]"
+                    value="<%= pg.ownerContact || '' %>"
+                    class="form-control"
+                    placeholder="10-digit mobile number"
+                    pattern="[6-9][0-9]{9}"
+                    maxlength="10"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Please enter a valid 10-digit mobile number.
+                </div>
+
+            </div>
+
+
+            <!-- GENDER -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    PG For
+                </label>
+
+                <select
+                    name="pg[gender]"
+                    class="form-select"
+                    required
+                >
+
+                    <option value="" disabled>
+                        Select
+                    </option>
+
+                    <option
+                        value="Male"
+                        <%= pg.gender === "Male" ? "selected" : "" %>
+                    >
+                        Male
+                    </option>
+
+                    <option
+                        value="Female"
+                        <%= pg.gender === "Female" ? "selected" : "" %>
+                    >
+                        Female
+                    </option>
+
+                    <option
+                        value="Unisex"
+                        <%= pg.gender === "Unisex" ? "selected" : "" %>
+                    >
+                        Unisex
+                    </option>
+
+                </select>
+
+                <div class="invalid-feedback">
+                    Please select who the PG is for.
+                </div>
+
+            </div>
+
+
+            <!-- SHARING TYPE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Sharing Type
+                </label>
+
+                <select
+                    name="pg[sharingType]"
+                    class="form-select"
+                    required
+                >
+
+                    <option value="" disabled>
+                        Select sharing type
+                    </option>
+
+                    <option
+                        value="Single"
+                        <%= pg.sharingType === "Single" ? "selected" : "" %>
+                    >
+                        Single
+                    </option>
+
+                    <option
+                        value="Double"
+                        <%= pg.sharingType === "Double" ? "selected" : "" %>
+                    >
+                        Double
+                    </option>
+
+                    <option
+                        value="Triple"
+                        <%= pg.sharingType === "Triple" ? "selected" : "" %>
+                    >
+                        Triple
+                    </option>
+
+                    <option
+                        value="4 Sharing"
+                        <%= pg.sharingType === "4 Sharing" ? "selected" : "" %>
+                    >
+                        4 Sharing
+                    </option>
+
+                    <option
+                        value="Other"
+                        <%= pg.sharingType === "Other" ? "selected" : "" %>
+                    >
+                        Other
+                    </option>
+
+                </select>
+
+                <div class="invalid-feedback">
+                    Please select a sharing type.
+                </div>
+
+            </div>
+
+
+            <!-- FOOD INCLUDED -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Food Included
+                </label>
+
+                <select
+                    name="pg[foodIncluded]"
+                    class="form-select"
+                    required
+                >
+
+                    <option value="" disabled>
+                        Select
+                    </option>
+
+                    <option
+                        value="true"
+                        <%= pg.foodIncluded === true ? "selected" : "" %>
+                    >
+                        Yes
+                    </option>
+
+                    <option
+                        value="false"
+                        <%= pg.foodIncluded === false ? "selected" : "" %>
+                    >
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- COLLEGE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Nearby College
+                </label>
+
+                <select
+                    name="pg[college]"
+                    class="form-select"
+                    required
+                >
+
+                    <option value="" disabled>
+                        Select College
+                    </option>
+
+                    <% colleges.forEach(college => { %>
+
+                        <option
+                            value="<%= college._id %>"
+                            <%= pg.college &&
+                                pg.college._id &&
+                                pg.college._id.equals(college._id)
+                                ? "selected"
+                                : ""
+                            %>
+                        >
+                            <%= college.name %>
+
+                            <% if (college.shortName) { %>
+                                (<%= college.shortName %>)
+                            <% } %>
+
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+                <div class="invalid-feedback">
+                    Please select a nearby college.
+                </div>
+
+            </div>
+
+
+            <!-- UPDATE -->
+
+            <button
+                type="submit"
+                class="btn btn-dark edit-btn"
+            >
+                Update PG
+            </button>
+
+            <br><br>
+
+        </form>
+
     </div>
-
-
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-            border-radius: 12px;
-            margin-top: 15px;
-            margin-bottom: 20px;
-        }
-
-
-        .location-suggestions {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            max-height: 250px;
-            overflow-y: auto;
-            position: relative;
-            z-index: 9999;
-        }
-
-
-        .suggestion-item {
-            padding: 12px 15px;
-            cursor: pointer;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-        }
-
-
-        .suggestion-item:hover {
-            background: #f5f5f5;
-        }
-    </style>
+</div>

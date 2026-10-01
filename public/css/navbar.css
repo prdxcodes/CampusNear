@@ -7,10 +7,18 @@
     width: 100%;
     background: #ffffff;
     border-bottom: 1px solid #eeeeee;
-    position: sticky;
+
+    /* Navbar stays fixed while page scrolls */
+    position: fixed;
     top: 0;
+    left: 0;
+
     z-index: 1000;
 }
+
+/* =========================
+   NAVBAR CONTAINER
+========================= */
 
 .navbar-container {
     max-width: 1400px;
@@ -18,9 +26,11 @@
     height: 72px;
     margin: 0 auto;
     padding: 0 20px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 20px;
     box-sizing: border-box;
     position: relative;
@@ -34,6 +44,7 @@
     display: flex;
     align-items: center;
     gap: 9px;
+
     text-decoration: none;
     white-space: nowrap;
     flex-shrink: 0;
@@ -42,12 +53,15 @@
 .logo-icon {
     width: 38px;
     height: 38px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 50%;
     background: #d94b3d;
     color: white;
+
     font-size: 19px;
 }
 
@@ -69,17 +83,23 @@
     display: flex;
     align-items: center;
     gap: 40px;
+
     margin: 0 auto;
 }
 
 .nav-link {
     position: relative;
+
     text-decoration: none;
     color: #18202c;
+
     font-size: 14px;
     font-weight: 600;
+
     white-space: nowrap;
+
     padding: 24px 0;
+
     transition: color 0.2s ease;
 }
 
@@ -87,7 +107,9 @@
     color: #d94b3d;
 }
 
-/* Active link */
+/* =========================
+   ACTIVE LINK
+========================= */
 
 .nav-link.active {
     color: #d94b3d;
@@ -95,12 +117,17 @@
 
 .nav-link.active::after {
     content: "";
+
     position: absolute;
+
     bottom: 0;
     left: 0;
+
     width: 100%;
     height: 3px;
+
     background: #d94b3d;
+
     border-radius: 2px 2px 0 0;
 }
 
@@ -111,42 +138,60 @@
 .navbar-actions {
     display: flex;
     align-items: center;
+
     gap: 16px;
+
     white-space: nowrap;
     flex-shrink: 0;
 }
 
-/* Add property */
+/* =========================
+   ADD PROPERTY BUTTON
+========================= */
 
 .add-property-btn {
     display: flex;
     align-items: center;
+
     gap: 7px;
+
     background: #d94b3d;
     color: white;
+
     padding: 9px 15px;
+
     border: none;
     border-radius: 8px;
+
     text-decoration: none;
+
     font-size: 13px;
     font-weight: 600;
+
     cursor: pointer;
+
     transition: all 0.2s ease;
 }
 
 .add-property-btn:hover {
     background: #c33f34;
     color: white;
+
     transform: translateY(-1px);
 }
 
-/* Auth */
+/* =========================
+   AUTH
+========================= */
 
 .auth-link {
     color: #18202c;
+
     text-decoration: none;
+
     font-size: 14px;
     font-weight: 600;
+
     transition: color 0.2s ease;
 }
 
@@ -164,20 +209,29 @@
 }
 
 /* =========================
-   MOBILE BUTTON & RESPONSIVE
+   MOBILE BUTTON
 ========================= */
 
 .mobile-menu-btn {
     display: none;
+
     border: none;
     background: transparent;
+
     font-size: 22px;
     color: #18202c;
+
     cursor: pointer;
+
     padding: 5px;
 }
 
+/* =========================
+   TABLET
+========================= */
+
 @media (max-width: 992px) {
+
     .navbar-links {
         gap: 20px;
     }
@@ -195,25 +249,41 @@
     }
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 768px) {
+
     .mobile-menu-btn {
         display: block;
     }
 
     /* Mobile Dropdown Menu */
+
     .navbar-links {
         display: none;
+
         position: absolute;
+
         top: 72px;
         left: 0;
+
         width: 100%;
+
         background: #ffffff;
+
         flex-direction: column;
         align-items: flex-start;
+
         padding: 12px 20px;
+
         gap: 0;
+
         border-bottom: 1px solid #eeeeee;
+
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+
         z-index: 999;
     }
 
@@ -223,7 +293,9 @@
 
     .nav-link {
         width: 100%;
+
         padding: 12px 0;
+
         border-bottom: 1px solid #f5f5f5;
     }
 

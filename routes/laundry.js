@@ -11,6 +11,10 @@ const {
 
 const Laundry = require("../models/laundry.js");
 
+const {
+    laundrySchema
+} = require("../schema.js");
+
 const laundryController =
     require("../controllers/laundryController.js");
 
@@ -31,8 +35,8 @@ router
     )
     .post(
         isLoggedIn,
-        upload.single("place[image][url]"),
-        validateListing,
+        upload.single("laundry[image][url]"),
+        validateListing(laundrySchema),
         wrapAsync(laundryController.createPlace)
     );
 
@@ -44,7 +48,7 @@ router
 router.get(
     "/new",
     isLoggedIn,
-    laundryController.renderNewForm
+    wrapAsync(laundryController.renderNewForm)
 );
 
 
@@ -62,8 +66,8 @@ router
     .put(
         isLoggedIn,
         isOwner(Laundry, "/laundries"),
-        upload.single("place[image][url]"),
-        validateListing,
+        upload.single("laundry[image][url]"),
+        validateListing(laundrySchema),
         wrapAsync(laundryController.updatePlace)
     )
 

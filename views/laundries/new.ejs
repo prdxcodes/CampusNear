@@ -1,245 +1,430 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="service-form-page">
+<div class="service-form-page">
 
-        <div class="service-form-container">
+    <div class="service-form-container">
 
-            <div class="service-form-card">
+        <div class="service-form-card">
 
-                <div class="service-form-header">
+            <div class="service-form-header">
 
-                    <span class="service-form-badge">
-                        LAUNDRY
-                    </span>
+                <span class="service-form-badge">
+                    LAUNDRY
+                </span>
 
-                    <h2>List Your Laundry</h2>
+                <h2>List Your Laundry</h2>
 
-                    <p>
-                        Help students find convenient laundry services near their college.
-                    </p>
+                <p>
+                    Help students find convenient laundry services near their college.
+                </p>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="/laundries"
+                novalidate
+                class="needs-validation service-form"
+                enctype="multipart/form-data"
+            >
+
+                <!-- =========================================
+                     TITLE
+                ========================================== -->
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Laundry Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="laundry[title]"
+                        class="form-control"
+                        placeholder="e.g. Quick Wash Laundry"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter the laundry name.
+                    </div>
 
                 </div>
 
 
-                <form method="POST" action="/laundries" novalidate class="needs-validation service-form"
-                    enctype="multipart/form-data">
+                <!-- =========================================
+                     DESCRIPTION
+                ========================================== -->
 
-                    <!-- TITLE -->
+                <div class="form-group">
 
-                    <div class="form-group">
+                    <label for="description">
+                        Description
+                    </label>
 
-                        <label for="title">
-                            Laundry Name
-                        </label>
+                    <textarea
+                        id="description"
+                        name="laundry[description]"
+                        class="form-control"
+                        placeholder="Describe your laundry services..."
+                        required
+                    ></textarea>
 
-                        <input type="text" id="title" name="laundry[title]" class="form-control"
-                            placeholder="e.g. Quick Wash Laundry" required>
-
+                    <div class="invalid-feedback">
+                        Please enter a description.
                     </div>
 
+                </div>
 
-                    <!-- DESCRIPTION -->
 
-                    <div class="form-group">
+                <!-- =========================================
+                     IMAGE
+                ========================================== -->
 
-                        <label for="description">
-                            Description
-                        </label>
+                <div class="form-group">
 
-                        <textarea id="description" name="laundry[description]" class="form-control"
-                            placeholder="Describe your laundry services..." required></textarea>
+                    <label for="image">
+                        Laundry Image
+                    </label>
 
+                    <input
+                        type="file"
+                        id="image"
+                        name="laundry[image][url]"
+                        class="form-control"
+                        accept="image/*"
+                        required
+                    >
+
+                    <small>
+                        Upload a clear image of the laundry service.
+                    </small>
+
+                </div>
+
+
+                <!-- =========================================
+                     PRICE
+                ========================================== -->
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Starting Price (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        name="laundry[price]"
+                        class="form-control"
+                        placeholder="e.g. 50"
+                        min="0"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter a valid starting price.
                     </div>
 
+                </div>
 
-                    <!-- IMAGE -->
 
-                    <div class="form-group">
+                <!-- =========================================
+                     COUNTRY
+                ========================================== -->
 
-                        <label for="image">
-                            Laundry Image
-                        </label>
+                <div class="form-group">
 
-                        <input type="file" id="image" name="laundry[image][url]" class="form-control" accept="image/*"
-                            required>
+                    <label for="country">
+                        Country
+                    </label>
 
-                    </div>
+                    <input
+                        type="text"
+                        id="country"
+                        name="laundry[country]"
+                        class="form-control"
+                        value="India"
+                        required
+                    >
 
+                </div>
 
-                    <!-- PRICE -->
 
-                    <div class="form-group">
+                <!-- =========================================
+                     LOCATION
+                ========================================== -->
 
-                        <label for="price">
-                            Starting Price (₹)
-                        </label>
+                <div class="form-group">
 
-                        <input type="number" id="price" name="laundry[price]" class="form-control" placeholder="e.g. 50"
-                            min="0" required>
+                    <label for="location">
+                        Location
+                    </label>
 
-                    </div>
+                    <input
+                        type="text"
+                        id="location"
+                        name="laundry[location]"
+                        class="form-control"
+                        placeholder="Search your location..."
+                        autocomplete="off"
+                        required
+                    >
 
+                    <!-- Location Suggestions -->
 
-                    <!-- COUNTRY -->
+                    <div
+                        id="locationSuggestions"
+                        class="location-suggestions"
+                    ></div>
 
-                    <div class="form-group">
+                </div>
 
-                        <label for="country">
-                            Country
-                        </label>
 
-                        <input type="text" id="country" name="laundry[country]" class="form-control" value="India"
-                            required>
+                <!-- =========================================
+                     SEARCH LOCATION
+                ========================================== -->
 
-                    </div>
+                <div class="form-group">
 
-
-                    <!-- LOCATION -->
-
-                    <div class="mb-3">
-                        <label for="location" class="form-label">Location</label>
-
-                        <input type="text" id="location" name="location" class="form-control"
-                            placeholder="Search your location..." autocomplete="off" required>
-
-                        <!-- Suggestions -->
-                        <div id="locationSuggestions" class="location-suggestions"></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <button type="button" id="searchLocationBtn" class="btn btn-primary">
-                            Search Location
-                        </button>
-                    </div>
-
-                    <div id="map"></div>
-
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
-
-                    <p id="coordinatesText" class="text-muted mt-2">
-                        Select your exact location on the map.
-                    </p>
-                    <!-- CONTACT -->
-
-                    <div class="form-group">
-
-                        <label for="ownerContact">
-                            Owner Contact Number
-                        </label>
-
-                        <input type="tel" id="ownerContact" name="laundry[ownerContact]" class="form-control"
-                            placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required>
-
-                    </div>
-
-
-                    <!-- SERVICE TYPE -->
-
-                    <div class="form-group">
-
-                        <label for="serviceType">
-                            Service Type
-                        </label>
-
-                        <select id="serviceType" name="laundry[serviceType]" class="form-select" required>
-
-                            <option value="" selected disabled>
-                                Select service
-                            </option>
-
-                            <option value="Washing">
-                                Washing
-                            </option>
-
-                            <option value="Dry Cleaning">
-                                Dry Cleaning
-                            </option>
-
-                            <option value="Ironing">
-                                Ironing
-                            </option>
-
-                            <option value="Washing & Ironing">
-                                Washing & Ironing
-                            </option>
-
-                            <option value="All Services">
-                                All Services
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- PICKUP DELIVERY -->
-
-                    <div class="form-group">
-
-                        <label for="pickupDelivery">
-                            Pickup & Delivery
-                        </label>
-
-                        <select id="pickupDelivery" name="laundry[pickupDelivery]" class="form-select" required>
-
-                            <option value="" selected disabled>
-                                Select
-                            </option>
-
-                            <option value="true">
-                                Available
-                            </option>
-
-                            <option value="false">
-                                Not Available
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- COLLEGE -->
-
-                    <div class="form-group">
-
-                        <label for="college">
-                            Nearby College
-                        </label>
-
-                        <select id="college" name="laundry[college]" class="form-select" required>
-
-                            <option value="" selected disabled>
-                                Select College
-                            </option>
-
-                            <% colleges.forEach(college=> { %>
-
-                                <option value="<%= college._id %>">
-                                    <%= college.name %>
-                                        <% if (college.shortName) { %>
-                                            (<%= college.shortName %>)
-                                                <% } %>
-                                </option>
-
-                                <% }) %>
-
-                        </select>
-
-                    </div>
-
-
-                    <button type="submit" class="service-submit-btn">
-                        Add Laundry
+                    <button
+                        type="button"
+                        id="searchLocationBtn"
+                        class="btn btn-primary"
+                    >
+                        Search Location
                     </button>
 
-                </form>
+                </div>
 
-            </div>
+
+                <!-- =========================================
+                     MAP
+                ========================================== -->
+
+                <div
+                    id="map"
+                    style="height: 400px; width: 100%; border-radius: 12px;"
+                ></div>
+
+
+                <!-- =========================================
+                     COORDINATES
+                ========================================== -->
+
+                <input
+                    type="hidden"
+                    name="laundry[latitude]"
+                    id="latitude"
+                >
+
+                <input
+                    type="hidden"
+                    name="laundry[longitude]"
+                    id="longitude"
+                >
+
+                <p
+                    id="coordinatesText"
+                    class="text-muted mt-2"
+                >
+                    Search a location and drag the marker to the exact location.
+                </p>
+
+
+                <!-- =========================================
+                     OWNER CONTACT
+                ========================================== -->
+
+                <div class="form-group">
+
+                    <label for="ownerContact">
+                        Owner Contact Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="ownerContact"
+                        name="laundry[ownerContact]"
+                        class="form-control"
+                        placeholder="10-digit mobile number"
+                        pattern="[6-9][0-9]{9}"
+                        maxlength="10"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter a valid 10-digit mobile number.
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     SERVICE TYPE
+                ========================================== -->
+
+                <div class="form-group">
+
+                    <label for="serviceType">
+                        Service Type
+                    </label>
+
+                    <select
+                        id="serviceType"
+                        name="laundry[serviceType][]"
+                        class="form-select"
+                        required
+                    >
+
+                        <option
+                            value=""
+                            selected
+                            disabled
+                        >
+                            Select service
+                        </option>
+
+                        <option value="Washing">
+                            Washing
+                        </option>
+
+                        <option value="Dry Cleaning">
+                            Dry Cleaning
+                        </option>
+
+                        <option value="Ironing">
+                            Ironing
+                        </option>
+
+                        <option value="Washing & Ironing">
+                            Washing & Ironing
+                        </option>
+
+                        <option value="All Services">
+                            All Services
+                        </option>
+
+                    </select>
+
+                    <div class="invalid-feedback">
+                        Please select a laundry service.
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     PICKUP & DELIVERY
+                ========================================== -->
+
+                <div class="form-group">
+
+                    <label for="pickupDelivery">
+                        Pickup & Delivery
+                    </label>
+
+                    <select
+                        id="pickupDelivery"
+                        name="laundry[pickupDelivery]"
+                        class="form-select"
+                        required
+                    >
+
+                        <option
+                            value=""
+                            selected
+                            disabled
+                        >
+                            Select
+                        </option>
+
+                        <option value="true">
+                            Available
+                        </option>
+
+                        <option value="false">
+                            Not Available
+                        </option>
+
+                    </select>
+
+                    <div class="invalid-feedback">
+                        Please select pickup & delivery availability.
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     COLLEGE
+                ========================================== -->
+
+                <div class="form-group">
+
+                    <label for="college">
+                        Nearby College
+                    </label>
+
+                    <select
+                        id="college"
+                        name="laundry[college]"
+                        class="form-select"
+                        required
+                    >
+
+                        <option
+                            value=""
+                            selected
+                            disabled
+                        >
+                            Select College
+                        </option>
+
+                        <% colleges.forEach(college => { %>
+
+                            <option value="<%= college._id %>">
+
+                                <%= college.name %>
+
+                                <% if (college.shortName) { %>
+
+                                    (<%= college.shortName %>)
+
+                                <% } %>
+
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                    <div class="invalid-feedback">
+                        Please select a nearby college.
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     SUBMIT
+                ========================================== -->
+
+                <button
+                    type="submit"
+                    class="service-submit-btn"
+                >
+                    Add Laundry
+                </button>
+
+            </form>
 
         </div>
 
     </div>
 
-    <script src="/js/script.js"></script>
+</div>

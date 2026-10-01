@@ -7,9 +7,10 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const {
     isLoggedIn,
     isOwner,
-    validateListing,
-    validateReview
+    validateListing
 } = require("../middleware.js");
+
+const { pgSchema } = require("../schema.js");
 
 const Pg = require("../models/pg.js");
 const pgController = require("../controllers/pgController.js");
@@ -33,8 +34,8 @@ router
 
     .post(
         isLoggedIn,
-        upload.single("place[image][url]"),
-        validateListing,
+        upload.single("pg[image][url]"),
+        validateListing(pgSchema),
         wrapAsync(pgController.createPlace)
     );
 
@@ -64,8 +65,8 @@ router
     .put(
         isLoggedIn,
         isOwner(Pg, "/pgs"),
-        upload.single("place[image][url]"),
-        validateListing,
+        upload.single("pg[image][url]"),
+        validateListing(pgSchema),
         wrapAsync(pgController.updatePlace)
     )
 
@@ -86,5 +87,6 @@ router.get(
     isOwner(Pg, "/pgs"),
     wrapAsync(pgController.renderEditForm)
 );
+
 
 module.exports = router;

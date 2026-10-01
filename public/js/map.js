@@ -2,22 +2,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const mapElement = document.getElementById("map");
 
-    // Agar current page par map nahi hai
+    // Current page does not have a map
     if (!mapElement) {
         return;
     }
 
-    // Get coordinates from HTML data attribute
-    const coordinates = JSON.parse(
-        mapElement.dataset.coordinates
-    );
+    // Check whether coordinates exist
+    const coordinatesData = mapElement.dataset.coordinates;
+
+    if (!coordinatesData) {
+        return;
+    }
+
+    // Convert JSON string into array
+    const coordinates = JSON.parse(coordinatesData);
 
     // GeoJSON format:
     // [longitude, latitude]
     const longitude = coordinates[0];
     const latitude = coordinates[1];
 
-    // Create map at exact property's location
+    // Create map
     const map = L.map("map").setView(
         [latitude, longitude],
         17
@@ -31,11 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     ).addTo(map);
 
-    // Add marker at exact location
+    // Marker
     L.marker([latitude, longitude])
         .addTo(map)
         .bindPopup(
-            `<b>${mapElement.dataset.title}</b>`
+            `<b>${mapElement.dataset.title || "Location"}</b>`
         )
         .openPopup();
 
