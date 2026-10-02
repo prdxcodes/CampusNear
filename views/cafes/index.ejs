@@ -10,10 +10,29 @@
                 FOOD & BEVERAGES
             </p>
 
-            <h1>Cafes Near Your Campus</h1>
+            <h1>
+                <%= selectedCollege
+                    ? `Cafes Near ${selectedCollege.name}`
+                    : "Find Cafes Near Your College"
+                %>
+            </h1>
 
             <p class="listing-subtitle">
-                Discover cafes, coffee shops and student-friendly places near your college.
+
+                <% if (selectedCollege) { %>
+
+                    Showing cafes within 5 km of
+                    <strong>
+                        <%= selectedCollege.name %>
+                    </strong>.
+
+                <% } else { %>
+
+                    Select your college to discover cafes within 5 km
+                    of your campus.
+
+                <% } %>
+
             </p>
 
         </div>
@@ -27,26 +46,58 @@
 
     <div class="row">
 
-        <% if (allPlaces.length === 0) { %>
+        <% if (!selectedCollege) { %>
 
-            <div class="empty-state">
+            <div class="col-12">
 
-                <i class="fa-solid fa-mug-hot"></i>
+                <div class="empty-state">
 
-                <h3>No cafes available</h3>
+                    <i class="fa-solid fa-location-dot"></i>
 
-                <p>
-                    Be the first one to list a cafe near your campus.
-                </p>
+                    <h3>
+                        Select Your College
+                    </h3>
 
-                <a href="/cafes/new" class="btn btn-dark">
-                    Add Cafe
-                </a>
+                    <p>
+                        Choose your college from the homepage to find
+                        nearby cafes.
+                    </p>
+
+                    <a href="/" class="btn btn-dark">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Search College
+                    </a>
+
+                </div>
+
+            </div>
+
+        <% } else if (allPlaces.length === 0) { %>
+
+            <div class="col-12">
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-mug-hot"></i>
+
+                    <h3>
+                        No Cafes Found Nearby
+                    </h3>
+
+                    <p>
+                        There are currently no cafes listed within 5 km of
+                        <strong><%= selectedCollege.name %></strong>.
+                    </p>
+
+                    <a href="/cafes/new" class="btn btn-dark">
+                        Add Cafe
+                    </a>
+
+                </div>
 
             </div>
 
         <% } else { %>
-
 
             <% allPlaces.forEach(cafe => { %>
 
@@ -90,7 +141,6 @@
                                     <%= cafe.title %>
                                 </h3>
 
-
                                 <p class="listing-location">
 
                                     <i class="fa-solid fa-location-dot"></i>
@@ -98,7 +148,6 @@
                                     <%= cafe.location %>
 
                                 </p>
-
 
                                 <div class="listing-info">
 
@@ -115,7 +164,6 @@
                                     </span>
 
                                 </div>
-
 
                                 <div class="listing-bottom">
 
@@ -138,7 +186,6 @@
                 </div>
 
             <% }) %>
-
 
         <% } %>
 

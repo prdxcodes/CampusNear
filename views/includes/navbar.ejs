@@ -11,62 +11,103 @@
             <span class="logo-icon">
                 <i class="fa-solid fa-compass"></i>
             </span>
+
             <span class="logo-text">
                 Campus<span>Near</span>
             </span>
         </a>
 
+
         <!-- NAVIGATION LINKS -->
         <% const selectedCollege = typeof queryCollege !== "undefined" ? queryCollege : null; %>
 
         <div class="navbar-links" id="navbarLinks">
-            <a href="<%= selectedCollege ? '/pgs?college=' + encodeURIComponent(selectedCollege) : '/pgs' %>" 
-               class="nav-link <%= currentPath.startsWith('/pgs') ? 'active' : '' %>">
+
+            <a href="/"
+                class="nav-link <%= currentPath === '/' ? 'active' : '' %>">
+                Home
+            </a>
+
+            <a href="<%= selectedCollege ? '/pgs?college=' + encodeURIComponent(selectedCollege) : '/pgs' %>"
+                class="nav-link <%= currentPath.startsWith('/pgs') ? 'active' : '' %>">
                 PGs
             </a>
 
-            <a href="<%= selectedCollege ? '/messes?college=' + encodeURIComponent(selectedCollege) : '/messes' %>" 
-               class="nav-link <%= currentPath.startsWith('/messes') ? 'active' : '' %>">
+            <a href="<%= selectedCollege ? '/messes?college=' + encodeURIComponent(selectedCollege) : '/messes' %>"
+                class="nav-link <%= currentPath.startsWith('/messes') ? 'active' : '' %>">
                 Messes
             </a>
 
-            <a href="<%= selectedCollege ? '/cafes?college=' + encodeURIComponent(selectedCollege) : '/cafes' %>" 
-               class="nav-link <%= currentPath.startsWith('/cafes') ? 'active' : '' %>">
+            <a href="<%= selectedCollege ? '/cafes?college=' + encodeURIComponent(selectedCollege) : '/cafes' %>"
+                class="nav-link <%= currentPath.startsWith('/cafes') ? 'active' : '' %>">
                 Cafes
             </a>
 
-            <a href="<%= selectedCollege ? '/laundries?college=' + encodeURIComponent(selectedCollege) : '/laundries' %>" 
-               class="nav-link <%= currentPath.startsWith('/laundries') ? 'active' : '' %>">
+            <a href="<%= selectedCollege ? '/laundries?college=' + encodeURIComponent(selectedCollege) : '/laundries' %>"
+                class="nav-link <%= currentPath.startsWith('/laundries') ? 'active' : '' %>">
                 Laundry
             </a>
 
-            <a href="/about" 
-               class="nav-link <%= currentPath.startsWith('/about') ? 'active' : '' %>">
+            <a href="/about"
+                class="nav-link <%= currentPath.startsWith('/about') ? 'active' : '' %>">
                 About
             </a>
+
         </div>
+
 
         <!-- RIGHT SIDE ACTIONS -->
         <div class="navbar-actions">
+
             <!-- Add New Service -->
-            <button type="button" class="add-property-btn" data-bs-toggle="modal" data-bs-target="#categoryModal">
+            <button
+                type="button"
+                class="add-property-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#categoryModal">
+
                 <i class="fa-solid fa-plus"></i>
+
                 <span>Add New Service</span>
+
             </button>
+
 
             <!-- Authentication -->
             <% if (!currUser) { %>
-                <a href="/signup" class="auth-link">Signup</a>
-                <a href="/login" class="auth-link login-link">Login</a>
+
+                <a href="/signup" class="auth-link">
+                    Signup
+                </a>
+
+                <a href="/login" class="auth-link login-link">
+                    Login
+                </a>
+
             <% } else { %>
-                <span class="welcome-user">Hi, <%= currUser.username %></span>
-                <a href="/logout" class="auth-link">Logout</a>
+
+                <span class="welcome-user">
+                    Hi, <%= currUser.username %>
+                </span>
+
+                <a href="/logout" class="auth-link">
+                    Logout
+                </a>
+
             <% } %>
+
         </div>
 
+
         <!-- MOBILE MENU BUTTON -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Toggle navigation">
+        <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            type="button"
+            aria-label="Toggle navigation">
+
             <i class="fa-solid fa-bars"></i>
+
         </button>
 
     </div>
@@ -74,45 +115,200 @@
 </nav>
 
 
+
 <!-- =========================================================
      ADD NEW SERVICE MODAL
 ========================================================= -->
 
-<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+<div
+    class="modal fade"
+    id="categoryModal"
+    tabindex="-1"
+    aria-labelledby="categoryModalLabel"
+    aria-hidden="true">
+
     <div class="modal-dialog modal-dialog-centered modal-lg">
+
         <div class="modal-content">
 
-            <!-- MODAL HEADER -->
+
+            <!-- =================================================
+                 MODAL HEADER
+            ================================================== -->
+
             <div class="modal-header">
+
                 <div>
-                    <h4 class="modal-title" id="categoryModalLabel">Add New Service</h4>
-                    <p class="text-muted mb-0">What would you like to list?</p>
+
+                    <h4
+                        class="modal-title"
+                        id="categoryModalLabel">
+
+                        Add New Service
+
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        What would you like to list?
+                    </p>
+
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                </button>
+
             </div>
 
-            <!-- MODAL BODY -->
+
+
+            <!-- =================================================
+                 MODAL BODY
+            ================================================== -->
+
             <div class="modal-body p-4">
+
                 <form id="categoryForm">
+
+
+                    <!-- CATEGORY -->
                     <div class="mb-4">
-                        <label for="serviceCategory" class="form-label fw-semibold">Select Category</label>
-                        <select id="serviceCategory" class="form-select form-select-lg" required>
-                            <option value="" selected disabled>Choose a category</option>
-                            <option value="pg">PG</option>
-                            <option value="cafe">Cafe</option>
-                            <option value="mess">Mess</option>
-                            <option value="laundry">Laundry</option>
-                        </select>
+
+                        <label
+                            for="categorySelectBtn"
+                            class="form-label fw-semibold">
+
+                            Select Category
+
+                        </label>
+
+
+                        <!-- CUSTOM CATEGORY DROPDOWN -->
+
+                        <div
+                            class="custom-category-select"
+                            id="categorySelect">
+
+
+                            <!-- SELECT BUTTON -->
+
+                            <button
+                                type="button"
+                                class="category-select-btn"
+                                id="categorySelectBtn">
+
+                                <span id="selectedCategoryText">
+                                    Choose a category
+                                </span>
+
+                                <i class="fa-solid fa-chevron-down"></i>
+
+                            </button>
+
+
+                            <!-- OPTIONS -->
+
+                            <div
+                                class="category-options"
+                                id="categoryOptions">
+
+
+                                <button
+                                    type="button"
+                                    class="category-option"
+                                    data-value="pg">
+
+                                    PG
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="category-option"
+                                    data-value="cafe">
+
+                                    Cafe
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="category-option"
+                                    data-value="mess">
+
+                                    Mess
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="category-option"
+                                    data-value="laundry">
+
+                                    Laundry
+
+                                </button>
+
+                            </div>
+
+
+                            <!--
+                                Hidden input.
+                                selectCategory.js will store
+                                the selected value here.
+                            -->
+
+                            <input
+                                type="hidden"
+                                name="category"
+                                id="serviceCategory"
+                                required>
+
+                        </div>
+
                     </div>
 
-                    <!-- BUTTONS -->
+
+
+                    <!-- =================================================
+                         BUTTONS
+                    ================================================== -->
+
                     <div class="d-flex justify-content-end gap-2">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-dark px-4">Continue</button>
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            data-bs-dismiss="modal">
+
+                            Cancel
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-dark px-4">
+
+                            Continue
+
+                        </button>
+
                     </div>
+
                 </form>
+
             </div>
 
         </div>
+
     </div>
+
 </div>

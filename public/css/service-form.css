@@ -1,49 +1,72 @@
-/* =========================================
+/* =========================================================
    SERVICE FORM PAGE
-========================================= */
+========================================================= */
 
 .service-form-page {
-    min-height: calc(100vh - 80px);
-    padding: 55px 20px 80px;
+    width: 100%;
+
+    min-height: auto;
+    height: auto;
+
+    margin: 0;
+    padding: 55px 20px 50px;
+
     background: #f7f7f5;
+
+    box-sizing: border-box;
 }
 
 
-/* =========================================
+/* =========================================================
    CONTAINER
-========================================= */
+========================================================= */
 
 .service-form-container {
+    width: 100%;
     max-width: 820px;
+
     margin: 0 auto;
+
+    box-sizing: border-box;
 }
 
 
-/* =========================================
+/* =========================================================
    CARD
-========================================= */
+========================================================= */
 
 .service-form-card {
+    width: 100%;
+
+    margin: 0 auto;
+
     background: #ffffff;
+
     border: 1px solid #e7e7e7;
     border-radius: 18px;
+
     padding: 45px;
+
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+
+    box-sizing: border-box;
 }
 
 
-/* =========================================
+/* =========================================================
    HEADER
-========================================= */
+========================================================= */
 
 .service-form-header {
     margin-bottom: 35px;
     padding-bottom: 25px;
+
     border-bottom: 1px solid #eeeeee;
 }
 
 .service-form-badge {
     display: inline-block;
+
     padding: 6px 12px;
     margin-bottom: 12px;
 
@@ -54,6 +77,7 @@
 
     font-size: 11px;
     font-weight: 700;
+
     letter-spacing: 1px;
 }
 
@@ -76,18 +100,32 @@
 }
 
 
-/* =========================================
+/* =========================================================
+   FORM
+========================================================= */
+
+.service-form {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
    FORM GROUP
-========================================= */
+========================================================= */
 
 .form-group {
     margin-bottom: 23px;
 }
 
 
-/* =========================================
+/* =========================================================
    LABEL
-========================================= */
+========================================================= */
 
 .form-group label {
     display: block;
@@ -101,9 +139,9 @@
 }
 
 
-/* =========================================
+/* =========================================================
    INPUTS
-========================================= */
+========================================================= */
 
 .service-form .form-control,
 .service-form .form-select {
@@ -117,12 +155,13 @@
     border-radius: 9px;
 
     background: #fff;
-
     color: #222;
 
     font-size: 14px;
 
     box-shadow: none;
+
+    box-sizing: border-box;
 
     transition:
         border-color 0.2s ease,
@@ -130,9 +169,9 @@
 }
 
 
-/* =========================================
+/* =========================================================
    TEXTAREA
-========================================= */
+========================================================= */
 
 .service-form textarea.form-control {
     min-height: 125px;
@@ -143,21 +182,23 @@
 }
 
 
-/* =========================================
+/* =========================================================
    FOCUS
-========================================= */
+========================================================= */
 
 .service-form .form-control:focus,
 .service-form .form-select:focus {
     border-color: #222;
 
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.07);
+
+    outline: none;
 }
 
 
-/* =========================================
+/* =========================================================
    FILE INPUT
-========================================= */
+========================================================= */
 
 .service-form input[type="file"] {
     padding: 9px;
@@ -166,9 +207,9 @@
 }
 
 
-/* =========================================
+/* =========================================================
    SMALL TEXT
-========================================= */
+========================================================= */
 
 .service-form small {
     display: block;
@@ -181,18 +222,21 @@
 }
 
 
-/* =========================================
+/* =========================================================
    CHECKBOXES
-========================================= */
+========================================================= */
 
 .checkbox-group {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 12px;
 }
 
 .checkbox-option {
     display: flex !important;
+
     align-items: center;
 
     gap: 8px;
@@ -211,11 +255,15 @@
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
 }
 
 .checkbox-option:hover {
     border-color: #aaa;
+
+    background: #fff;
 }
 
 .checkbox-option input {
@@ -226,9 +274,9 @@
 }
 
 
-/* =========================================
+/* =========================================================
    VALIDATION
-========================================= */
+========================================================= */
 
 .service-form .invalid-feedback {
     margin-top: 6px;
@@ -243,11 +291,13 @@
 }
 
 
-/* =========================================
+/* =========================================================
    SUBMIT BUTTON
-========================================= */
+========================================================= */
 
 .service-submit-btn {
+    display: block;
+
     width: 100%;
 
     min-height: 50px;
@@ -282,34 +332,80 @@
 }
 
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/* =========================================================
+   REMOVE EXTRA SPACE INSIDE FORM
+========================================================= */
+
+.service-form-card > :last-child {
+    margin-bottom: 0;
+}
+
+.service-form > :last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 768px) {
 
     .service-form-page {
-        padding: 30px 15px 50px;
+        width: 100%;
+
+        margin: 0;
+
+        padding: 35px 15px 40px;
+    }
+
+    .service-form-container {
+        width: 100%;
     }
 
     .service-form-card {
+        width: 100%;
+
         padding: 30px 25px;
+
+        border-radius: 16px;
     }
 
     .service-form-header h2 {
         font-size: 25px;
     }
 
+    .checkbox-group {
+        gap: 10px;
+    }
+
+    .checkbox-option {
+        padding: 9px 12px;
+    }
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 576px) {
 
     .service-form-page {
-        padding: 20px 10px 40px;
+        width: 100%;
+
+        margin: 0;
+
+        padding: 25px 10px 30px;
+    }
+
+    .service-form-container {
+        width: 100%;
     }
 
     .service-form-card {
+        width: 100%;
+
         padding: 25px 18px;
 
         border-radius: 13px;
@@ -317,18 +413,103 @@
 
     .service-form-header {
         margin-bottom: 27px;
+
+        padding-bottom: 20px;
     }
 
     .service-form-header h2 {
         font-size: 22px;
     }
 
+    .service-form-header p {
+        font-size: 13px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
     .checkbox-group {
-        flex-direction: column;
+        display: flex;
+
+        flex-direction: row;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
     }
 
     .checkbox-option {
-        width: 100%;
+        width: auto !important;
+
+        flex: 0 0 auto;
+
+        padding: 9px 11px;
+
+        font-size: 12px !important;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .service-form-page {
+        padding-left: 8px;
+        padding-right: 8px;
     }
 
+    .service-form-card {
+        padding: 22px 15px;
+    }
+
+    .service-form-header h2 {
+        font-size: 20px;
+    }
+
+    .service-form-header p {
+        font-size: 13px;
+    }
+
+    .checkbox-group {
+        gap: 6px;
+    }
+
+    .checkbox-option {
+        padding: 8px 9px;
+
+        font-size: 11px !important;
+    }
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .service-form-card {
+        padding: 20px 12px;
+    }
+
+    .service-form-header h2 {
+        font-size: 19px;
+    }
+
+    .checkbox-option {
+        padding: 7px 8px;
+
+        gap: 6px;
+
+        font-size: 10px !important;
+    }
+
+    .checkbox-option input {
+        width: 14px;
+        height: 14px;
+    }
 }

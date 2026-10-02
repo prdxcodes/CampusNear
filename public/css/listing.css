@@ -21,10 +21,6 @@ body {
 .listing-page {
     width: 100%;
 
-    /*
-        5% left + right spacing
-        keeps content away from screen edges
-    */
     padding: 50px 5% 80px;
 
     box-sizing: border-box;
@@ -414,34 +410,191 @@ body {
     background: #fafafa;
 }
 
-.empty-state i {
-    margin-bottom: 20px;
+
+/* =========================================================
+   EMPTY STATE — MAIN ICON
+   Location / Cafe / Mess / Laundry icon
+========================================================= */
+
+.empty-state > i {
+    display: block;
+
+    width: fit-content;
+
+    margin: 0 auto 20px;
 
     font-size: 45px;
 
-    color: #bbb;
+    line-height: 1;
+
+    color: #bcbcbc;
 }
 
+
+/*
+    Keep the main icon ABOVE "Select Your College"
+    and prevent button icon styles from affecting it.
+*/
+
+.empty-state > i:first-child {
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   EMPTY STATE HEADING
+========================================================= */
+
 .empty-state h3 {
-    margin-bottom: 8px;
+    margin: 0 0 8px;
 
     font-size: 22px;
 
-    color: #333;
+    font-weight: 600;
+
+    line-height: 1.3;
+
+    color: #222;
 }
 
+
+/* =========================================================
+   EMPTY STATE DESCRIPTION
+========================================================= */
+
 .empty-state p {
-    margin-bottom: 22px;
+    margin: 0 0 26px;
 
     color: #777;
 
     font-size: 14px;
+
+    line-height: 1.6;
 }
 
-.empty-state .btn {
-    padding: 10px 20px;
 
-    border-radius: 8px;
+/* =========================================================
+   SEARCH COLLEGE BUTTON
+========================================================= */
+
+/*
+    Specific selector is intentionally strong so Bootstrap
+    .btn-dark styles do not change this button.
+*/
+
+.empty-state a.btn,
+.empty-state a.btn.btn-dark {
+    display: inline-flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 10px !important;
+
+    width: 250px !important;
+    min-width: 250px !important;
+
+    height: 56px !important;
+
+    padding: 0 22px !important;
+
+    margin: 0 !important;
+
+    border: none !important;
+
+    border-radius: 9px !important;
+
+    background: #d94b3d !important;
+
+    background-color: #d94b3d !important;
+
+    color: #ffffff !important;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1 !important;
+
+    text-decoration: none !important;
+
+    box-shadow: none;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON ICON
+========================================================= */
+
+/*
+    Important:
+    This specifically controls the SEARCH icon.
+    It will NOT affect the location icon above.
+*/
+
+.empty-state a.btn i,
+.empty-state a.btn.btn-dark i {
+    display: inline-block !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 18px !important;
+
+    line-height: 1 !important;
+
+    color: #ffffff !important;
+
+    flex-shrink: 0 !important;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON TEXT
+========================================================= */
+
+.empty-state a.btn,
+.empty-state a.btn.btn-dark {
+    text-align: center;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON HOVER
+========================================================= */
+
+.empty-state a.btn:hover,
+.empty-state a.btn.btn-dark:hover {
+    background: #c33f34 !important;
+
+    background-color: #c33f34 !important;
+
+    color: #ffffff !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(217, 75, 61, 0.22);
+}
+
+
+/* =========================================================
+   SEARCH BUTTON ACTIVE
+========================================================= */
+
+.empty-state a.btn:active,
+.empty-state a.btn.btn-dark:active {
+    transform: translateY(0);
+
+    box-shadow: none;
 }
 
 
@@ -474,6 +627,10 @@ body {
 
     .listing-image-wrapper {
         height: 210px;
+    }
+
+    .empty-state {
+        padding: 70px 25px;
     }
 }
 
@@ -523,6 +680,46 @@ body {
     .listing-bottom {
         gap: 10px;
     }
+
+
+    /* =========================
+       EMPTY STATE MOBILE
+    ========================= */
+
+    .empty-state {
+        padding: 60px 20px;
+    }
+
+    .empty-state > i {
+        font-size: 40px;
+
+        margin-bottom: 20px;
+    }
+
+    .empty-state h3 {
+        font-size: 20px;
+    }
+
+    .empty-state p {
+        font-size: 13px;
+
+        margin-bottom: 22px;
+    }
+
+    .empty-state a.btn,
+    .empty-state a.btn.btn-dark {
+        width: 220px !important;
+        min-width: 220px !important;
+
+        height: 50px !important;
+
+        font-size: 14px !important;
+    }
+
+    .empty-state a.btn i,
+    .empty-state a.btn.btn-dark i {
+        font-size: 17px !important;
+    }
 }
 
 
@@ -557,5 +754,34 @@ body {
         font-size: 9px;
 
         padding: 6px 9px;
+    }
+
+
+    /* =========================
+       EMPTY STATE SMALL MOBILE
+    ========================= */
+
+    .empty-state {
+        padding: 50px 15px;
+    }
+
+    .empty-state > i {
+        font-size: 38px;
+
+        margin-bottom: 18px;
+    }
+
+    .empty-state h3 {
+        font-size: 19px;
+    }
+
+    .empty-state a.btn,
+    .empty-state a.btn.btn-dark {
+        width: 210px !important;
+        min-width: 210px !important;
+
+        height: 48px !important;
+
+        font-size: 13px !important;
     }
 }

@@ -1,19 +1,99 @@
+/* =========================
+   GLOBAL BODY
+========================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
+
 /* =========================
-   FIXED NAVBAR SPACING
+   PAGE CONTENT
 ========================= */
 
 .page-content {
+    width: 100%;
+    box-sizing: border-box;
+
     padding-top: 72px;
+
+    /*
+       Content area takes remaining
+       available viewport height.
+    */
+    flex: 1 0 auto;
+
+    display: flex;
+    flex-direction: column;
 }
 
-.container {
-    flex: 1;
+
+/* =========================
+   MOBILE NAVBAR SPACING
+========================= */
+
+@media (max-width: 768px) {
+
+    .page-content {
+        padding-top: 68px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE NAVBAR
+========================= */
+
+@media (max-width: 576px) {
+
+    .page-content {
+        padding-top: 64px;
+    }
+}
+
+
+/* =========================================================
+   TABLET LAYOUT
+   769px - 992px
+========================================================= */
+
+@media (min-width: 769px) and (max-width: 992px) {
+
+    /*
+       Keep footer at the bottom when
+       page content is short.
+    */
+
+    .page-content {
+        flex: 1 0 auto;
+
+        /*
+           Don't force children to stretch.
+        */
+        align-items: stretch;
+    }
+
+    /*
+       Any direct page section can use
+       the available vertical space.
+    */
+
+    .page-content > section,
+    .page-content > .container,
+    .page-content > .container-fluid {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
 
 
@@ -108,10 +188,24 @@ body {
 
 
 /* =========================
+   TABLET MAP
+========================= */
+
+@media (max-width: 992px) {
+
+    #map {
+        width: 100% !important;
+        max-width: 600px;
+        height: 400px !important;
+    }
+}
+
+
+/* =========================
    SEARCH BUTTON
 ========================= */
 
 .btn-search {
     background-color: #BC4A3C !important;
-    color: #ffff !important;
+    color: #ffffff !important;
 }

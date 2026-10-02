@@ -29,41 +29,42 @@ const createPlaceController = (
                 let selectedCollege = null;
 
                 // ==================================================
-                // IF COLLEGE IS SELECTED
+                // COLLEGE SELECTED
                 // ==================================================
 
-                if (college) {
+                if (college && college.trim()) {
+
+                    const searchCollege = college.trim();
 
                     selectedCollege = await College.findOne({
                         $or: [
                             {
                                 name: {
-                                    $regex: `^${college}$`,
+                                    $regex: `^${searchCollege}$`,
                                     $options: "i"
                                 }
                             },
                             {
                                 shortName: {
-                                    $regex: `^${college}$`,
+                                    $regex: `^${searchCollege}$`,
                                     $options: "i"
                                 }
                             }
                         ]
                     });
 
-                    // ==============================================
+                    // ==================================================
                     // COLLEGE FOUND
-                    // ==============================================
+                    // ==================================================
 
                     if (selectedCollege) {
 
                         const [longitude, latitude] =
                             selectedCollege.location.coordinates;
 
-
-                        // ==========================================
+                        // ==================================================
                         // FIND PLACES WITHIN 5 KM
-                        // ==========================================
+                        // ==================================================
 
                         allPlaces = await Model.find({
 
@@ -82,27 +83,27 @@ const createPlaceController = (
 
                         })
                             .populate("college")
-                            .populate("owner");
+                            .populate("owner")
+                            .sort({ _id: -1 });
 
                     }
 
                 }
 
                 // ==================================================
+                // IMPORTANT:
                 // NO COLLEGE SELECTED
+                // DO NOT SHOW ALL LISTINGS
                 // ==================================================
 
                 else {
 
-                    allPlaces = await Model.find({})
-                        .populate("college")
-                        .populate("owner");
+                    allPlaces = [];
 
                 }
 
-
                 // ==================================================
-                // RENDER PAGE
+                // RENDER
                 // ==================================================
 
                 res.render(
@@ -122,6 +123,7 @@ const createPlaceController = (
             }
 
         },
+
 
 
         // ==================================================
@@ -152,6 +154,7 @@ const createPlaceController = (
         },
 
 
+
         // ==================================================
         // CREATE PLACE
         // ==================================================
@@ -162,7 +165,6 @@ const createPlaceController = (
 
                 const ModelData =
                     req.body[category.toLowerCase()];
-
 
                 if (!ModelData) {
 
@@ -177,18 +179,16 @@ const createPlaceController = (
 
                 }
 
-
-                // ==============================================
+                // ==================================================
                 // CREATE MODEL
-                // ==============================================
+                // ==================================================
 
                 const place =
                     new Model(ModelData);
 
-
-                // ==============================================
+                // ==================================================
                 // OWNER
-                // ==============================================
+                // ==================================================
 
                 if (req.user) {
 
@@ -197,10 +197,9 @@ const createPlaceController = (
 
                 }
 
-
-                // ==============================================
+                // ==================================================
                 // IMAGE
-                // ==============================================
+                // ==================================================
 
                 if (req.file) {
 
@@ -214,17 +213,15 @@ const createPlaceController = (
 
                 }
 
-
-                // ==============================================
-                // LOCATION
-                // ==============================================
+                // ==================================================
+                // LOCATION COORDINATES
+                // ==================================================
 
                 const latitude =
                     parseFloat(ModelData.latitude);
 
                 const longitude =
                     parseFloat(ModelData.longitude);
-
 
                 if (
                     !isNaN(latitude) &&
@@ -244,11 +241,11 @@ const createPlaceController = (
 
                 }
 
-                else {
+                // ==================================================
+                // FALLBACK GEOCODING
+                // ==================================================
 
-                    // ==========================================
-                    // FALLBACK GEOCODING
-                    // ==========================================
+                else {
 
                     try {
 
@@ -275,7 +272,6 @@ const createPlaceController = (
                                 }
                             );
 
-
                         if (
                             geoResponse.data &&
                             geoResponse.data.length > 0
@@ -283,7 +279,6 @@ const createPlaceController = (
 
                             const result =
                                 geoResponse.data[0];
-
 
                             place.geocoding = {
 
@@ -312,31 +307,27 @@ const createPlaceController = (
 
                 }
 
-
-                // ==============================================
+                // ==================================================
                 // REMOVE TEMPORARY FIELDS
-                // ==============================================
+                // ==================================================
 
                 delete ModelData.latitude;
                 delete ModelData.longitude;
 
-
-                // ==============================================
+                // ==================================================
                 // SAVE
-                // ==============================================
+                // ==================================================
 
                 await place.save();
-
 
                 req.flash(
                     "success",
                     `${category} listed successfully!`
                 );
 
-
-                // ==============================================
+                // ==================================================
                 // REDIRECT
-                // ==============================================
+                // ==================================================
 
                 return res.redirect(
                     `${redirectPath}/${place._id}`
@@ -351,6 +342,7 @@ const createPlaceController = (
         },
 
 
+
         // ==================================================
         // SHOW PLACE
         // ==================================================
@@ -361,13 +353,11 @@ const createPlaceController = (
 
                 const { id } = req.params;
 
-
                 const place =
                     await Model.findById(id)
                         .populate("reviews")
                         .populate("owner")
                         .populate("college");
-
 
                 if (!place) {
 
@@ -381,7 +371,6 @@ const createPlaceController = (
                     );
 
                 }
-
 
                 res.render(
                     `${viewsPath}/show.ejs`,
@@ -406,6 +395,7 @@ const createPlaceController = (
         },
 
 
+
         // ==================================================
         // EDIT FORM
         // ==================================================
@@ -416,11 +406,9 @@ const createPlaceController = (
 
                 const { id } = req.params;
 
-
                 const place =
                     await Model.findById(id)
                         .populate("college");
-
 
                 if (!place) {
 
@@ -435,15 +423,12 @@ const createPlaceController = (
 
                 }
 
-
                 const colleges =
                     await College.find({})
                         .sort({ name: 1 });
 
-
                 let originalImageUrl =
                     place.image?.url || "";
-
 
                 if (originalImageUrl) {
 
@@ -454,7 +439,6 @@ const createPlaceController = (
                         );
 
                 }
-
 
                 res.render(
                     `${viewsPath}/edit.ejs`,
@@ -483,6 +467,7 @@ const createPlaceController = (
         },
 
 
+
         // ==================================================
         // UPDATE PLACE
         // ==================================================
@@ -493,10 +478,8 @@ const createPlaceController = (
 
                 const { id } = req.params;
 
-
                 const placeData =
                     req.body[category.toLowerCase()];
-
 
                 if (!placeData) {
 
@@ -511,7 +494,6 @@ const createPlaceController = (
 
                 }
 
-
                 const latitude =
                     parseFloat(
                         placeData.latitude
@@ -522,15 +504,12 @@ const createPlaceController = (
                         placeData.longitude
                     );
 
-
                 delete placeData.latitude;
                 delete placeData.longitude;
-
 
                 const updateData = {
                     ...placeData
                 };
-
 
                 if (
                     !isNaN(latitude) &&
@@ -550,7 +529,6 @@ const createPlaceController = (
 
                 }
 
-
                 const place =
                     await Model.findByIdAndUpdate(
                         id,
@@ -560,7 +538,6 @@ const createPlaceController = (
                             runValidators: true
                         }
                     );
-
 
                 if (!place) {
 
@@ -574,7 +551,6 @@ const createPlaceController = (
                     );
 
                 }
-
 
                 if (req.file) {
 
@@ -590,12 +566,10 @@ const createPlaceController = (
 
                 }
 
-
                 req.flash(
                     "success",
                     `${category} updated successfully!`
                 );
-
 
                 res.redirect(
                     `${redirectPath}/${id}`
@@ -610,6 +584,7 @@ const createPlaceController = (
         },
 
 
+
         // ==================================================
         // DELETE PLACE
         // ==================================================
@@ -620,10 +595,8 @@ const createPlaceController = (
 
                 const { id } = req.params;
 
-
                 const deletedPlace =
                     await Model.findByIdAndDelete(id);
-
 
                 if (!deletedPlace) {
 
@@ -638,12 +611,10 @@ const createPlaceController = (
 
                 }
 
-
                 req.flash(
                     "success",
                     `${category} deleted successfully!`
                 );
-
 
                 res.redirect(
                     redirectPath
@@ -656,6 +627,7 @@ const createPlaceController = (
             }
 
         },
+
 
 
         // ==================================================
@@ -671,7 +643,6 @@ const createPlaceController = (
                 const place =
                     await Model.findById(id);
 
-
                 if (!place) {
 
                     req.flash(
@@ -685,28 +656,21 @@ const createPlaceController = (
 
                 }
 
-
                 const review =
                     new Review(req.body.review);
-
 
                 review.author =
                     req.user._id;
 
-
                 place.reviews.push(review);
 
-
                 await review.save();
-
                 await place.save();
-
 
                 req.flash(
                     "success",
                     "Review added successfully!"
                 );
-
 
                 return res.redirect(
                     `${redirectPath}/${id}`
@@ -723,6 +687,5 @@ const createPlaceController = (
     };
 
 };
-
 
 module.exports = createPlaceController;

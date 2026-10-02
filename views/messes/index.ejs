@@ -10,10 +10,29 @@
                 FOOD SERVICES
             </p>
 
-            <h1>Mess Near Your Campus</h1>
+            <h1>
+                <%= selectedCollege
+                    ? `Mess Near ${selectedCollege.name}`
+                    : "Find Messes Near Your College"
+                %>
+            </h1>
 
             <p class="listing-subtitle">
-                Find affordable daily meals and monthly mess plans near your college.
+
+                <% if (selectedCollege) { %>
+
+                    Showing messes within 5 km of
+                    <strong>
+                        <%= selectedCollege.name %>
+                    </strong>.
+
+                <% } else { %>
+
+                    Select your college to discover messes within 5 km
+                    of your campus.
+
+                <% } %>
+
             </p>
 
         </div>
@@ -27,26 +46,58 @@
 
     <div class="row">
 
-        <% if (allPlaces.length === 0) { %>
+        <% if (!selectedCollege) { %>
 
-            <div class="empty-state">
+            <div class="col-12">
 
-                <i class="fa-solid fa-bowl-food"></i>
+                <div class="empty-state">
 
-                <h3>No messes available</h3>
+                    <i class="fa-solid fa-location-dot"></i>
 
-                <p>
-                    Be the first one to list a mess near your campus.
-                </p>
+                    <h3>
+                        Select Your College
+                    </h3>
 
-                <a href="/messes/new" class="btn btn-dark">
-                    Add Mess
-                </a>
+                    <p>
+                        Choose your college from the homepage to find
+                        nearby messes.
+                    </p>
+
+                    <a href="/" class="btn btn-dark">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Search College
+                    </a>
+
+                </div>
+
+            </div>
+
+        <% } else if (allPlaces.length === 0) { %>
+
+            <div class="col-12">
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-bowl-food"></i>
+
+                    <h3>
+                        No Messes Found Nearby
+                    </h3>
+
+                    <p>
+                        There are currently no messes listed within 5 km of
+                        <strong><%= selectedCollege.name %></strong>.
+                    </p>
+
+                    <a href="/messes/new" class="btn btn-dark">
+                        Add Mess
+                    </a>
+
+                </div>
 
             </div>
 
         <% } else { %>
-
 
             <% allPlaces.forEach(mess => { %>
 
@@ -86,11 +137,9 @@
                                     MESS
                                 </div>
 
-
                                 <h3>
                                     <%= mess.title %>
                                 </h3>
-
 
                                 <p class="listing-location">
 
@@ -99,7 +148,6 @@
                                     <%= mess.location %>
 
                                 </p>
-
 
                                 <div class="listing-info">
 
@@ -118,35 +166,37 @@
                                 </div>
 
 
-                                <div class="meal-features">
+                                <% if (mess.meals && mess.meals.length) { %>
 
-                                    <% if (mess.meals && mess.meals.breakfast) { %>
+                                    <div class="meal-features">
 
-                                        <span>
-                                            Breakfast
-                                        </span>
+                                        <% if (mess.meals.includes("Breakfast")) { %>
 
-                                    <% } %>
+                                            <span>
+                                                Breakfast
+                                            </span>
 
+                                        <% } %>
 
-                                    <% if (mess.meals && mess.meals.lunch) { %>
+                                        <% if (mess.meals.includes("Lunch")) { %>
 
-                                        <span>
-                                            Lunch
-                                        </span>
+                                            <span>
+                                                Lunch
+                                            </span>
 
-                                    <% } %>
+                                        <% } %>
 
+                                        <% if (mess.meals.includes("Dinner")) { %>
 
-                                    <% if (mess.meals && mess.meals.dinner) { %>
+                                            <span>
+                                                Dinner
+                                            </span>
 
-                                        <span>
-                                            Dinner
-                                        </span>
+                                        <% } %>
 
-                                    <% } %>
+                                    </div>
 
-                                </div>
+                                <% } %>
 
 
                                 <div class="listing-bottom">
@@ -171,7 +221,6 @@
                 </div>
 
             <% }) %>
-
 
         <% } %>
 

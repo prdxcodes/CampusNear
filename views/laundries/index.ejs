@@ -10,10 +10,29 @@
                 STUDENT SERVICES
             </p>
 
-            <h1>Laundry Near Your Campus</h1>
+            <h1>
+                <%= selectedCollege
+                    ? `Laundry Near ${selectedCollege.name}`
+                    : "Find Laundry Near Your College"
+                %>
+            </h1>
 
             <p class="listing-subtitle">
-                Find reliable washing, ironing and dry-cleaning services near your college.
+
+                <% if (selectedCollege) { %>
+
+                    Showing laundry services within 5 km of
+                    <strong>
+                        <%= selectedCollege.name %>
+                    </strong>.
+
+                <% } else { %>
+
+                    Select your college to discover laundry services
+                    within 5 km of your campus.
+
+                <% } %>
+
             </p>
 
         </div>
@@ -27,26 +46,59 @@
 
     <div class="row">
 
-        <% if (allPlaces.length === 0) { %>
+        <% if (!selectedCollege) { %>
 
-            <div class="empty-state">
+            <div class="col-12">
 
-                <i class="fa-solid fa-shirt"></i>
+                <div class="empty-state">
 
-                <h3>No laundry services available</h3>
+                    <i class="fa-solid fa-location-dot"></i>
 
-                <p>
-                    Be the first one to list a laundry service near your campus.
-                </p>
+                    <h3>
+                        Select Your College
+                    </h3>
 
-                <a href="/laundries/new" class="btn btn-dark">
-                    Add Laundry
-                </a>
+                    <p>
+                        Choose your college from the homepage to find
+                        nearby laundry services.
+                    </p>
+
+                    <a href="/" class="btn btn-dark">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Search College
+                    </a>
+
+                </div>
+
+            </div>
+
+        <% } else if (allPlaces.length === 0) { %>
+
+            <div class="col-12">
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-shirt"></i>
+
+                    <h3>
+                        No Laundry Services Found Nearby
+                    </h3>
+
+                    <p>
+                        There are currently no laundry services listed
+                        within 5 km of
+                        <strong><%= selectedCollege.name %></strong>.
+                    </p>
+
+                    <a href="/laundries/new" class="btn btn-dark">
+                        Add Laundry
+                    </a>
+
+                </div>
 
             </div>
 
         <% } else { %>
-
 
             <% allPlaces.forEach(laundry => { %>
 
@@ -61,7 +113,10 @@
 
                             <div class="listing-image-wrapper">
 
-                                <% if (laundry.image && laundry.image.url) { %>
+                                <% if (
+                                    laundry.image &&
+                                    laundry.image.url
+                                ) { %>
 
                                     <img
                                         src="<%= laundry.image.url %>"
@@ -86,11 +141,9 @@
                                     LAUNDRY
                                 </div>
 
-
                                 <h3>
                                     <%= laundry.title %>
                                 </h3>
-
 
                                 <p class="listing-location">
 
@@ -161,7 +214,6 @@
                 </div>
 
             <% }) %>
-
 
         <% } %>
 

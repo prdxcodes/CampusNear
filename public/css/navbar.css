@@ -5,16 +5,17 @@
 .campusnear-navbar {
     min-height: 72px;
     width: 100%;
+
     background: #ffffff;
     border-bottom: 1px solid #eeeeee;
 
-    /* Navbar stays fixed while page scrolls */
     position: fixed;
     top: 0;
     left: 0;
 
     z-index: 1000;
 }
+
 
 /* =========================
    NAVBAR CONTAINER
@@ -24,6 +25,7 @@
     max-width: 1400px;
     width: 95%;
     height: 72px;
+
     margin: 0 auto;
     padding: 0 20px;
 
@@ -32,9 +34,11 @@
     justify-content: space-between;
 
     gap: 20px;
+
     box-sizing: border-box;
     position: relative;
 }
+
 
 /* =========================
    LOGO
@@ -43,10 +47,12 @@
 .campusnear-logo {
     display: flex;
     align-items: center;
+
     gap: 9px;
 
     text-decoration: none;
     white-space: nowrap;
+
     flex-shrink: 0;
 }
 
@@ -59,21 +65,26 @@
     justify-content: center;
 
     border-radius: 50%;
+
     background: #d94b3d;
-    color: white;
+    color: #ffffff;
 
     font-size: 19px;
+
+    flex-shrink: 0;
 }
 
 .logo-text {
     font-size: 22px;
     font-weight: 700;
+
     color: #18202c;
 }
 
 .logo-text span {
     color: #d94b3d;
 }
+
 
 /* =========================
    NAV LINKS
@@ -82,15 +93,19 @@
 .navbar-links {
     display: flex;
     align-items: center;
+
     gap: 40px;
 
     margin: 0 auto;
+
+    min-width: 0;
 }
 
 .nav-link {
     position: relative;
 
     text-decoration: none;
+
     color: #18202c;
 
     font-size: 14px;
@@ -106,6 +121,7 @@
 .nav-link:hover {
     color: #d94b3d;
 }
+
 
 /* =========================
    ACTIVE LINK
@@ -131,6 +147,7 @@
     border-radius: 2px 2px 0 0;
 }
 
+
 /* =========================
    RIGHT ACTIONS
 ========================= */
@@ -142,8 +159,10 @@
     gap: 16px;
 
     white-space: nowrap;
+
     flex-shrink: 0;
 }
+
 
 /* =========================
    ADD PROPERTY BUTTON
@@ -152,11 +171,12 @@
 .add-property-btn {
     display: flex;
     align-items: center;
+    justify-content: center;
 
     gap: 7px;
 
     background: #d94b3d;
-    color: white;
+    color: #ffffff;
 
     padding: 9px 15px;
 
@@ -170,15 +190,20 @@
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 .add-property-btn:hover {
     background: #c33f34;
-    color: white;
+    color: #ffffff;
 
     transform: translateY(-1px);
 }
+
 
 /* =========================
    AUTH
@@ -191,6 +216,8 @@
 
     font-size: 14px;
     font-weight: 600;
+
+    white-space: nowrap;
 
     transition: color 0.2s ease;
 }
@@ -205,101 +232,473 @@
 
 .welcome-user {
     font-size: 14px;
+
     color: #555;
+
+    white-space: nowrap;
 }
 
+
 /* =========================
-   MOBILE BUTTON
+   MOBILE MENU BUTTON
 ========================= */
 
 .mobile-menu-btn {
     display: none;
 
+    width: 40px;
+    height: 40px;
+
+    align-items: center;
+    justify-content: center;
+
     border: none;
     background: transparent;
 
     font-size: 22px;
+
     color: #18202c;
 
     cursor: pointer;
 
     padding: 5px;
+
+    border-radius: 8px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
-/* =========================
-   TABLET
-========================= */
+.mobile-menu-btn:hover {
+    background: #f5f5f5;
 
-@media (max-width: 992px) {
+    color: #d94b3d;
+}
+
+
+/* =========================================================
+   LARGE TABLET / SMALL LAPTOP
+   1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .navbar-container {
+        width: 96%;
+
+        padding: 0 15px;
+
+        gap: 15px;
+    }
 
     .navbar-links {
-        gap: 20px;
+        gap: 25px;
+    }
+
+    .navbar-actions {
+        gap: 12px;
     }
 
     .nav-link {
         font-size: 13px;
     }
 
+    .logo-text {
+        font-size: 21px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   992px
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .navbar-container {
+        width: 100%;
+
+        padding: 0 18px;
+
+        gap: 15px;
+    }
+
+    .navbar-links {
+        gap: 18px;
+    }
+
+    .nav-link {
+        font-size: 13px;
+
+        padding: 24px 0;
+    }
+
+    /*
+        Hide Add Property text,
+        keep only the icon.
+    */
+
     .add-property-btn span {
         display: none;
     }
 
     .add-property-btn {
-        padding: 9px;
+        width: 38px;
+        height: 38px;
+
+        padding: 0;
+
+        border-radius: 8px;
+    }
+
+    .add-property-btn i {
+        margin: 0;
+
+        font-size: 15px;
+    }
+
+    .navbar-actions {
+        gap: 10px;
+    }
+
+    .auth-link,
+    .welcome-user {
+        font-size: 13px;
     }
 }
 
-/* =========================
-   MOBILE
-========================= */
+
+/* =========================================================
+   SMALL TABLET
+   850px
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .navbar-container {
+        padding: 0 15px;
+    }
+
+    .navbar-links {
+        gap: 12px;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 17px;
+    }
+
+    .navbar-actions {
+        gap: 8px;
+    }
+
+    .auth-link,
+    .welcome-user {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE NAVBAR
+   768px
+========================================================= */
 
 @media (max-width: 768px) {
 
-    .mobile-menu-btn {
-        display: block;
+    .campusnear-navbar {
+        min-height: 68px;
     }
 
-    /* Mobile Dropdown Menu */
+    .navbar-container {
+        width: 100%;
+        height: 68px;
+
+        padding: 0 16px;
+
+        gap: 10px;
+    }
+
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .campusnear-logo {
+        gap: 8px;
+    }
+
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 17px;
+    }
+
+    .logo-text {
+        font-size: 20px;
+    }
+
+
+    /* =========================
+       DESKTOP LINKS HIDDEN
+    ========================= */
 
     .navbar-links {
         display: none;
 
         position: absolute;
 
-        top: 72px;
+        top: 68px;
         left: 0;
 
         width: 100%;
+
+        margin: 0;
+
+        padding: 10px 20px 15px;
 
         background: #ffffff;
 
         flex-direction: column;
         align-items: flex-start;
 
-        padding: 12px 20px;
-
         gap: 0;
 
         border-bottom: 1px solid #eeeeee;
 
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        box-shadow:
+            0 8px 18px rgba(0, 0, 0, 0.06);
 
         z-index: 999;
     }
+
+
+    /* =========================
+       OPEN MOBILE MENU
+    ========================= */
 
     .navbar-links.active {
         display: flex;
     }
 
+
+    /* =========================
+       MOBILE LINKS
+    ========================= */
+
     .nav-link {
         width: 100%;
 
-        padding: 12px 0;
+        padding: 13px 0;
 
-        border-bottom: 1px solid #f5f5f5;
+        font-size: 14px;
+
+        border-bottom: 1px solid #f2f2f2;
+    }
+
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+
+    .nav-link.active {
+        color: #d94b3d;
     }
 
     .nav-link.active::after {
         display: none;
     }
+
+
+    /* =========================
+       RIGHT ACTIONS
+    ========================= */
+
+    .navbar-actions {
+        margin-left: auto;
+
+        gap: 8px;
+    }
+
+    .auth-link,
+    .welcome-user {
+        display: none;
+    }
+
+
+    /* =========================
+       ADD PROPERTY
+    ========================= */
+
+    .add-property-btn {
+        width: 38px;
+        height: 38px;
+
+        padding: 0;
+
+        border-radius: 8px;
+    }
+
+
+    /* =========================
+       MOBILE MENU BUTTON
+    ========================= */
+
+    .mobile-menu-btn {
+        display: flex;
+
+        width: 40px;
+        height: 40px;
+    }
 }
+
+
+/* =========================================================
+   SMALL MOBILE
+   576px
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .navbar-container {
+        height: 64px;
+
+        padding: 0 12px;
+    }
+
+    .campusnear-navbar {
+        min-height: 64px;
+    }
+
+
+    /* Logo */
+
+    .logo-icon {
+        width: 34px;
+        height: 34px;
+
+        font-size: 16px;
+    }
+
+    .logo-text {
+        font-size: 19px;
+    }
+
+
+    /* Mobile menu */
+
+    .navbar-links {
+        top: 64px;
+
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+
+    /* Buttons */
+
+    .add-property-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .mobile-menu-btn {
+        width: 38px;
+        height: 38px;
+
+        font-size: 20px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .navbar-container {
+        padding: 0 10px;
+
+        gap: 6px;
+    }
+
+    .campusnear-logo {
+        gap: 6px;
+    }
+
+    .logo-icon {
+        width: 32px;
+        height: 32px;
+
+        font-size: 15px;
+    }
+
+    .logo-text {
+        font-size: 18px;
+    }
+
+    .navbar-actions {
+        gap: 5px;
+    }
+
+    .add-property-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .mobile-menu-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+   350px
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .navbar-container {
+        padding: 0 8px;
+    }
+
+    .logo-text {
+        font-size: 17px;
+    }
+
+    .logo-icon {
+        width: 30px;
+        height: 30px;
+
+        font-size: 14px;
+    }
+
+    .add-property-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .mobile-menu-btn {
+        width: 34px;
+        height: 34px;
+
+        font-size: 19px;
+    }
+}
+
