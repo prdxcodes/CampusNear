@@ -72,6 +72,7 @@
 
             </div>
 
+
         <% } else if (allPlaces.length === 0) { %>
 
             <div class="col-12">
@@ -98,6 +99,7 @@
 
             </div>
 
+
         <% } else { %>
 
             <% allPlaces.forEach(pg => { %>
@@ -110,6 +112,8 @@
                     >
 
                         <div class="listing-card">
+
+                            <!-- ================= IMAGE ================= -->
 
                             <div class="listing-image-wrapper">
 
@@ -132,15 +136,25 @@
                             </div>
 
 
+                            <!-- ================= CARD BODY ================= -->
+
                             <div class="listing-card-body">
+
+                                <!-- CATEGORY -->
 
                                 <div class="listing-category">
                                     PG
                                 </div>
 
+
+                                <!-- TITLE -->
+
                                 <h3>
                                     <%= pg.title %>
                                 </h3>
+
+
+                                <!-- LOCATION -->
 
                                 <% if (pg.location) { %>
 
@@ -155,33 +169,57 @@
                                 <% } %>
 
 
-                                <% if (pg.description) { %>
+                                <!-- ================= PG INFORMATION ================= -->
 
-                                    <p class="listing-description">
+                                <div class="listing-info">
 
-                                        <%= pg.description.length > 100
-                                            ? pg.description.substring(0, 100) + "..."
-                                            : pg.description
-                                        %>
+                                    <% if (pg.ownerContact) { %>
 
-                                    </p>
+                                        <span>
+                                            <i class="fa-solid fa-phone"></i>
 
-                                <% } %>
+                                            Contact Available
+                                        </span>
 
+                                    <% } %>
+
+
+                                    <% if (pg.country) { %>
+
+                                        <span>
+                                            <i class="fa-solid fa-earth-asia"></i>
+
+                                            <%= pg.country %>
+                                        </span>
+
+                                    <% } %>
+
+                                </div>
+
+
+                                <!-- ================= BOTTOM ================= -->
 
                                 <div class="listing-bottom">
 
                                     <strong>
+
                                         ₹<%= pg.price || "N/A" %>
 
                                         <% if (pg.price) { %>
-                                            <small>/ month</small>
+
+                                            <small>
+                                                / month
+                                            </small>
+
                                         <% } %>
 
                                     </strong>
 
+
                                     <span class="feature-badge">
+
                                         View PG
+
                                     </span>
 
                                 </div>

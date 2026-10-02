@@ -1,20 +1,170 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="row">
-        <div class="col col-8 offset-2">
-            <br>
-            <h3>Login</h3>
-            <br>
-            <form method="post" , action="/login" novalidate class="needs-validation">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input name="username" id="username" placeholder="xyz" type="text" class="form-control" required>
+<div class="login-page">
+
+    <div class="login-card">
+
+        <!-- LEFT / BRAND SECTION -->
+        <div class="login-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <h1>Welcome Back!</h1>
+
+            <p>
+                Login to discover PGs, hostels, cafes,
+                messes and other services around your campus.
+            </p>
+
+            <div class="login-features">
+
+                <div>
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span>Find places near your campus</span>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input name="password" id="password" type="password" class="form-control" required/>
+
+                <div>
+                    <i class="fa-solid fa-star"></i>
+                    <span>Read student reviews</span>
                 </div>
-                <button class="btn btn-success">Login</button>
-            </form>
+
+                <div>
+                    <i class="fa-solid fa-house"></i>
+                    <span>List your own property</span>
+                </div>
+
+            </div>
+
         </div>
+
+
+        <!-- LOGIN FORM -->
+        <div class="login-form-section">
+
+            <div class="login-heading">
+
+                <span>ACCOUNT LOGIN</span>
+
+                <h2>Sign in to CampusNear</h2>
+
+                <p>
+                    Enter your credentials to continue.
+                </p>
+
+            </div>
+
+
+            <form
+                method="post"
+                action="/login"
+                novalidate
+                class="needs-validation"
+            >
+
+                <!-- USERNAME -->
+
+                <div class="login-input-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            name="username"
+                            id="username"
+                            placeholder="Enter your username"
+                            type="text"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please enter your username.
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="login-input-group">
+
+                    <div class="password-label">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                    </div>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            name="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            type="password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please enter your password.
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-submit-btn"
+                >
+                    <span>Login</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </form>
+
+
+            <!-- SIGNUP -->
+
+            <div class="signup-link">
+
+                <span>
+                    Don't have an account?
+                </span>
+
+                <a href="/signup">
+                    Create an account
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
+
+</div>

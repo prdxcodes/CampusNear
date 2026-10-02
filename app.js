@@ -17,7 +17,7 @@ const messRouter = require("./routes/mess.js");
 const laundryRouter = require("./routes/laundry.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
-const aboutRouter = require("./routes/about");
+const staticPagesRouter = require("./routes/staticPages");
 
 const session = require("express-session");
 const flash = require("connect-flash");
@@ -117,9 +117,9 @@ app.use("/laundries/:id/reviews", reviewRouter);
 
 app.use("/", userRouter);
 
-// About
+// Static Pages
 
-app.use("/about", aboutRouter);
+app.use("/", staticPagesRouter);
 
 // Error Handeling
 
@@ -129,7 +129,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     let { statusCode = 505, message = "Something went wrong" } = err;
-    res.status(statusCode).render("pgs/error.ejs", { message });
+    res.status(statusCode).render("includes/error.ejs", { message });
 });
 
 // Localhost

@@ -1,43 +1,115 @@
 const User = require("../models/user.js");
 
+
+// =========================
+// SIGNUP FORM
+// =========================
+
 module.exports.renderSignupForm = (req, res) => {
+
     res.render("user/signup.ejs");
+
 };
 
-module.exports.signup = async (req, res) => {
+
+// =========================
+// SIGNUP
+// =========================
+
+module.exports.signup = async (req, res, next) => {
+
     try {
+
         let { username, email, password } = req.body;
-        const newUser = new User({ username, email });
-        const registeredUser = await User.register(newUser, password);
+
+        const newUser = new User({
+            username,
+            email
+        });
+
+        const registeredUser = await User.register(
+            newUser,
+            password
+        );
+
         req.login(registeredUser, (err) => {
+
             if (err) {
                 return next(err);
             }
-            req.flash("success", "Welcome to CampusNear");
-            res.redirect("/pgs");
+
+            req.flash(
+                "success",
+                "Welcome to CampusNear"
+            );
+
+            res.redirect("/");
+
         });
+
     } catch (err) {
-        req.flash("error", error.message);
+
+        req.flash(
+            "error",
+            err.message
+        );
+
         res.redirect("/signup");
-    };
+
+    }
+
 };
+
+
+// =========================
+// LOGIN FORM
+// =========================
 
 module.exports.renderLoginForm = (req, res) => {
+
     res.render("user/login.ejs");
+
 };
+
+
+// =========================
+// LOGIN
+// =========================
 
 module.exports.login = async (req, res) => {
-    req.flash("success", "Welcome to CampusNear");
-    let redirectUrl = res.locals.redirectUrl || "/pgs";
+
+    req.flash(
+        "success",
+        "Welcome to CampusNear"
+    );
+
+    const redirectUrl =
+        res.locals.redirectUrl || "/";
+
     res.redirect(redirectUrl);
+
 };
 
+
+// =========================
+// LOGOUT
+// =========================
+
 module.exports.logout = (req, res, next) => {
-    req.logOut((err) => {
+
+    req.logout((err) => {
+
         if (err) {
             return next(err);
         }
-        req.flash("success", "You're logged out");
-        res.redirect("/pgs");
+
+        req.flash(
+            "success",
+            "You're logged out"
+        );
+
+        res.redirect("/");
+
     });
+
 };

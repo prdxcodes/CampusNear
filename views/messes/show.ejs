@@ -540,6 +540,17 @@
 
                         </div>
 
+
+                        <% if (place.geocoding && place.geocoding.coordinates) { %>
+
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=<%= place.geocoding.coordinates[1] %>,<%= place.geocoding.coordinates[0] %>"
+                                target="_blank" rel="noopener noreferrer" class="get-directions-btn">
+                                <i class="fa-solid fa-diamond-turn-right"></i>
+                                Get Directions
+                            </a>
+
+                            <% } %>
+
                     </div>
 
                 </aside>

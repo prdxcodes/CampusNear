@@ -1,0 +1,93 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="error-page">
+
+    <!-- Decorative Background -->
+    <div class="error-circle circle-one"></div>
+    <div class="error-circle circle-two"></div>
+    <div class="error-circle circle-three"></div>
+
+
+    <div class="error-content">
+
+        <!-- Error Number -->
+        <div class="error-number">
+            4<span>0</span>4
+        </div>
+
+
+        <!-- Location Icon -->
+        <div class="error-icon">
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
+
+
+        <!-- Error Label -->
+        <p class="error-label">
+            PAGE NOT FOUND
+        </p>
+
+
+        <!-- Heading -->
+        <h1>
+            Looks like you're lost.
+        </h1>
+
+
+        <!-- Message -->
+        <p class="error-description">
+
+            <%= message || "The page you're looking for doesn't exist or may have been moved." %>
+
+        </p>
+
+
+        <!-- Buttons -->
+        <div class="error-actions">
+
+            <!-- Home -->
+            <a href="/" class="error-btn primary-btn">
+
+                <i class="fa-solid fa-house"></i>
+
+                Go Home
+
+            </a>
+
+
+            <!-- Back -->
+            <button
+                type="button"
+                class="error-btn secondary-btn"
+                onclick="history.back()"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Go Back
+
+            </button>
+
+        </div>
+
+
+        <!-- Explore -->
+        <div class="error-search">
+
+            <span>
+                Looking for a PG?
+            </span>
+
+            <a href="/pgs">
+
+                Explore PGs
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

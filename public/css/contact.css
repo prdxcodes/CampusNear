@@ -1,0 +1,353 @@
+/* =========================================================
+   CONTACT PAGE
+========================================================= */
+
+.legal-page {
+    width: 100%;
+
+    padding: 70px 5% 90px;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+.legal-container {
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.legal-header {
+    max-width: 750px;
+
+    margin-bottom: 50px;
+}
+
+.legal-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #d94b3d;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.legal-header h1 {
+    margin: 0;
+
+    color: #18202c;
+
+    font-size: 40px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+.legal-header p {
+    margin: 12px 0 0;
+
+    color: #747b85;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CONTACT GRID
+========================================================= */
+
+.contact-grid {
+    display: grid;
+
+    grid-template-columns: 0.9fr 1.1fr;
+
+    gap: 40px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   CONTACT INFORMATION
+========================================================= */
+
+.contact-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.contact-card {
+    display: flex;
+
+    gap: 18px;
+
+    padding: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 16px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.07);
+}
+
+.contact-icon {
+    width: 45px;
+
+    height: 45px;
+
+    min-width: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f7f1ef;
+
+    color: #d94b3d;
+
+    font-size: 18px;
+}
+
+.contact-card h3 {
+    margin: 0 0 6px;
+
+    color: #18202c;
+
+    font-size: 17px;
+
+    font-weight: 650;
+}
+
+.contact-card p {
+    margin: 0 0 7px;
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+.contact-card a {
+    color: #d94b3d;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    color: #b9362d;
+}
+
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+.contact-form-card {
+    padding: 32px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.contact-form-card h2 {
+    margin: 0;
+
+    color: #18202c;
+
+    font-size: 25px;
+
+    font-weight: 700;
+}
+
+.form-description {
+    margin: 8px 0 25px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #333;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #222;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 130px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #d94b3d;
+
+    box-shadow:
+        0 0 0 3px rgba(217, 75, 61, 0.08);
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.contact-submit {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    width: 100%;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #d94b3d;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.contact-submit:hover {
+    background: #c33f34;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(217, 75, 61, 0.22);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .legal-page {
+        padding: 45px 20px 60px;
+    }
+
+    .legal-header h1 {
+        font-size: 32px;
+    }
+
+    .contact-form-card {
+        padding: 22px;
+    }
+
+    .contact-card {
+        padding: 20px;
+    }
+}

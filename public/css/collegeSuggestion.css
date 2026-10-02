@@ -1,0 +1,449 @@
+/* =========================================================
+   COLLEGE SEARCH FIELD
+========================================================= */
+
+.location-field {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+.location-field .search-field-content {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+
+/* =========================================================
+   COLLEGE SUGGESTION DROPDOWN
+========================================================= */
+
+#collegeSuggestions {
+    position: absolute !important;
+
+    top: calc(100% + 10px) !important;
+    left: 0 !important;
+
+    width: 100% !important;
+    min-width: 320px;
+    max-width: 500px;
+
+    max-height: 330px;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    display: none;
+
+    padding: 6px 0 !important;
+
+    background: #ffffff !important;
+
+    border: 1px solid #e5e5e5 !important;
+
+    border-radius: 14px !important;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.14),
+        0 4px 10px rgba(0, 0, 0, 0.06) !important;
+
+    z-index: 99999 !important;
+
+    box-sizing: border-box !important;
+
+    text-align: left !important;
+}
+
+
+/* =========================================================
+   EACH COLLEGE SUGGESTION
+========================================================= */
+
+#collegeSuggestions .college-suggestion-item {
+
+    width: 100% !important;
+
+    min-height: 68px;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 12px !important;
+
+    padding: 11px 15px !important;
+
+    margin: 0 !important;
+
+    box-sizing: border-box !important;
+
+    background: #ffffff !important;
+
+    color: #222 !important;
+
+    border: none !important;
+
+    border-bottom: 1px solid #eeeeee !important;
+
+    cursor: pointer !important;
+
+    text-align: left !important;
+
+    transition:
+        background-color 0.2s ease,
+        padding-left 0.2s ease,
+        transform 0.2s ease !important;
+}
+
+
+/* =========================================================
+   LAST ITEM
+========================================================= */
+
+#collegeSuggestions .college-suggestion-item:last-child {
+    border-bottom: none !important;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+#collegeSuggestions .college-suggestion-item:hover {
+
+    background: #fff7f5 !important;
+
+    padding-left: 19px !important;
+}
+
+
+/* =========================================================
+   COLLEGE ICON
+========================================================= */
+
+#collegeSuggestions
+.college-suggestion-item > i {
+
+    flex-shrink: 0 !important;
+
+    width: 38px !important;
+    height: 38px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 10px !important;
+
+    background: #fff0ed !important;
+
+    color: #d94b3d !important;
+
+    font-size: 16px !important;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease !important;
+}
+
+
+/* Icon hover */
+
+#collegeSuggestions
+.college-suggestion-item:hover > i {
+
+    background: #d94b3d !important;
+
+    color: #ffffff !important;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   TEXT CONTAINER
+========================================================= */
+
+#collegeSuggestions
+.college-suggestion-item > div {
+
+    flex: 1 !important;
+
+    min-width: 0 !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    justify-content: center !important;
+
+    gap: 3px !important;
+}
+
+
+/* =========================================================
+   COLLEGE NAME
+========================================================= */
+
+#collegeSuggestions
+.college-suggestion-item strong {
+
+    display: block !important;
+
+    margin: 0 !important;
+
+    color: #222222 !important;
+
+    font-size: 14px !important;
+
+    font-weight: 650 !important;
+
+    line-height: 1.35 !important;
+
+    white-space: normal !important;
+
+    overflow: visible !important;
+
+    text-overflow: unset !important;
+}
+
+
+/* =========================================================
+   SHORT NAME
+========================================================= */
+
+#collegeSuggestions
+.college-suggestion-item small {
+
+    display: block !important;
+
+    margin: 0 !important;
+
+    color: #d94b3d !important;
+
+    font-size: 11px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.3 !important;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   CITY / STATE
+========================================================= */
+
+#collegeSuggestions
+.college-suggestion-item span {
+
+    display: block !important;
+
+    margin: 0 !important;
+
+    color: #888888 !important;
+
+    font-size: 11px !important;
+
+    line-height: 1.3 !important;
+
+    white-space: nowrap !important;
+
+    overflow: hidden !important;
+
+    text-overflow: ellipsis !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+#collegeSuggestions::-webkit-scrollbar {
+    width: 6px;
+}
+
+#collegeSuggestions::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#collegeSuggestions::-webkit-scrollbar-thumb {
+
+    background: #d3d3d3;
+
+    border-radius: 10px;
+}
+
+#collegeSuggestions::-webkit-scrollbar-thumb:hover {
+    background: #b5b5b5;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    #collegeSuggestions {
+
+        min-width: 280px;
+
+        max-height: 300px;
+
+        border-radius: 12px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item {
+
+        min-height: 64px;
+
+        padding: 10px 13px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item:hover {
+
+        padding-left: 16px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item > i {
+
+        width: 36px !important;
+        height: 36px !important;
+
+        font-size: 15px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item strong {
+
+        font-size: 13px !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+    #collegeSuggestions {
+
+        top: calc(100% + 7px) !important;
+
+        width: 100% !important;
+
+        min-width: 0;
+
+        max-width: none;
+
+        max-height: 270px;
+
+        border-radius: 11px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item {
+
+        min-height: 62px;
+
+        gap: 10px !important;
+
+        padding: 9px 11px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item:hover {
+
+        padding-left: 14px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item > i {
+
+        width: 34px !important;
+        height: 34px !important;
+
+        border-radius: 9px !important;
+
+        font-size: 14px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item strong {
+
+        font-size: 12px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item small {
+
+        font-size: 10px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item span {
+
+        font-size: 10px !important;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    #collegeSuggestions {
+
+        max-height: 240px;
+
+        padding: 4px 0 !important;
+
+        border-radius: 10px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item {
+
+        min-height: 58px;
+
+        gap: 8px !important;
+
+        padding: 8px 9px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item > i {
+
+        width: 31px !important;
+        height: 31px !important;
+
+        font-size: 12px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item strong {
+
+        font-size: 11px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item small {
+
+        font-size: 9px !important;
+    }
+
+    #collegeSuggestions
+    .college-suggestion-item span {
+
+        font-size: 9px !important;
+    }
+}

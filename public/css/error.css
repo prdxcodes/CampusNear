@@ -1,0 +1,478 @@
+/* =========================================================
+   ERROR / 404 PAGE
+========================================================= */
+
+.error-page {
+    position: relative;
+
+    width: 100%;
+    min-height: calc(100vh - 140px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 70px 20px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.error-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    max-width: 650px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   404 NUMBER
+========================================================= */
+
+.error-number {
+    font-size: clamp(120px, 20vw, 220px);
+
+    font-weight: 800;
+
+    line-height: 0.85;
+
+    letter-spacing: -10px;
+
+    color: #f1f1f1;
+
+    user-select: none;
+}
+
+.error-number span {
+    color: #d94b3d;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.error-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: -25px auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fdf0ee;
+
+    color: #d94b3d;
+
+    font-size: 25px;
+
+    animation: floatingIcon 2.5s ease-in-out infinite;
+}
+
+@keyframes floatingIcon {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.error-label {
+    margin: 0 0 8px;
+
+    color: #d94b3d;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.error-content h1 {
+    margin: 0;
+
+    color: #222;
+
+    font-size: 38px;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.error-description {
+    max-width: 540px;
+
+    margin: 15px auto 0;
+
+    color: #777;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.error-actions {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+
+.error-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-width: 145px;
+
+    height: 48px;
+
+    padding: 0 20px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+/* =========================================================
+   HOME BUTTON
+========================================================= */
+
+.primary-btn {
+    background: #d94b3d;
+
+    color: #ffffff;
+
+    border: 1px solid #d94b3d;
+}
+
+.primary-btn:hover {
+    background: #c33f34;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(217, 75, 61, 0.22);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.secondary-btn {
+    background: #ffffff;
+
+    color: #333;
+
+    border: 1px solid #dddddd;
+}
+
+.secondary-btn:hover {
+    background: #f7f7f7;
+
+    color: #222;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   EXPLORE PG
+========================================================= */
+
+.error-search {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 30px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #eeeeee;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.error-search a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #d94b3d;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: gap 0.2s ease;
+}
+
+.error-search a:hover {
+    color: #b9362d;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   BACKGROUND CIRCLES
+========================================================= */
+
+.error-circle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    opacity: 0.45;
+}
+
+
+.circle-one {
+    width: 180px;
+    height: 180px;
+
+    top: 10%;
+    left: 5%;
+
+    background: #fdf0ee;
+
+    animation: circleFloatOne 6s ease-in-out infinite;
+}
+
+
+.circle-two {
+    width: 120px;
+    height: 120px;
+
+    right: 8%;
+    top: 18%;
+
+    background: #f7f7f7;
+
+    animation: circleFloatTwo 5s ease-in-out infinite;
+}
+
+
+.circle-three {
+    width: 90px;
+    height: 90px;
+
+    bottom: 12%;
+    left: 15%;
+
+    background: #fdf0ee;
+
+    animation: circleFloatThree 7s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   FLOATING ANIMATIONS
+========================================================= */
+
+@keyframes circleFloatOne {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(15px, -20px);
+    }
+}
+
+
+@keyframes circleFloatTwo {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-15px, 15px);
+    }
+}
+
+
+@keyframes circleFloatThree {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, -15px);
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .error-page {
+        min-height: calc(100vh - 120px);
+
+        padding: 50px 20px;
+    }
+
+    .error-number {
+        font-size: 140px;
+
+        letter-spacing: -6px;
+    }
+
+    .error-content h1 {
+        font-size: 30px;
+    }
+
+    .error-description {
+        font-size: 14px;
+    }
+
+    .circle-one {
+        width: 120px;
+        height: 120px;
+    }
+
+    .circle-two {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .error-page {
+        padding: 40px 15px;
+    }
+
+    .error-number {
+        font-size: 110px;
+
+        letter-spacing: -5px;
+    }
+
+    .error-icon {
+        width: 55px;
+        height: 55px;
+
+        margin-top: -15px;
+
+        font-size: 21px;
+    }
+
+    .error-content h1 {
+        font-size: 26px;
+    }
+
+    .error-description {
+        font-size: 13px;
+    }
+
+    .error-actions {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .error-btn {
+        width: 100%;
+
+        max-width: 260px;
+    }
+
+    .error-search {
+        flex-direction: column;
+
+        gap: 6px;
+    }
+}

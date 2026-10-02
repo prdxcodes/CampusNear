@@ -1,25 +1,207 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="row">
-        <div class="col col-8 offset-2">
-            <br>
-            <h3>SignUp Form</h3>
-            <br>
-            <form method="post" , action="/signup" novalidate class="needs-validation">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input name="username" id="username" placeholder="xyz" type="text" class="form-control" required>
-                    <div class="valid-feedback">Available!</div>
+<div class="login-page">
+
+    <div class="login-card signup-card">
+
+        <!-- BRAND SECTION -->
+
+        <div class="login-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <h1>Join CampusNear</h1>
+
+            <p>
+                Create your account and discover everything
+                you need around your campus.
+            </p>
+
+            <div class="login-features">
+
+                <div>
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span>Find places near your campus</span>
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input name="email" id="email" placeholder="xyz@gmail.com" type="text" class="form-control" required/>
+
+                <div>
+                    <i class="fa-solid fa-star"></i>
+                    <span>Share and read student reviews</span>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input name="password" id="password" type="password" class="form-control" required/>
+
+                <div>
+                    <i class="fa-solid fa-house"></i>
+                    <span>List your own property</span>
                 </div>
-                <button class="btn btn-success">SignUp</button>
-            </form>
+
+            </div>
+
         </div>
+
+
+        <!-- SIGNUP FORM -->
+
+        <div class="login-form-section">
+
+            <div class="login-heading">
+
+                <span>CREATE ACCOUNT</span>
+
+                <h2>Create your account</h2>
+
+                <p>
+                    Join CampusNear in just a few steps.
+                </p>
+
+            </div>
+
+
+            <form
+                method="post"
+                action="/signup"
+                novalidate
+                class="needs-validation"
+            >
+
+                <!-- USERNAME -->
+
+                <div class="login-input-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            name="username"
+                            id="username"
+                            placeholder="Choose a username"
+                            type="text"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="login-input-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            name="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            type="email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="login-input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            name="password"
+                            id="password"
+                            placeholder="Create a password"
+                            type="password"
+                            autocomplete="new-password"
+                            required
+                            minlength="6"
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Password must be at least 6 characters.
+                    </div>
+
+                </div>
+
+
+                <!-- SIGNUP BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-submit-btn"
+                >
+                    <span>Create Account</span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN LINK -->
+
+            <div class="signup-link">
+
+                <span>
+                    Already have an account?
+                </span>
+
+                <a href="/login">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
+
+</div>
+
+
+<script src="/js/signup.js"></script>

@@ -1,0 +1,179 @@
+/* =========================================================
+   PRIVACY / LEGAL PAGE
+========================================================= */
+
+.legal-page {
+    width: 100%;
+
+    padding: 70px 5% 90px;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+.legal-container {
+    max-width: 950px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.legal-header {
+    margin-bottom: 50px;
+}
+
+.legal-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #d94b3d;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.legal-header h1 {
+    margin: 0;
+
+    color: #18202c;
+
+    font-size: 40px;
+
+    font-weight: 700;
+}
+
+.legal-header p {
+    max-width: 700px;
+
+    margin: 12px 0 0;
+
+    color: #747b85;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.legal-section {
+    margin-bottom: 38px;
+}
+
+.legal-section h2 {
+    margin: 0 0 12px;
+
+    color: #18202c;
+
+    font-size: 21px;
+
+    font-weight: 700;
+}
+
+.legal-section p {
+    margin: 0 0 12px;
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+.legal-section ul {
+    margin: 10px 0 0;
+
+    padding-left: 22px;
+}
+
+.legal-section li {
+    margin-bottom: 8px;
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.legal-section a {
+    color: #d94b3d;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.policy-note {
+    display: flex;
+
+    gap: 13px;
+
+    padding: 18px;
+
+    margin-top: 45px;
+
+    border-radius: 12px;
+
+    background: #f7f1ef;
+}
+
+.policy-note i {
+    margin-top: 3px;
+
+    color: #d94b3d;
+}
+
+.policy-note p {
+    margin: 0;
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .legal-page {
+        padding: 45px 20px 60px;
+    }
+
+    .legal-header h1 {
+        font-size: 32px;
+    }
+
+    .legal-section h2 {
+        font-size: 19px;
+    }
+
+    .legal-section p,
+    .legal-section li {
+        font-size: 13px;
+    }
+}
