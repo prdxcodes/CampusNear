@@ -255,6 +255,8 @@
 
     font-size: 13px;
 
+    box-sizing: border-box;
+
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
@@ -306,6 +308,10 @@
 
     cursor: pointer;
 
+    text-decoration: none;
+
+    box-sizing: border-box;
+
     transition:
         background-color 0.2s ease,
         transform 0.2s ease,
@@ -315,10 +321,125 @@
 .contact-submit:hover {
     background: #c33f34;
 
+    color: #ffffff;
+
     transform: translateY(-2px);
 
     box-shadow:
         0 7px 18px rgba(217, 75, 61, 0.22);
+}
+
+
+/* =========================================================
+   SUCCESS STATE
+========================================================= */
+
+.contact-success {
+    width: 100%;
+
+    min-height: 330px;
+
+    padding: 35px 25px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background: #fdf4f2;
+
+    border: 1px solid #f2d2cd;
+
+    border-radius: 16px;
+
+    animation: contactSuccessIn 0.35s ease;
+}
+
+.success-icon {
+    width: 65px;
+
+    height: 65px;
+
+    margin-bottom: 18px;
+
+    border-radius: 50%;
+
+    background: #d94b3d;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 1.5rem;
+
+    box-shadow:
+        0 10px 25px rgba(217, 75, 61, 0.18);
+}
+
+.success-content {
+    max-width: 420px;
+}
+
+.success-content h3 {
+    margin: 0 0 8px;
+
+    color: #18202c;
+
+    font-size: 22px;
+
+    font-weight: 700;
+}
+
+.success-content p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.success-home-btn {
+    width: auto;
+
+    min-width: 170px;
+
+    margin-top: 25px;
+
+    padding: 0 22px;
+}
+
+
+/* =========================================================
+   SUCCESS ANIMATION
+========================================================= */
+
+@keyframes contactSuccessIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
 }
 
 
@@ -331,7 +452,9 @@
     .contact-grid {
         grid-template-columns: 1fr;
     }
+
 }
+
 
 @media (max-width: 600px) {
 
@@ -350,4 +473,19 @@
     .contact-card {
         padding: 20px;
     }
+
+    .contact-success {
+        min-height: 300px;
+
+        padding: 30px 20px;
+    }
+
+    .success-content h3 {
+        font-size: 20px;
+    }
+
+    .success-home-btn {
+        width: 100%;
+    }
+
 }

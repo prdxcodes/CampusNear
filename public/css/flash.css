@@ -1,16 +1,30 @@
 /* =========================================================
-   FLASH NOTIFICATION
+   FLASH NOTIFICATION CONTAINER
 ========================================================= */
 
 .flash-container {
     position: fixed;
 
     top: 82px;
-    right: 25px;
+    left: 0;
+    right: 0;
 
-    z-index: 9999;
+    width: 100%;
+    max-width: none;
 
-    width: min(390px, calc(100vw - 30px));
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    /*
+       Slightly shift notification toward LEFT.
+       Increase padding-right for more left shift.
+    */
+    padding: 0 40px 0 15px;
+
+    box-sizing: border-box;
+
+    z-index: 999999;
 
     pointer-events: none;
 }
@@ -23,16 +37,22 @@
 .flash-message {
     position: relative;
 
+    width: min(390px, 100%);
+
+    min-height: 68px;
+
     display: flex;
     align-items: center;
 
     gap: 13px;
 
-    min-height: 68px;
-
     padding: 13px 15px;
 
-    background: #fff;
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid transparent;
 
     border-radius: 15px;
 
@@ -44,8 +64,10 @@
     pointer-events: auto;
 
     animation:
-        flashSlideIn 0.45s cubic-bezier(.22, 1, .36, 1),
-        flashDisappear 0.45s ease 3.55s forwards;
+        flashDropDown
+        0.7s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        forwards;
 }
 
 
@@ -54,7 +76,7 @@
 ========================================================= */
 
 .flash-success {
-    border: 1px solid #d8eee0;
+    border-color: #d8eee0;
 }
 
 .flash-success .flash-icon {
@@ -68,7 +90,7 @@
 ========================================================= */
 
 .flash-error {
-    border: 1px solid #f1d5d2;
+    border-color: #f1d5d2;
 }
 
 .flash-error .flash-icon {
@@ -85,7 +107,7 @@
     width: 38px;
     height: 38px;
 
-    flex-shrink: 0;
+    flex: 0 0 38px;
 
     display: flex;
     align-items: center;
@@ -104,23 +126,25 @@
 .flash-content {
     min-width: 0;
 
+    flex: 1;
+
     display: flex;
     flex-direction: column;
 
     gap: 3px;
-
-    flex: 1;
 }
 
 .flash-content strong {
-    color: #222;
+    color: #222222;
 
     font-size: 13px;
     font-weight: 700;
+
+    line-height: 1.2;
 }
 
 .flash-content span {
-    color: #666;
+    color: #666666;
 
     font-size: 13px;
     line-height: 1.4;
@@ -137,7 +161,7 @@
     width: 30px;
     height: 30px;
 
-    flex-shrink: 0;
+    flex: 0 0 30px;
 
     display: flex;
     align-items: center;
@@ -145,13 +169,12 @@
 
     padding: 0;
 
+    border: none;
+    border-radius: 8px;
+
     background: transparent;
 
-    border: none;
-
-    color: #999;
-
-    border-radius: 8px;
+    color: #999999;
 
     cursor: pointer;
 
@@ -161,7 +184,7 @@
 }
 
 .flash-close:hover {
-    color: #333;
+    color: #333333;
     background: #f3f3f3;
 }
 
@@ -181,12 +204,26 @@
 
     transform-origin: left;
 
-    animation: flashProgress 4s linear forwards;
+    animation:
+        flashProgress
+        4s
+        linear
+        forwards;
 }
+
+
+/* =========================================================
+   SUCCESS PROGRESS
+========================================================= */
 
 .flash-success .flash-progress {
     background: #198754;
 }
+
+
+/* =========================================================
+   ERROR PROGRESS
+========================================================= */
 
 .flash-error .flash-progress {
     background: #d94b3d;
@@ -194,42 +231,46 @@
 
 
 /* =========================================================
-   ANIMATIONS
+   TOP → BOTTOM ANIMATION
 ========================================================= */
 
-@keyframes flashSlideIn {
+@keyframes flashDropDown {
 
-    from {
+    0% {
         opacity: 0;
 
         transform:
-            translateX(40px)
+            translateY(-120px)
             scale(0.96);
     }
 
-    to {
+    55% {
         opacity: 1;
 
         transform:
-            translateX(0)
+            translateY(8px)
+            scale(1);
+    }
+
+    75% {
+        transform:
+            translateY(-3px)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
             scale(1);
     }
 }
 
 
-@keyframes flashDisappear {
-
-    from {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-}
-
+/* =========================================================
+   PROGRESS ANIMATION
+========================================================= */
 
 @keyframes flashProgress {
 
@@ -244,22 +285,64 @@
 
 
 /* =========================================================
+   EXIT ANIMATION
+========================================================= */
+
+.flash-message.flash-hide {
+    animation:
+        flashSlideUp
+        0.4s
+        cubic-bezier(0.4, 0, 1, 1)
+        forwards;
+}
+
+
+@keyframes flashSlideUp {
+
+    from {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    to {
+        opacity: 0;
+
+        transform:
+            translateY(-50px)
+            scale(0.97);
+    }
+}
+
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 576px) {
 
     .flash-container {
-
         top: 72px;
 
-        left: 15px;
-        right: 15px;
+        left: 0;
+        right: 0;
 
-        width: auto;
+        width: 100%;
+
+        /*
+           Reset desktop left shift on mobile.
+        */
+        padding: 0 15px;
+
+        display: flex;
+        justify-content: center;
     }
 
+
     .flash-message {
+        width: 100%;
 
         min-height: 62px;
 
@@ -268,19 +351,44 @@
         border-radius: 13px;
     }
 
-    .flash-icon {
 
+    .flash-icon {
         width: 34px;
         height: 34px;
 
+        flex-basis: 34px;
+
         font-size: 15px;
     }
+
 
     .flash-content strong {
         font-size: 12px;
     }
 
+
     .flash-content span {
         font-size: 12px;
+    }
+
+
+    .flash-close {
+        width: 28px;
+        height: 28px;
+
+        flex-basis: 28px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .flash-message,
+    .flash-progress {
+        animation: none;
     }
 }

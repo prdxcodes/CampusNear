@@ -18,7 +18,9 @@
 
         <div class="contact-grid">
 
-            <!-- CONTACT INFORMATION -->
+            <!-- =====================================================
+                 CONTACT INFORMATION
+            ====================================================== -->
 
             <div class="contact-info">
 
@@ -81,7 +83,9 @@
             </div>
 
 
-            <!-- CONTACT FORM -->
+            <!-- =====================================================
+                 CONTACT FORM
+            ====================================================== -->
 
             <div class="contact-form-card">
 
@@ -92,7 +96,11 @@
                 </p>
 
 
-                <form action="#" method="POST">
+                <!-- =========================
+                     FORM
+                ========================== -->
+
+                <form id="contactForm">
 
                     <div class="form-group">
 
@@ -162,7 +170,10 @@
                     </div>
 
 
-                    <button type="submit" class="contact-submit">
+                    <button
+                        type="submit"
+                        class="contact-submit"
+                    >
 
                         Send Message
 
@@ -171,6 +182,51 @@
                     </button>
 
                 </form>
+
+
+                <!-- =================================================
+                     SUCCESS STATE
+                ================================================== -->
+
+                <div
+                    id="contactSuccess"
+                    class="contact-success"
+                    style="display: none;"
+                >
+
+                    <div class="success-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <div class="success-content">
+
+                        <h3>
+                            Thanks for reaching out!
+                        </h3>
+
+                        <p>
+                            We appreciate you taking the time to contact
+                            CampusNear.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="/"
+                        class="contact-submit success-home-btn"
+                    >
+
+                        Back to Home
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
 
             </div>
 

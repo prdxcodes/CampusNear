@@ -91,39 +91,48 @@
 
             <!-- Newsletter -->
             <div class="col-lg-4 col-md-6">
+
                 <h5 class="footer-heading">Stay Updated</h5>
 
                 <p class="newsletter-text">
                     Get the latest properties and updates.
                 </p>
 
-                <form class="newsletter-form">
-                    <input
-                        type="email"
-                        placeholder="Your email"
-                        required
-                    >
+                <form class="newsletter-form" id="newsletterForm">
+
+                    <input type="email" id="newsletterEmail" placeholder="Your email" required>
 
                     <button type="submit">
                         Subscribe
                     </button>
+
                 </form>
+
             </div>
 
+
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 CampusNear. All rights reserved.
+                </p>
+
+                <p>
+                    Made with <span class="heart">♥</span> for college students
+                </p>
+
+            </div>
         </div>
 
+        <!-- Newsletter Success Message -->
 
-        <!-- Bottom Footer -->
-        <div class="footer-bottom">
+        <div id="newsletterFlash" class="newsletter-flash">
+            <i class="fa-solid fa-circle-check"></i>
 
-            <p>
-                © 2026 CampusNear. All rights reserved.
-            </p>
-
-            <p>
-                Made with <span class="heart">♥</span> for college students
-            </p>
-
+            <span>
+                Thanks for subscribing to CampusNear!
+            </span>
         </div>
-    </div>
+        
 </footer>

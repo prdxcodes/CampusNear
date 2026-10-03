@@ -6,6 +6,9 @@
     background: #101722;
     color: #ffffff;
 
+    /*
+       Default gap for normal pages
+    */
     margin-top: 70px;
 
     padding-top: 55px;
@@ -13,16 +16,34 @@
 
 
 /* =========================================================
-   REMOVE FOOTER GAP ON SERVICE FORM PAGES
+   REMOVE FOOTER GAP
+   LOGIN / SIGNUP / SERVICE FORM
 ========================================================= */
 
 /*
-   On PG / Cafe / Mess / Laundry new-form pages,
-   remove the default 70px footer margin.
+   Login page
+*/
+
+.page-content:has(.login-page) + .staynear-footer {
+    margin-top: 0 !important;
+}
+
+
+/*
+   Signup page
+*/
+
+.page-content:has(.signup-card) + .staynear-footer {
+    margin-top: 0 !important;
+}
+
+
+/*
+   Service form pages
 */
 
 .page-content:has(.service-form-page) + .staynear-footer {
-    margin-top: 0;
+    margin-top: 0 !important;
 }
 
 
@@ -38,6 +59,7 @@
 
     margin-bottom: 15px;
 }
+
 
 .footer-logo {
     width: 38px;
@@ -56,12 +78,14 @@
     color: white;
 }
 
+
 .brand-name {
     font-size: 23px;
     font-weight: 700;
 
     color: #ffffff;
 }
+
 
 .brand-name span {
     color: #e04b3f;
@@ -95,6 +119,7 @@
     gap: 10px;
 }
 
+
 .footer-socials a {
     width: 36px;
     height: 36px;
@@ -113,6 +138,7 @@
 
     transition: 0.25s ease;
 }
+
 
 .footer-socials a:hover {
     background: #e04b3f;
@@ -146,9 +172,11 @@
     margin: 0;
 }
 
+
 .footer-links li {
     margin-bottom: 11px;
 }
+
 
 .footer-links a {
     color: #aeb6c2;
@@ -159,6 +187,7 @@
 
     transition: color 0.2s ease;
 }
+
 
 .footer-links a:hover {
     color: #ffffff;
@@ -177,11 +206,13 @@
     margin-bottom: 15px;
 }
 
+
 .newsletter-form {
     display: flex;
 
     gap: 8px;
 }
+
 
 .newsletter-form input {
     flex: 1;
@@ -201,13 +232,16 @@
     outline: none;
 }
 
+
 .newsletter-form input::placeholder {
     color: #7f8997;
 }
 
+
 .newsletter-form input:focus {
     border-color: #e04b3f;
 }
+
 
 .newsletter-form button {
     border: none;
@@ -227,6 +261,7 @@
 
     transition: 0.2s ease;
 }
+
 
 .newsletter-form button:hover {
     background: #c93e34;
@@ -253,6 +288,7 @@
     gap: 20px;
 }
 
+
 .footer-bottom p {
     margin: 0;
 
@@ -261,20 +297,22 @@
     font-size: 13px;
 }
 
+
 .heart {
     color: #e04b3f;
 }
 
 
-/* =========================
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
 @media (max-width: 768px) {
 
     .staynear-footer {
         padding-top: 40px;
     }
+
 
     .footer-bottom {
         flex-direction: column;
@@ -283,6 +321,7 @@
 
         margin-top: 30px;
     }
+
 
     .newsletter-form {
         max-width: 450px;
@@ -296,7 +335,95 @@
         flex-direction: column;
     }
 
+
     .newsletter-form button {
         padding: 11px;
     }
+}
+
+/* =========================================================
+   NEWSLETTER FLASH MESSAGE
+========================================================= */
+
+.newsletter-flash {
+    position: fixed;
+
+    top: 25px;
+    left: 50%;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 14px 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+
+    border-left: 4px solid #d94b3d;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12);
+
+    color: #18202c;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translate(-50%, -20px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.newsletter-flash i {
+    color: #d94b3d;
+
+    font-size: 18px;
+}
+
+.newsletter-flash.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translate(-50%, 0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .newsletter-flash {
+        top: 15px;
+        left: 50%;
+
+        width: calc(100% - 30px);
+
+        box-sizing: border-box;
+
+        white-space: normal;
+
+        text-align: center;
+
+        padding: 13px 16px;
+    }
+
 }

@@ -605,10 +605,7 @@ const createPlaceController = (
                         `${category} does not exist!`
                     );
 
-                    return res.redirect(
-                        redirectPath
-                    );
-
+                    return res.redirect("/");
                 }
 
                 req.flash(
@@ -616,16 +613,13 @@ const createPlaceController = (
                     `${category} deleted successfully!`
                 );
 
-                res.redirect(
-                    redirectPath
-                );
+                return res.redirect("/");
 
             } catch (err) {
 
                 next(err);
 
             }
-
         },
 
 

@@ -6,8 +6,12 @@
 
     <div class="navbar-container">
 
-        <!-- LOGO -->
+        <!-- =====================================================
+             LOGO
+        ====================================================== -->
+
         <a href="/" class="campusnear-logo">
+
             <span class="logo-icon">
                 <i class="fa-solid fa-compass"></i>
             </span>
@@ -15,51 +19,180 @@
             <span class="logo-text">
                 Campus<span>Near</span>
             </span>
+
         </a>
 
 
-        <!-- NAVIGATION LINKS -->
-        <% const selectedCollege = typeof queryCollege !== "undefined" ? queryCollege : null; %>
+        <!-- =====================================================
+             NAVIGATION LINKS
+        ====================================================== -->
+
+        <% const selectedCollege = typeof queryCollege !== "undefined"
+            ? queryCollege
+            : null; %>
+
 
         <div class="navbar-links" id="navbarLinks">
 
-            <a href="/"
+            <!-- HOME -->
+
+            <a
+                href="/"
                 class="nav-link <%= currentPath === '/' ? 'active' : '' %>">
+
                 Home
+
             </a>
 
-            <a href="<%= selectedCollege ? '/pgs?college=' + encodeURIComponent(selectedCollege) : '/pgs' %>"
+
+            <!-- PGs -->
+
+            <a
+                href="<%= selectedCollege
+                    ? '/pgs?college=' + encodeURIComponent(selectedCollege)
+                    : '/pgs' %>"
                 class="nav-link <%= currentPath.startsWith('/pgs') ? 'active' : '' %>">
+
                 PGs
+
             </a>
 
-            <a href="<%= selectedCollege ? '/messes?college=' + encodeURIComponent(selectedCollege) : '/messes' %>"
+
+            <!-- MESSES -->
+
+            <a
+                href="<%= selectedCollege
+                    ? '/messes?college=' + encodeURIComponent(selectedCollege)
+                    : '/messes' %>"
                 class="nav-link <%= currentPath.startsWith('/messes') ? 'active' : '' %>">
+
                 Messes
+
             </a>
 
-            <a href="<%= selectedCollege ? '/cafes?college=' + encodeURIComponent(selectedCollege) : '/cafes' %>"
+
+            <!-- CAFES -->
+
+            <a
+                href="<%= selectedCollege
+                    ? '/cafes?college=' + encodeURIComponent(selectedCollege)
+                    : '/cafes' %>"
                 class="nav-link <%= currentPath.startsWith('/cafes') ? 'active' : '' %>">
+
                 Cafes
+
             </a>
 
-            <a href="<%= selectedCollege ? '/laundries?college=' + encodeURIComponent(selectedCollege) : '/laundries' %>"
+
+            <!-- LAUNDRY -->
+
+            <a
+                href="<%= selectedCollege
+                    ? '/laundries?college=' + encodeURIComponent(selectedCollege)
+                    : '/laundries' %>"
                 class="nav-link <%= currentPath.startsWith('/laundries') ? 'active' : '' %>">
+
                 Laundry
+
             </a>
 
-            <a href="/about"
+
+            <!-- ABOUT -->
+
+            <a
+                href="/about"
                 class="nav-link <%= currentPath.startsWith('/about') ? 'active' : '' %>">
+
                 About
+
             </a>
+
+
+            <!-- =================================================
+                 MOBILE AUTHENTICATION
+            ================================================== -->
+
+            <div class="mobile-auth-actions">
+
+                <% if (!currUser) { %>
+
+                    <!-- SIGN UP -->
+
+                    <a
+                        href="/signup"
+                        class="mobile-auth-btn mobile-signup-btn">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        <span>
+                            Sign Up
+                        </span>
+
+                    </a>
+
+
+                    <!-- LOGIN -->
+
+                    <a
+                        href="/login"
+                        class="mobile-auth-btn mobile-login-btn">
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        <span>
+                            Login
+                        </span>
+
+                    </a>
+
+
+                <% } else { %>
+
+
+                    <!-- LOGGED IN USER -->
+
+                    <div class="mobile-user-info">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <span>
+                            Hi, <%= currUser.username %>
+                        </span>
+
+                    </div>
+
+
+                    <!-- LOGOUT -->
+
+                    <a
+                        href="/logout"
+                        class="mobile-auth-btn mobile-logout-btn">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        <span>
+                            Logout
+                        </span>
+
+                    </a>
+
+                <% } %>
+
+            </div>
 
         </div>
 
 
-        <!-- RIGHT SIDE ACTIONS -->
+        <!-- =====================================================
+             RIGHT SIDE ACTIONS
+        ====================================================== -->
+
         <div class="navbar-actions">
 
-            <!-- Add New Service -->
+            <!-- =================================================
+                 ADD NEW SERVICE
+            ================================================== -->
+
             <button
                 type="button"
                 class="add-property-btn"
@@ -68,30 +201,61 @@
 
                 <i class="fa-solid fa-plus"></i>
 
-                <span>Add New Service</span>
+                <span>
+                    Add New Service
+                </span>
 
             </button>
 
 
-            <!-- Authentication -->
+            <!-- =================================================
+                 DESKTOP AUTHENTICATION
+            ================================================== -->
+
             <% if (!currUser) { %>
 
-                <a href="/signup" class="auth-link">
+                <!-- SIGN UP -->
+
+                <a
+                    href="/signup"
+                    class="auth-link">
+
                     Signup
+
                 </a>
 
-                <a href="/login" class="auth-link login-link">
+
+                <!-- LOGIN -->
+
+                <a
+                    href="/login"
+                    class="auth-link login-link">
+
                     Login
+
                 </a>
+
 
             <% } else { %>
 
+
+                <!-- USERNAME -->
+
                 <span class="welcome-user">
+
                     Hi, <%= currUser.username %>
+
                 </span>
 
-                <a href="/logout" class="auth-link">
+
+                <!-- LOGOUT -->
+
+                <a
+                    href="/logout"
+                    class="auth-link">
+
                     Logout
+
                 </a>
 
             <% } %>
@@ -99,12 +263,16 @@
         </div>
 
 
-        <!-- MOBILE MENU BUTTON -->
+        <!-- =====================================================
+             MOBILE MENU BUTTON
+        ====================================================== -->
+
         <button
             class="mobile-menu-btn"
             id="mobileMenuBtn"
             type="button"
-            aria-label="Toggle navigation">
+            aria-label="Toggle navigation"
+            aria-expanded="false">
 
             <i class="fa-solid fa-bars"></i>
 
@@ -127,6 +295,7 @@
     aria-labelledby="categoryModalLabel"
     aria-hidden="true">
 
+
     <div class="modal-dialog modal-dialog-centered modal-lg">
 
         <div class="modal-content">
@@ -148,8 +317,11 @@
 
                     </h4>
 
+
                     <p class="text-muted mb-0">
+
                         What would you like to list?
+
                     </p>
 
                 </div>
@@ -175,7 +347,10 @@
                 <form id="categoryForm">
 
 
-                    <!-- CATEGORY -->
+                    <!-- =================================================
+                         CATEGORY
+                    ================================================== -->
+
                     <div class="mb-4">
 
                         <label
@@ -202,20 +377,27 @@
                                 id="categorySelectBtn">
 
                                 <span id="selectedCategoryText">
+
                                     Choose a category
+
                                 </span>
+
 
                                 <i class="fa-solid fa-chevron-down"></i>
 
                             </button>
 
 
-                            <!-- OPTIONS -->
+                            <!-- =================================================
+                                 CATEGORY OPTIONS
+                            ================================================== -->
 
                             <div
                                 class="category-options"
                                 id="categoryOptions">
 
+
+                                <!-- PG -->
 
                                 <button
                                     type="button"
@@ -227,6 +409,8 @@
                                 </button>
 
 
+                                <!-- CAFE -->
+
                                 <button
                                     type="button"
                                     class="category-option"
@@ -237,6 +421,8 @@
                                 </button>
 
 
+                                <!-- MESS -->
+
                                 <button
                                     type="button"
                                     class="category-option"
@@ -246,6 +432,8 @@
 
                                 </button>
 
+
+                                <!-- LAUNDRY -->
 
                                 <button
                                     type="button"
@@ -259,11 +447,9 @@
                             </div>
 
 
-                            <!--
-                                Hidden input.
-                                selectCategory.js will store
-                                the selected value here.
-                            -->
+                            <!-- =================================================
+                                 HIDDEN CATEGORY INPUT
+                            ================================================== -->
 
                             <input
                                 type="hidden"
@@ -278,10 +464,13 @@
 
 
                     <!-- =================================================
-                         BUTTONS
+                         MODAL BUTTONS
                     ================================================== -->
 
                     <div class="d-flex justify-content-end gap-2">
+
+
+                        <!-- CANCEL -->
 
                         <button
                             type="button"
@@ -292,6 +481,8 @@
 
                         </button>
 
+
+                        <!-- CONTINUE -->
 
                         <button
                             type="submit"

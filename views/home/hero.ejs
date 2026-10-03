@@ -75,41 +75,85 @@
 
 
             <!-- =========================
-                 CATEGORY
+                 CATEGORY DROPDOWN
             ========================== -->
 
-            <div class="search-field">
+            <div class="search-field custom-dropdown-container">
 
                 <i class="fa-solid fa-building"></i>
 
-                <div class="search-field-content">
+                <div
+                    class="search-field-content custom-select-wrapper"
+                    id="heroCategoryDropdown"
+                >
 
-                    <label for="category">
+                    <label>
                         Looking for
                     </label>
 
-                    <select
-                        id="category"
+
+                    <!-- =========================
+                         SELECTED CATEGORY
+                    ========================== -->
+
+                    <div class="custom-select-trigger">
+
+                        <span id="heroSelectedCategoryText">
+                            PG
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+
+                    <!-- =========================
+                         HIDDEN CATEGORY VALUE
+                    ========================== -->
+
+                    <input
+                        type="hidden"
                         name="category"
+                        id="heroCategoryValue"
+                        value="pg"
                     >
 
-                        <option value="pg" selected>
+
+                    <!-- =========================
+                         CATEGORY OPTIONS
+                    ========================== -->
+
+                    <ul class="custom-options-list">
+
+                        <li
+                            class="custom-option active"
+                            data-value="pg"
+                        >
                             PG
-                        </option>
+                        </li>
 
-                        <option value="cafe">
+                        <li
+                            class="custom-option"
+                            data-value="cafe"
+                        >
                             Cafe
-                        </option>
+                        </li>
 
-                        <option value="mess">
+                        <li
+                            class="custom-option"
+                            data-value="mess"
+                        >
                             Mess
-                        </option>
+                        </li>
 
-                        <option value="laundry">
+                        <li
+                            class="custom-option"
+                            data-value="laundry"
+                        >
                             Laundry
-                        </option>
+                        </li>
 
-                    </select>
+                    </ul>
 
                 </div>
 
