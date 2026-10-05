@@ -918,4 +918,4 @@ If you find CampusNear interesting, consider giving the repository a ⭐ on GitH
 
 Find places. Discover possibilities. Make campus life easier.
 
-Built independently by Pradyuman Singh ❤️
+Built independently by Pradyuman Singh ❤️ 
